@@ -1,2 +1,2 @@
 # thequickdivorce
-Site Thequickdivorce
+Site thequickdivorce.com
