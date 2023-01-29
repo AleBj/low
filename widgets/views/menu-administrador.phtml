@@ -1,0 +1,29 @@
+<ul class="nav navbar-nav">
+	<?php foreach($menuAdministrador as $m): ?>
+    <?php if($m['permiso']['rol'] == $this->_sess->get('level')):?>
+    
+    <?php $estilo = ($m['item'] == $m['id']) ? 'active' : '';?> 
+
+    <li class="<?php echo $estilo; if(isset($m['submenu']) && !empty($m['submenu'])) echo ' dropdown'?>">
+		<a class="<?php if(isset($m['submenu']) && !empty($m['submenu'])) echo 'dropdown-toggle'?>" data-toggle="<?php if(isset($m['submenu']) && !empty($m['submenu'])) echo 'dropdown'?>" href="<?php echo $m['enlace']; ?>">
+			<span class="glyphicon <?php echo $m['imagen']; ?>"></span> <?php echo $m['titulo']?>
+            <?php if(isset($m['submenu']) && !empty($m['submenu'])):?>
+            <span class="caret"></span>
+            <?php endif;?>
+		</a>
+        
+        <?php if(isset($m['submenu']) && !empty($m['submenu'])):?>
+        	<ul class="<?php if(isset($m['submenu']) && !empty($m['submenu'])) echo 'dropdown-menu'?>">
+            	<?php foreach($m['submenu'] as $submenu):?>
+            	<li>
+                	<a href="<?php echo $submenu['enlace']?>">
+                    	<span class="glyphicon <?php echo $submenu['imagen']?>"></span> <?php echo $submenu['titulo']?>
+                    </a>
+                </li>
+                <?php endforeach;?>
+            </ul>
+        <?php endif;?>
+	</li>
+    <?php endif;?>
+	<?php endforeach; ?>
+</ul>

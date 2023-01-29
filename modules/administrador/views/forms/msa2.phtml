@@ -1,0 +1,1769 @@
+<main>    
+    <section class="cart whity">
+        <h1>The Quick Divorce - MSA</h1>
+       <div class="containerForm">
+           <main>
+               <section id="Divorce" style="display: block;">
+                   <div class="information contForm" style="display: block;">
+                        <h2>Information</h2>
+                        <form name="divorce_information" id="divorce_information">
+                            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                            <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                            <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                            <input type="hidden" name="_form_part" value="divorce_information">
+
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="50%">Is this a Same-Sex Relationship?</td>
+                                    <td width="10%"></td>
+                                    <td width="20%"><input type="radio" name="SameSex" value="No" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['SameSex']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                    <td width="20%"><input type="radio" name="SameSex" value="Yes" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['SameSex']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                                </tr>                                
+                                <tr>
+                                    <td width="50%">Filing County</td>
+                                    <td width="10%"></td>
+                                    <td width="40%" colspan="2">
+                                        <select size="1" name="FilingCounty">    
+                                            <option value="">Select a County</option>
+                                            <?php foreach($this->condados as $condado):?>
+                                            <?php if(is_array($this->order['forms']['divorce_information']) && $condado['valor'] == $this->order['forms']['divorce_information']['FilingCounty']):?>
+                                            <option value="<?=$condado['valor']?>" selected="selected"><?=strtoupper($condado['valor'])?></option>
+                                            <?php else:?>
+                                            <option value="<?=$condado['valor']?>" ><?=strtoupper($condado['valor'])?></option>
+                                            <?php endif?>                                            
+                                            <?php endforeach?>
+                                            
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr id="person_separation">
+                                    <td width="50%">Person Filing the Seperation</td>
+                                    <td width="10%"></td>
+                                    <td width="20%"><input type="radio" name="FilingSeparation" value="Husband" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['FilingSeparation']=='Husband') ? 'checked="checked"' : ''?>> <label>Husband</label></td>
+                                    <td width="20%"><input type="radio" name="FilingSeparation" value="Wife" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['FilingSeparation']=='Wife') ? 'checked="checked"' : ''?>> <label>Wife</label></td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Were you married in the United States?</td>
+                                    <td width="10%"></td>
+                                    <td width="20%"><input type="radio" name="MarriageUS" value="Yes" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['MarriageUS']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                                    <td width="20%"><input type="radio" name="MarriageUS" value="No" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['MarriageUS']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Marriage City</td>
+                                    <td width="10%"></td>
+                                    <td width="40%" colspan="2"><input type="text" name="MarriageCity" value="<?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['MarriageCity']!='') ? $this->order['forms']['divorce_information']['MarriageCity'] : ''?>"></td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Marriage State</td>
+                                    <td width="10%"></td>
+                                    <td width="40%" colspan="2">
+                                        <select size="1" name="MarriageState" class="formfont">
+                                            <option value="">State</option>
+                                            <?php foreach($this->states as $states):?>
+                                            <?php if(is_array($this->order['forms']['divorce_information']) && $states['valor'] == $this->order['forms']['divorce_information']['MarriageState']):?>
+                                            <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option>
+                                            <?php else:?>
+                                            <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                            <?php endif?>
+                                            
+                                            <?php endforeach?>                                           
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Date of Marriage (MM/DD/YYYY)</td>
+                                    <td width="10%"></td>
+                                    <td width="40%" colspan="2">
+                                        <input type="date" name="dateMarriage" value="<?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['dateMarriage']!='') ? $this->order['forms']['divorce_information']['dateMarriage'] : ''?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Date of Separation (MM/DD/YYYY)</td>
+                                    <td width="10%"></td>
+                                    <td width="40%" colspan="2">
+                                        <input type="date" name="dateSeparation" value="<?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['dateSeparation']!='') ? $this->order['forms']['divorce_information']['dateSeparation'] : ''?>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Do you have any minor children from this marriage?</td>
+                                    <td width="10%"></td>
+                                    <td width="20%"><input type="radio" name="children" value="No" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['children']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                    <td width="20%"><input type="radio" name="children" value="Yes" <?=(is_array($this->order['forms']['divorce_information']) && $this->order['forms']['divorce_information']['children']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                    </td>
+                                </tr>
+                               
+
+                            </table>
+                        </form>
+                       
+                   </div>
+                   <div class="residency contForm" style="display: block;">
+                       <h2>Residency</h2>
+                       <form name="divorce_residency" id="divorce_residency">
+                            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                            <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                            <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                            <input type="hidden" name="_form_part" value="divorce_residency">
+
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                               <tr>
+                                   <td colspan="3"><strong>Domicile:</strong><br> At least one of you must have lived in Florida for the past six months, and lived in the county where the divorce will be filed for the past 90 days.</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="domicile" value="Wife" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['domicile']=='Wife') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Wife</strong> has lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="domicile" value="Husband" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['domicile']=='Husband') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Husband</strong> has lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="domicile" value="Both Partners" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['domicile']=='Both Partners') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Both spouses</strong> have lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                               </tr>
+                               <tr><td colspan="3"><hr></td></tr>
+                               <tr>
+                                   <td colspan="3"><strong>Military:</strong> <br> Is Wife on active duty in the military?</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="military-1" value="Yes" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['military-1']=='Yes') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Yes</strong></td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="military-1" value="No" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['military-1']=='No') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>No</strong></td>
+                               </tr>
+                               <tr>
+                                   <td colspan="3">Is the Husband on active duty in the military?</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="military-2" value="Yes" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['military-2']=='Yes') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Yes</strong></td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="military-2" value="No" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['military-2']=='No') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>No</strong></td>
+                               </tr>
+                               <tr><td colspan="3"><hr></td></tr>
+                               <tr>
+                                   <td colspan="3"><strong>Simplified Divorce:</strong><br> 
+                                    A Florida Simplified Divorce (or Simplified Dissolution) is faster and simpler, but you must meet the following requirements: <br>
+                                    • Agree that the marriage cannot be saved.  <br>
+                                    • Have no minor or dependent children together.  <br>
+                                    • Agree on how any property and debts will be divided.  <br>
+                                    • Neither spouse is seeking spousal support (alimony).  <br>
+                                    • Both spouses will sign the Petition at the courthouse and attend the final hearing.
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td colspan="3">Do you and your spouse meet all of these requirements?</td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="Marriage-Requirements" value="Yes" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['Marriage-Requirements']=='Yes') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Yes</strong></td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="Marriage-Requirements" value="No" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['Marriage-Requirements']=='No') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>No</strong></td>
+                               </tr>
+                               <tr><td colspan="3"><hr></td></tr>
+                               <tr>
+                                   <td colspan="3"><strong>Other Court Cases:</strong><br> Are there any other domestic/family law cases pending concerning the parties and/or their children in any court?      </td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="other-case" value="Yes" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['other-case']=='Yes') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>Yes</strong></td>
+                               </tr>
+                               <tr>
+                                   <td><input type="radio" name="other-case" value="No" <?=(is_array($this->order['forms']['divorce_residency']) && $this->order['forms']['divorce_residency']['other-case']=='No') ? 'checked="checked"' : ''?>></td>
+                                   <td width="5%"></td>
+                                   <td><strong>No</strong></td>
+                               </tr>                          
+                              
+                           </table>
+                      </form>
+                   </div>
+               
+                   <div class="information contForm" style="display: block;">
+                        <h2>Wife Information</h2>
+                        <form name="wife_information" id="wife_information">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="wife_information">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">First Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-firstname" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-firstname']!='') ? $this->order['forms']['wife_information']['Wife-firstname'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Middle Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-middlename" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-middlename']!='') ? $this->order['forms']['wife_information']['Wife-middlename'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Last Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-lastname" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-lastname']!='') ? $this->order['forms']['wife_information']['Wife-lastname'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Birth Date (MM/DD/YYYY)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2">
+                                    <input type="date" name="Wife-birth" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-birth']!='') ? $this->order['forms']['wife_information']['Wife-birth'] : ''?>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Maiden Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-maidenname" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-maidenname']!='') ? $this->order['forms']['wife_information']['Wife-maidenname'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Is the Wife currently pregnant?</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="radio" name="Wife-pregnant" value="No" <?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-pregnant']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                <td width="20%"><input type="radio" name="Wife-pregnant" value="Yes" <?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-pregnant']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Street Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-address" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-address']!='') ? $this->order['forms']['wife_information']['Wife-address'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">City and State</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="text" name="Wife-city" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-city']!='') ? $this->order['forms']['wife_information']['Wife-city'] : ''?>" placeholder="City"></td>
+                                <td width="20%" align="center">
+                                    <select size="1" name="WifeState" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['wife_information']) && $states['valor'] == $this->order['forms']['wife_information']['WifeState']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Zip Code</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="Wife-zipcode" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-zipcode']!='') ? $this->order['forms']['wife_information']['Wife-zipcode'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Phone</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="Wife-phone" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-phone']!='') ? $this->order['forms']['wife_information']['Wife-phone'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Fax Number (optional)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="Wife-fax" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-fax']!='') ? $this->order['forms']['wife_information']['Wife-fax'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">E-Mail Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="email" name="Wife-email" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-email']!='') ? $this->order['forms']['wife_information']['Wife-email'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">County</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="Wife-County" value="<?=(is_array($this->order['forms']['wife_information']) && $this->order['forms']['wife_information']['Wife-County']!='') ? $this->order['forms']['wife_information']['Wife-County'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                </td>
+                            </tr>
+                           
+                        </table>  
+                        </form>                 
+                   </div>
+                   <div class="identification contForm" style="display: block;">
+                       <h2>Wife Identification</h2>
+                       <form name="wife_identification" id="wife_identification">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="wife_identification">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">Birth State (or country if not USA)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-BirthState" value="<?=(is_array($this->order['forms']['wife_identification']) && $this->order['forms']['wife_identification']['wife-BirthState']!='') ? $this->order['forms']['wife_identification']['wife-BirthState'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Driver's License Number</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-DriverLicenceNumber" value="<?=(is_array($this->order['forms']['wife_identification']) && $this->order['forms']['wife_identification']['wife-DriverLicenceNumber']!='') ? $this->order['forms']['wife_identification']['wife-DriverLicenceNumber'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Driver's License State of Issuance</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2">
+                                    <select size="1" name="wifeDriverLicenceState" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['wife_identification']) && $states['valor'] == $this->order['forms']['wife_identification']['wifeDriverLicenceState']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                </td>
+                            </tr>
+                            
+                        </table>
+                        </form>
+                   </div>
+                   <div class="employer contForm" style="display: block;">
+                       <h2>Wife Employer</h2>
+                       <form name="wife_employer_information" id="wife_employer_information">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="wife_employer_information">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">Is the Partner currently employed?</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="radio" name="wife-employed" value="No" <?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-employed']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                <td width="20%"><input type="radio" name="wife-employed" value="Yes" <?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-employed']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Occupation</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-OccupationEmployed" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-OccupationEmployed']!='') ? $this->order['forms']['wife_employer_information']['wife-OccupationEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employer</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-EmployerEmployed" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-EmployerEmployed']!='') ? $this->order['forms']['wife_employer_information']['wife-EmployerEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employment Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-EmployedAddress" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-EmployedAddress']!='') ? $this->order['forms']['wife_employer_information']['wife-EmployedAddress'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employment Address Line 2</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="wife-EmployedAddress2" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-EmployedAddress2']!='') ? $this->order['forms']['wife_employer_information']['wife-EmployedAddress2'] : ''?>"></td>
+                            </tr><tr>
+                                <td width="50%">City and State</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="text" name="wife-cityEmployed" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-cityEmployed']!='') ? $this->order['forms']['wife_employer_information']['wife-cityEmployed'] : ''?>" placeholder="City"></td>
+                                <td width="20%" align="center">
+                                    <select size="1" name="wifeStateEmployed" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['wife_employer_information']) && $states['valor'] == $this->order['forms']['wife_employer_information']['wifeStateEmployed']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Zip Code</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="wife-zipcodeEmployed" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-zipcodeEmployed']!='') ? $this->order['forms']['wife_employer_information']['wife-zipcodeEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Phone</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="wife-phoneEmployed" value="<?=(is_array($this->order['forms']['wife_employer_information']) && $this->order['forms']['wife_employer_information']['wife-phoneEmployed']!='') ? $this->order['forms']['wife_employer_information']['wife-phoneEmployed'] : ''?>"></td>
+                            </tr>
+                            
+                        </table>
+                        </form>
+                   </div>
+               
+                   <div class="income contForm" style="display: block;">
+                       <h2>Wife Income</h2>
+                       <form name="wife_monthly_income" id="wife_monthly_income">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="wife_monthly_income">
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td colspan="3"><strong>Monthly Income</strong></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Wages and Salaries</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-wageSalaries" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-wageSalaries']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-wageSalaries'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Interest and Dividend Income</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-InterestDividend" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-InterestDividend']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-InterestDividend'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Business Income (Self-Employment)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-BusinessIncome" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-BusinessIncome']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-BusinessIncome'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Alimony from Prior Marriage</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-AlmonyMarriage" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-AlmonyMarriage']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-AlmonyMarriage'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Disability Benefits/SSI</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-DisabilityBenefits" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-DisabilityBenefits']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-DisabilityBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Workers' Compensation</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-WorkersCompensation" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-WorkersCompensation']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-WorkersCompensation'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Unemployment Benefits</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-UnemployedBenefits" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-UnemployedBenefits']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-UnemployedBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Pension, Retirement, or Annuity payments</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-PensionRetirement" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-PensionRetirement']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-PensionRetirement'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Social Security Benefits</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-socialSecurityBenefits" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-socialSecurityBenefits']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-socialSecurityBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Other Income</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-Other" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-Other']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-Other'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td colspan="3"><strong>Monthly Deductions from Gross Income</strong></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Income Taxes (Federal and State)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-IncomeTaxes" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-IncomeTaxes']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-IncomeTaxes'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">FICA (Soc.Sec.)/Self-Employment Taxes</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-FICA" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-FICA']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-FICA'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Medicare</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-Medicare" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-Medicare']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-Medicare'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Health Insurance (not including portion paid for children)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-HealthInsurance" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-HealthInsurance']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-HealthInsurance'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">State Industrial Insurance Deductions</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-StateIndustrialInsurance" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-StateIndustrialInsurance']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-StateIndustrialInsurance'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Mandatory Union Dues</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-MandatoryUnionDues" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-MandatoryUnionDues']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-MandatoryUnionDues'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Mandatory Pension Plan Payments</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-MandatoryPensionPlan" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-MandatoryPensionPlan']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-MandatoryPensionPlan'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Alimony Paid for Prior Marriage</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-AlimonyPaidPrior" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-AlimonyPaidPrior']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-AlimonyPaidPrior'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Normal Business Expenses</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="WifeFinancial-NormalBusinessExpenses" value="<?=(is_array($this->order['forms']['wife_monthly_income']) && $this->order['forms']['wife_monthly_income']['WifeFinancial-NormalBusinessExpenses']!='') ? $this->order['forms']['wife_monthly_income']['WifeFinancial-NormalBusinessExpenses'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                                <td width="50%"></td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"></td>
+                            </tr>
+                          
+                       </table>
+                        </form>
+                   </div>
+               
+                   <div class="information contForm" style="display: block;">
+                        <h2>Husband Information</h2>
+                        <form name="husband_personal_information" id="husband_personal_information">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="husband_personal_information">                        
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">First Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-firstname" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-firstname']!='') ? $this->order['forms']['husband_personal_information']['husband-firstname'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Middle Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-middlename" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-middlename']!='') ? $this->order['forms']['husband_personal_information']['husband-middlename'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Last Name</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-lastname" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-lastname']!='') ? $this->order['forms']['husband_personal_information']['husband-lastname'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Birth Date (MM/DD/YYYY)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2">
+                                    <input type="date" name="husband-birth" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-birth']!='') ? $this->order['forms']['husband_personal_information']['husband-birth'] : ''?>">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td width="50%">Street Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-address" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-address']!='') ? $this->order['forms']['husband_personal_information']['husband-address'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">City and State</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="text" name="husband-city" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-city']!='') ? $this->order['forms']['husband_personal_information']['husband-city'] : ''?>" placeholder="City"></td>
+                                <td width="20%" align="center">
+                                    <select size="1" name="husbandState" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['husband_personal_information']) && $states['valor'] == $this->order['forms']['husband_personal_information']['husbandState']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Zip Code</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="husband-zipcode" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-zipcode']!='') ? $this->order['forms']['husband_personal_information']['husband-zipcode'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Phone</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="husband-phone" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-phone']!='') ? $this->order['forms']['husband_personal_information']['husband-phone'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Fax Number (optional)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="husband-fax" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-fax']!='') ? $this->order['forms']['husband_personal_information']['husband-fax'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">E-Mail Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="email" name="husband-email" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-email']!='') ? $this->order['forms']['husband_personal_information']['husband-email'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">County</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-County" value="<?=(is_array($this->order['forms']['husband_personal_information']) && $this->order['forms']['husband_personal_information']['husband-County']!='') ? $this->order['forms']['husband_personal_information']['husband-County'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                </td>
+                            </tr>
+                            
+                        </table>       
+                        </form>             
+                   </div>
+                   <div class="identification contForm" style="display: block;">
+                       <h2>Husband Identification</h2>
+                       <form name="husband_identification" id="husband_identification">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="husband_identification">
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">Birth State (or country if not USA)</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-BirthState" value="<?=(is_array($this->order['forms']['husband_identification']) && $this->order['forms']['husband_identification']['husband-BirthState']!='') ? $this->order['forms']['husband_identification']['husband-BirthState'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Driver's License Number</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-DriverLicenceNumber" value="<?=(is_array($this->order['forms']['husband_identification']) && $this->order['forms']['husband_identification']['husband-DriverLicenceNumber']!='') ? $this->order['forms']['husband_identification']['husband-DriverLicenceNumber'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Driver's License State of Issuance</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2">
+                                    <select size="1" name="husbandDriverLicenceState" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['husband_identification']) && $states['valor'] == $this->order['forms']['husband_identification']['husbandDriverLicenceState']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                </td>
+                            </tr>
+                           
+                        </table>
+
+
+                        </form>
+                   </div>
+                   <div class="employer contForm" style="display: block;">
+                       <h2>Husband Employer</h2>
+                       <form name="husband_employer_information" id="husband_employer_information">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="husband_employer_information">
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td width="50%">Is the Partner currently employed?</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="radio" name="husband-employed" value="No" <?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-employed']=='No') ? 'checked="checked"' : ''?>> <label>No</label></td>
+                                <td width="20%"><input type="radio" name="husband-employed" value="Yes" <?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-employed']=='Yes') ? 'checked="checked"' : ''?>> <label>Yes</label></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Occupation</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-OccupationEmployed" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-OccupationEmployed']!='') ? $this->order['forms']['husband_employer_information']['husband-OccupationEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employer</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-EmployerEmployed" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-EmployerEmployed']!='') ? $this->order['forms']['husband_employer_information']['husband-EmployerEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employment Address</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-EmployedAddress" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-EmployedAddress']!='') ? $this->order['forms']['husband_employer_information']['husband-EmployedAddress'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Employment Address Line 2</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="text" name="husband-EmployedAddress2" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-EmployedAddress2']!='') ? $this->order['forms']['husband_employer_information']['husband-EmployedAddress2'] : ''?>"></td>
+                            </tr><tr>
+                                <td width="50%">City and State</td>
+                                <td width="10%"></td>
+                                <td width="20%"><input type="text" name="husband-cityEmployed" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-cityEmployed']!='') ? $this->order['forms']['husband_employer_information']['husband-cityEmployed'] : ''?>" placeholder="City"></td>
+                                <td width="20%" align="center">
+                                    <select size="1" name="husbandStateEmployed" class="formfont">
+                                        <option value="">State</option>
+                                        <?php foreach($this->states as $states):?>
+                                        <?php if(is_array($this->order['forms']['husband_employer_information']) && $states['valor'] == $this->order['forms']['husband_employer_information']['husbandStateEmployed']):?>
+                                        <option value="<?=$states['valor']?>" selected="selected"><?=strtoupper($states['valor'])?></option> 
+                                        <?php else:?>
+                                        <option value="<?=$states['valor']?>"><?=strtoupper($states['valor'])?></option>
+                                        <?php endif?>
+                                        <?php endforeach?>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Zip Code</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="husband-zipcodeEmployed" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-zipcodeEmployed']!='') ? $this->order['forms']['husband_employer_information']['husband-zipcodeEmployed'] : ''?>"></td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Phone</td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"><input type="number" name="husband-phoneEmployed" value="<?=(is_array($this->order['forms']['husband_employer_information']) && $this->order['forms']['husband_employer_information']['husband-phoneEmployed']!='') ? $this->order['forms']['husband_employer_information']['husband-phoneEmployed'] : ''?>"></td>
+                            </tr>
+                            
+                        </table>
+
+                        </form>
+                   </div>
+
+                   <div class="income contForm" style="display: block;">
+                       <h2>Husband Income</h2>
+                       <form name="husband_monthly_income" id="husband_monthly_income">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="husband_monthly_income">
+                       
+
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td colspan="3"><strong>Monthly Income</strong></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Wages and Salaries</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-wageSalaries" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-wageSalaries']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-wageSalaries'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Interest and Dividend Income</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-InterestDividend" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-InterestDividend']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-InterestDividend'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Business Income (Self-Employment)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-BusinessIncome" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-BusinessIncome']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-BusinessIncome'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Alimony from Prior Marriage</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-AlmonyMarriage" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-AlmonyMarriage']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-AlmonyMarriage'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Disability Benefits/SSI</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-DisabilityBenefits" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-DisabilityBenefits']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-DisabilityBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Workers' Compensation</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-WorkersCompensation" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-WorkersCompensation']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-WorkersCompensation'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Unemployment Benefits</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-UnemployedBenefits" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-UnemployedBenefits']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-UnemployedBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Pension, Retirement, or Annuity payments</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-PensionRetirement" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-PensionRetirement']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-PensionRetirement'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Social Security Benefits</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-socialSecurityBenefits" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-socialSecurityBenefits']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-socialSecurityBenefits'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Other Income</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-Other" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-Other']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-Other'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td colspan="3"><strong>Monthly Deductions from Gross Income</strong></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Income Taxes (Federal and State)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-IncomeTaxes" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-IncomeTaxes']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-IncomeTaxes'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">FICA (Soc.Sec.)/Self-Employment Taxes</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-FICA" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-FICA']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-FICA'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Medicare</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-Medicare" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-Medicare']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-Medicare'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Health Insurance (not including portion paid for children)</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-HealthInsurance" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-HealthInsurance']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-HealthInsurance'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">State Industrial Insurance Deductions</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-StateIndustrialInsurance" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-StateIndustrialInsurance']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-StateIndustrialInsurance'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Mandatory Union Dues</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-MandatoryUnionDues" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-MandatoryUnionDues']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-MandatoryUnionDues'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Mandatory Pension Plan Payments</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-MandatoryPensionPlan" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-MandatoryPensionPlan']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-MandatoryPensionPlan'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Alimony Paid for Prior Marriage</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-AlimonyPaidPrior" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-AlimonyPaidPrior']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-AlimonyPaidPrior'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                               <td width="60%">Normal Business Expenses</td>
+                               <td width="10%"></td>
+                               <td width="30%">$<input type="number" name="HusbandFinancial-NormalBusinessExpenses" value="<?=(is_array($this->order['forms']['husband_monthly_income']) && $this->order['forms']['husband_monthly_income']['HusbandFinancial-NormalBusinessExpenses']!='') ? $this->order['forms']['husband_monthly_income']['HusbandFinancial-NormalBusinessExpenses'] : ''?>"></td>
+                           </tr>
+                           <tr>
+                                <td width="50%"></td>
+                                <td width="10%"></td>
+                                <td width="40%" colspan="2"></td>
+                            </tr>
+                           
+                       </table>
+
+
+                        </form>
+                   </div>
+
+                   <div class="Property contForm" style="display: block;">
+                       <h2>Property</h2>
+                       <form name="property_division" id="property_division">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="property_division">
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td colspan="4">Marital property consists of the property, other than separate property, acquired by either party during the marriage. Anything earned or acquired with marital money is owned equally by the Husband and Wife.</td>
+                           </tr>
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2">Do you have cash on hand to divide (this is cash money that is NOT in any bank account)?</td>
+                               <td width="20%"><input type="radio" name="Property-cash" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-cash" value="No"> <label for="">No</label></td>
+                           </tr>
+                           <tbody class="content-PropertyCash">
+                               <tr>
+                                   <td width="60%" colspan="2">How much cash on hand will the Husband keep?</td>
+                                   <td width="40%" colspan="2">$ <input type="number" name="Property-cash-husband"></td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">How much cash on hand will the Wife keep?</td>
+                                   <td width="40%" colspan="2">$ <input type="number" name="Property-cash-wife"></td>
+                               </tr>
+                           </tbody>
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Real Estate:</strong> Do you have any houses or land?</td>
+                               <td width="20%"><input type="radio" name="Property-realEstate" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-realEstate" value="No"> <label for="">No</label></td>
+                           </tr>
+                           <tbody class="content-PropertyRealEstate">
+                               <tr>
+                                   <td width="40%">Address and description of property as it appears on deed</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-realEstateDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-realEstateValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">Will this property be kept by one spouse or sold with the proceeds being split?</td>
+                                   <td width="20%"><input type="radio" name="Property-realEstateKeep" value="Kept"> <label for="">Kept</label></td>
+                                   <td width="20%"><input type="radio" name="Property-realEstateKeep" value="Sold"> <label for="">Sold</label></td>
+                               </tr>
+                           </tbody>
+                       </table>                   
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Vehicles:</strong> Do you have any motor vehicles that need to be separated?</td>
+                               <td width="20%"><input type="radio" name="Property-Vehicles" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Vehicles" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>
+                        <div class="content-PropertyVehicles">
+                            <table cellpadding="0" cellspacing="0" width="100%" id="vehicle">
+                               <tr>
+                                   <td width="40%">Vehicle Description:</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-VehicleDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-VehicleValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Whose name(s) are currently on the title?</td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleTitular" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleTitular" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleTitular" value="Both"> <label for="">Both</label></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Is there money owed on the vehicle?</td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleOwed" value="Yes"> <label for="">Yes</label></td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleOwed" value="No"> <label for="">No</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this vehicle?</td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-VehicleKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-vehicle"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveVehicle" type="button">Remove Last Vehicle</button>
+                                <button id="btAddVehicle" type="button">Add Another Vehicle</button>
+                            </div>
+                        </div>
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Retirement Benefits:</strong>  Do you have retirement plans to separate?</td>
+                               <td width="20%"><input type="radio" name="Property-Retirement" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Retirement" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>     
+                        <div class="content-PropertyRetirement">               
+                            <table cellpadding="0" cellspacing="0" width="100%" id="plan">
+                               <tr>
+                                   <td width="40%">Description including Plan Name:</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-PlanName" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Plan Administrator</td>
+                                   <td width="60%" colspan="3"><input type="text" name="Property-PlanAdministrator"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-PlanValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this account?</td>
+                                   <td width="20%"><input type="radio" name="Property-PlanKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-PlanKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="radio" name="Property-PlanKeep" value="Divided"> <label for="">Divided</label></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-plan"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemovePlan" type="button">Remove Last Plan</button>
+                                <button id="btAddPlan" type="button">Add Another Plan</button>
+                            </div>
+                        </div>
+                        
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Bank Accounts: </strong>  Do you have bank accounts to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-BankAccount" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-BankAccount" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyBankAccount">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="bankaccount">
+                               <tr>
+                                   <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-BankAccountDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-BankAccountValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this account?</td>
+                                   <td width="20%"><input type="radio" name="Property-BankAccountKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-BankAccountKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-bankaccount"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveBankAccount" type="button">Remove Last Bank Account</button>
+                                <button id="btAddBankAccount" type="button">Add Another Bank Account</button>
+                            </div>
+                        </div>
+
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Investment Accounts:</strong> Do you have investment accounts or stocks/bonds/mutual funds to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-InvestmentAccounts" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-InvestmentAccounts" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyInvestmentAccounts">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="InvestmentAccounts">
+                               <tr>
+                                   <td width="40%">Description including account/investment name (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-InvestmentAccountsDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-InvestmentAccountsValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this account/investment?</td>
+                                   <td width="20%"><input type="radio" name="Property-InvestmentAccountsKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-InvestmentAccountsKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-InvestmentAccounts"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveInvestmentAccounts" type="button">Remove Last Investment Account</button>
+                                <button id="btAddInvestmentAccounts" type="button">Add Another Investment Account</button>
+                            </div>
+                        </div>
+
+
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Life Insurance:</strong> Do you have life insurance that needs to be divided?</td>
+                               <td width="20%"><input type="radio" name="Property-LifeInsurance" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-LifeInsurance" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyLifeInsurance">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="LifeInsurance">
+                               <tr>
+                                   <td width="40%">Description (include insurance company and last 4 digits of policy number)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-LifeInsuranceDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Cash Surrender Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-LifeInsuranceValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-LifeInsuranceKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-LifeInsuranceKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-LifeInsurance"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveLifeInsurance" type="button">Remove Last Life Insurance</button>
+                                <button id="btAddLifeInsurance" type="button">Add Another Life Insurance</button>
+                            </div>
+                        </div>
+
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Boats:</strong> Do you have any boats to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-Boats" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Boats" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyBoats">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Boats">
+                               <tr>
+                                   <td width="40%">Description of boat</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-BoatsDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-BoatsValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this boat?</td>
+                                   <td width="20%"><input type="radio" name="Property-BoatsKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-BoatsKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Boats"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveBoats" type="button">Remove Last Boats</button>
+                                <button id="btAddBoats" type="button">Add Another Boats</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Other Vehicles: </strong>Do you have any other vehicles to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-OtherVehicles" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-OtherVehicles" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyOtherVehicles">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="OtherVehicles">
+                               <tr>
+                                   <td width="40%">Description of vehicle</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-OtherVehiclesDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-OtherVehiclesValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this vehicle?</td>
+                                   <td width="20%"><input type="radio" name="Property-OtherVehiclesKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-OtherVehiclesKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-OtherVehicles"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveOtherVehicles" type="button">Remove Last Vehicle</button>
+                                <button id="btAddOtherVehicles" type="button">Add Another Vehicle</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Owed Money:</strong> Do you have any money owed to you to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-OwedMoney" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-OwedMoney" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyOwedMoney">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="OwedMoney">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-OwedMoneyDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-OtherVehiclesValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-OwedMoneyKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-OwedMoneyKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-OwedMoney"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveOwedMoney" type="button">Remove Property</button>
+                                <button id="btAddOwedMoney" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Furniture:</strong> Do you have any furniture to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-Furniture" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Furniture" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyFurniture">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Furniture">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-FurnitureDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-FurnitureValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-FurnitureKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-FurnitureKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Furniture"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveFurniture" type="button">Remove Property</button>
+                                <button id="btAddFurniture" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Jewelry and Collectibles:</strong> Do you have any jewelry or collectibles to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-Jewelry" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Jewelry" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyJewelry">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Jewelry">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-JewelryDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-JewelryValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-JewelryKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-JewelryKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Jewelry"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveJewelry" type="button">Remove Property</button>
+                                <button id="btAddJewelry" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Sports and Entertainment Equipment:</strong> Do you have any sports or entertainment equipment to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-Sports" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Sports" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertySports">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Sports">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-SportsDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-SportsValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-SportsKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-SportsKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Sports"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveSports" type="button">Remove Property</button>
+                                <button id="btAddSports" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Business Interests:</strong> Do you have any business interests to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-Business" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-Business" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyBusiness">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Business">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-BusinessDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-BusinessValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-BusinessKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-BusinessKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Business"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveBusiness" type="button">Remove Property</button>
+                                <button id="btAddBusiness" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Additional Property:</strong> Do you have additional property to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-AdditionalProperty" value="Yes"> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-AdditionalProperty" value="No"> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyAdditionalProperty">                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="AdditionalProperty">
+                               <tr>
+                                   <td width="40%">Description</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-AdditionalPropertyDescription" cols="34"></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Market Value:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-AdditionalPropertyValue"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will keep this property?</td>
+                                   <td width="20%"><input type="radio" name="Property-AdditionalPropertyKeep" value="Husband"> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-AdditionalPropertyKeep" value="Wife"> <label for="">Wife</label></td>
+                                   <td width="20%"></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-AdditionalProperty"></div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveAdditionalProperty" type="button">Remove Property</button>
+                                <button id="btAddAdditionalProperty" type="button">Add Another Property</button>
+                            </div>
+                        </div>
+
+                        <table cellpadding="0" cellspacing="0" width="100%">                          
+                            <tr><td colspan="4"><hr></td></tr>
+                            <tr><td colspan="4"></td></tr>
+                            
+                        </table>
+                        </form>
+                   </div>
+
+                   <div class="debts contForm" style="display: block;">
+                       <h2>Debt</h2>
+                       <form name="debt" id="debt" autocomplete="off">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="debt">
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td colspan="4">Marital debt is like marital property. Any debts acquired between the marriage and date of separation are marital. Do not list real estate or vehicle debt that was already listed in the property portion of the interview.</td>
+                           </tr>
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Credit Card Debt:</strong> Do you have Credit Card debt you need to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-debt-credit-car" value="Yes" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-credit-car']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-debt-credit-car" value="No" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-credit-car']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyCreditCar" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-credit-car']=='No') ? 'style="display:none;"' : ''?>>                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="CreditCar">
+                               <tr>
+                                   <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-CreditCarDescription[]" cols="34"><?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-CreditCarDescription'][0]!='') ? $this->order['forms']['debt']['Property-CreditCarDescription'][0] : ''?></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Creditor:</td>
+                                   <td width="60%" colspan="3"><input type="text" name="Property-CreditCarCreditor[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-CreditCarCreditor'][0]!='') ? $this->order['forms']['debt']['Property-CreditCarCreditor'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Current Amount Owed:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-CreditCarAmount[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-CreditCarAmount'][0]!='') ? $this->order['forms']['debt']['Property-CreditCarAmount'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Monthly Payment:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-CreditCarMonthly[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-CreditCarMonthly'][0]!='') ? $this->order['forms']['debt']['Property-CreditCarMonthly'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will be responsible for this debt?</td>
+                                   <td width="20%"><input type="radio" name="Property-CreditCarResponsible[]" value="Husband" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-CreditCarResponsible']) &&  $this->order['forms']['debt']['Property-CreditCarResponsible'][0]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-CreditCarResponsible[]" value="Wife" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-CreditCarResponsible']) && $this->order['forms']['debt']['Property-CreditCarResponsible'][0]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="hidden" name="CreditCar_cont[]" value=""></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-CreditCar">
+                                <?php if(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-CreditCarDescription'][0]!=''):?>
+                                <?php if(count($this->order['forms']['debt']['Property-CreditCarDescription'])>1):?>
+                                <?php for ($i=1; $i<count($this->order['forms']['debt']['Property-CreditCarDescription']); $i++):?>
+
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" id="CreditCar<?=$i?>">
+                                       <tr>
+                                           <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                           <td width="60%" colspan="3"><textarea name="Property-CreditCarDescription[<?=$i?>]" cols="34"><?=$this->order['forms']['debt']['Property-CreditCarDescription'][$i]?></textarea></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Creditor:</td>
+                                           <td width="60%" colspan="3"><input type="text" name="Property-CreditCarCreditor[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-CreditCarCreditor'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Current Amount Owed:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-CreditCarAmount[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-CreditCarAmount'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Monthly Payment:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-CreditCarMonthly[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-CreditCarMonthly'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Who will be responsible for this debt?</td>
+                                           <td width="20%"><input type="radio" name="Property-CreditCarResponsible[<?=$i?>]" value="Husband" <?=(isset($this->order['forms']['debt']['Property-CreditCarResponsible']) && $this->order['forms']['debt']['Property-CreditCarResponsible'][$i]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                           <td width="20%"><input type="radio" name="Property-CreditCarResponsible[<?=$i?>]" value="Wife" <?=(isset($this->order['forms']['debt']['Property-CreditCarResponsible']) && $this->order['forms']['debt']['Property-CreditCarResponsible'][$i]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                           <td width="20%"><input type="hidden" name="CreditCar_cont[]" value=""></td>
+                                       </tr>
+                                    </table>
+
+
+                                <?php endfor?>
+                                <?php endif?>
+                                <?php endif?>
+                            </div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveCreditCar" type="button">Remove Debt</button>
+                                <button id="btAddCreditCar" type="button">Add Another Debt</button>
+                            </div>
+                        </div>
+
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Bank Loans:</strong>  Do you have Bank/Credit Union Loans to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-debt-bankLoans" value="Yes" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-bankLoans']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-debt-bankLoans" value="No" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-bankLoans']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyBankLoans" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-bankLoans']=='No') ? 'style="display:none;"' : ''?>>                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="BankLoans">
+                               <tr>
+                                   <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-BankLoansDescription[]" cols="34"><?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-BankLoansDescription'][0]!='') ? $this->order['forms']['debt']['Property-BankLoansDescription'][0] : ''?></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Creditor:</td>
+                                   <td width="60%" colspan="3"><input type="text" name="Property-BankLoansCreditor[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-BankLoansCreditor'][0]!='') ? $this->order['forms']['debt']['Property-BankLoansCreditor'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Current Amount Owed:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-BankLoansAmount[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-BankLoansAmount'][0]!='') ? $this->order['forms']['debt']['Property-BankLoansAmount'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Monthly Payment:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-BankLoansMonthly[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-BankLoansMonthly'][0]!='') ? $this->order['forms']['debt']['Property-BankLoansMonthly'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will be responsible for this debt?</td>
+                                   <td width="20%"><input type="radio" name="Property-BankLoansResponsible[]" value="Husband" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-BankLoansResponsible']) && $this->order['forms']['debt']['Property-BankLoansResponsible'][0]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-BankLoansResponsible[]" value="Wife" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-BankLoansResponsible']) && $this->order['forms']['debt']['Property-BankLoansResponsible'][0]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="hidden" name="BankLoans_cont[]" value=""></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-BankLoans">
+
+                                <?php if(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-BankLoansDescription'][0]!=''):?>
+                                <?php if(count($this->order['forms']['debt']['Property-BankLoansDescription'])>1):?>
+                                <?php for ($i=1; $i<count($this->order['forms']['debt']['Property-BankLoansDescription']); $i++):?>
+
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" id="BankLoans<?=$i?>">
+                                       <tr>
+                                           <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                           <td width="60%" colspan="3"><textarea name="Property-BankLoansDescription[<?=$i?>]" cols="34"><?=$this->order['forms']['debt']['Property-BankLoansDescription'][$i]?></textarea></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Creditor:</td>
+                                           <td width="60%" colspan="3"><input type="text" name="Property-BankLoansCreditor[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-BankLoansCreditor'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Current Amount Owed:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-BankLoansAmount[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-BankLoansAmount'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Monthly Payment:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-BankLoansMonthly[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-BankLoansMonthly'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Who will be responsible for this debt?</td>
+                                           <td width="20%"><input type="radio" name="Property-BankLoansResponsible[<?=$i?>]" value="Husband" <?=(isset($this->order['forms']['debt']['Property-BankLoansResponsible']) && $this->order['forms']['debt']['Property-BankLoansResponsible'][$i]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                           <td width="20%"><input type="radio" name="Property-BankLoansResponsible[<?=$i?>]" value="Wife" <?=(isset($this->order['forms']['debt']['Property-BankLoansResponsible']) && $this->order['forms']['debt']['Property-BankLoansResponsible'][$i]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                           <td width="20%"><input type="hidden" name="BankLoans_cont[]" value=""></td>
+                                       </tr>
+                                    </table>
+
+
+                                <?php endfor?>
+                                <?php endif?>
+                                <?php endif?>
+
+                            </div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveBankLoans" type="button">Remove Debt</button>
+                                <button id="btAddBankLoans" type="button">Add Another Debt</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Judgments:</strong> Do you have Court Judgment Payments to divide?</td>
+                               <td width="20%"><input type="radio" name="Property-debt-Judgments" value="Yes" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Judgments']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-debt-Judgments" value="No" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Judgments']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyJudgments" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Judgments']=='No') ? 'style="display:none;"' : ''?>>                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="Judgments">
+                               <tr>
+                                   <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-JudgmentsDescription[]" cols="34"><?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-JudgmentsDescription'][0]!='') ? $this->order['forms']['debt']['Property-JudgmentsDescription'][0] : ''?></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Creditor:</td>
+                                   <td width="60%" colspan="3"><input type="text" name="Property-JudgmentsCreditor[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-JudgmentsCreditor'][0]!='') ? $this->order['forms']['debt']['Property-JudgmentsCreditor'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Current Amount Owed:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-JudgmentsAmount[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-JudgmentsAmount'][0]!='') ? $this->order['forms']['debt']['Property-JudgmentsAmount'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Monthly Payment:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-JudgmentsMonthly[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-JudgmentsMonthly'][0]!='') ? $this->order['forms']['debt']['Property-JudgmentsMonthly'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will be responsible for this debt?</td>
+                                   <td width="20%"><input type="radio" name="Property-JudgmentsResponsible[]" value="Husband" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-JudgmentsResponsible']) && $this->order['forms']['debt']['Property-JudgmentsResponsible'][0]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-JudgmentsResponsible[]" value="Wife" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-JudgmentsResponsible']) && $this->order['forms']['debt']['Property-JudgmentsResponsible'][0]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="hidden" name="Judgments_cont[]" value=""></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-Judgments">
+                                
+                                <?php if(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-JudgmentsDescription'][0]!=''):?>
+                                <?php if(count($this->order['forms']['debt']['Property-JudgmentsDescription'])>1):?>
+                                <?php for ($i=1; $i<count($this->order['forms']['debt']['Property-JudgmentsDescription']); $i++):?>
+
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" id="Judgments<?=$i?>">
+                                       <tr>
+                                           <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                           <td width="60%" colspan="3"><textarea name="Property-JudgmentsDescription[<?=$i?>]" cols="34"><?=$this->order['forms']['debt']['Property-JudgmentsDescription'][$i]?></textarea></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Creditor:</td>
+                                           <td width="60%" colspan="3"><input type="text" name="Property-JudgmentsCreditor[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-JudgmentsCreditor'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Current Amount Owed:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-JudgmentsAmount[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-JudgmentsAmount'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Monthly Payment:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-JudgmentsMonthly[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-JudgmentsMonthly'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Who will be responsible for this debt?</td>
+                                           <td width="20%"><input type="radio" name="Property-JudgmentsResponsible[<?=$i?>]" value="Husband" <?=(isset($this->order['forms']['debt']['Property-JudgmentsResponsible']) && $this->order['forms']['debt']['Property-JudgmentsResponsible'][$i]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                           <td width="20%"><input type="radio" name="Property-JudgmentsResponsible[<?=$i?>]" value="Wife" <?=(isset($this->order['forms']['debt']['Property-JudgmentsResponsible']) && $this->order['forms']['debt']['Property-JudgmentsResponsible'][$i]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                           <td width="20%"></td>
+                                       </tr>
+                                    </table>
+
+
+                                <?php endfor?>
+                                <?php endif?>
+                                <?php endif?>
+
+                            </div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveJudgments" type="button">Remove Debt</button>
+                                <button id="btAddJudgments" type="button">Add Another Debt</button>
+                            </div>
+                        </div>
+
+
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr><td colspan="4"><hr></td></tr>
+                           <tr>
+                               <td width="60%" colspan="2"><strong>Other Debts:</strong> Do you have other debts to divide between you and your spouse?</td>
+                               <td width="20%"><input type="radio" name="Property-debt-Other" value="Yes" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Other']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Property-debt-Other" value="No" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Other']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                        </table>  
+                        <div class="content-PropertyOtherdebt" <?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debt-Other']=='No') ? 'style="display:none;"' : ''?>>                   
+                            <table cellpadding="0" cellspacing="0" width="100%" id="otherdebt">
+                               <tr>
+                                   <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                   <td width="60%" colspan="3"><textarea name="Property-debtOtherDescription[]" cols="34"><?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debtOtherDescription'][0]!='') ? $this->order['forms']['debt']['Property-debtOtherDescription'][0] : ''?></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Creditor:</td>
+                                   <td width="60%" colspan="3"><input type="text" name="Property-debtOtherCreditor[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debtOtherCreditor'][0]!='') ? $this->order['forms']['debt']['Property-debtOtherCreditor'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Current Amount Owed:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-debtOtherAmount[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debtOtherAmount'][0]!='') ? $this->order['forms']['debt']['Property-debtOtherAmount'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Monthly Payment:</td>
+                                   <td width="60%" colspan="3">$ <input type="number" name="Property-debtOtherMonthly[]" value="<?=(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debtOtherMonthly'][0]!='') ? $this->order['forms']['debt']['Property-debtOtherMonthly'][0] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="40%">Who will be responsible for this debt?</td>
+                                   <td width="20%"><input type="radio" name="Property-debtOtherResponsible[]" value="Husband" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-debtOtherResponsible']) && $this->order['forms']['debt']['Property-debtOtherResponsible'][0]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Property-debtOtherResponsible[]" value="Wife" <?=(is_array($this->order['forms']['debt']) && isset($this->order['forms']['debt']['Property-debtOtherResponsible']) && $this->order['forms']['debt']['Property-debtOtherResponsible'][0]=='Husband') ? 'Wife' : ''?>> <label for="">Wife</label></td>
+                                   <td width="20%"><input type="hidden" name="otherdebt_cont[]" value=""></td>
+                               </tr>
+                            </table>
+                            <div id="duplicate-otherdebt">
+                                
+                                <?php if(is_array($this->order['forms']['debt']) && $this->order['forms']['debt']['Property-debtOtherDescription'][0]!=''):?>
+                                <?php if(count($this->order['forms']['debt']['Property-debtOtherDescription'])>1):?>
+                                <?php for ($i=1; $i<count($this->order['forms']['debt']['Property-debtOtherDescription']); $i++):?>
+
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" id="otherdebt<?=$i?>">
+                                       <tr>
+                                           <td width="40%">Description including bank name and account type (do not enter account #)</td>
+                                           <td width="60%" colspan="3"><textarea name="Property-debtOtherDescription[<?=$i?>]" cols="34"><?=$this->order['forms']['debt']['Property-debtOtherDescription'][$i]?></textarea></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Creditor:</td>
+                                           <td width="60%" colspan="3"><input type="text" name="Property-debtOtherCreditor[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-debtOtherCreditor'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Current Amount Owed:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-debtOtherAmount[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-debtOtherAmount'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Monthly Payment:</td>
+                                           <td width="60%" colspan="3">$ <input type="number" name="Property-debtOtherMonthly[<?=$i?>]" value="<?=$this->order['forms']['debt']['Property-debtOtherMonthly'][$i]?>"></td>
+                                       </tr>
+                                       <tr>
+                                           <td width="40%">Who will be responsible for this debt?</td>
+                                           <td width="20%"><input type="radio" name="Property-debtOtherResponsible[<?=$i?>]" value="Husband" <?=(isset($this->order['forms']['debt']['Property-debtOtherResponsible']) && $this->order['forms']['debt']['Property-debtOtherResponsible'][$i]=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                           <td width="20%"><input type="radio" name="Property-debtOtherResponsible[<?=$i?>]" value="Wife" <?=(isset($this->order['forms']['debt']['Property-debtOtherResponsible']) && $this->order['forms']['debt']['Property-debtOtherResponsible'][$i]=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                                           <td width="20%"><input type="hidden" name="otherdebt_cont[]" value=""></td>
+                                       </tr>
+                                    </table>
+
+
+                                <?php endfor?>
+                                <?php endif?>
+                                <?php endif?>
+
+                            </div>
+                            <div class="buttons" style="padding-top: 20px;">
+                                <button id="btRemoveOtherDebt" type="button">Remove Debt</button>
+                                <button id="btAddOtherDebt" type="button">Add Another Debt</button>
+                            </div> 
+                        </div>
+                        
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr><td colspan="4"><hr></td></tr>
+                            <tr><td colspan="4"></td></tr>
+                           
+                        </table>
+                          
+                        </form>   
+                   </div>
+
+
+                   <div class="Alimony contForm" style="display: block;">
+                       <h2>Spousal Support</h2>
+                       <form name="spousal_support" id="spousal_support">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="spousal_support">
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td width="60%" colspan="2">Will there be spousal support?</td>
+                               <td width="20%"><input type="radio" name="Support-spousalSupport" value="Yes" <?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-spousalSupport']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="Support-spousalSupport" value="No" <?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-spousalSupport']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                       
+                           <tbody class="content-spousalSupport">
+                            
+                               <tr>
+                                   <td width="60%" colspan="2">Which spouse will pay support?</td>
+                                   <td width="20%"><input type="radio" name="Support-PaySupport" value="Husband" <?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-PaySupport']=='Husband') ? 'checked="checked"' : ''?>> <label for="">Husband</label></td>
+                                   <td width="20%"><input type="radio" name="Support-PaySupport" value="Wife" <?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-PaySupport']=='Wife') ? 'checked="checked"' : ''?>> <label for="">Wife</label></td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">Reason for Maintenance</td>
+                                   <td width="40%" colspan="2"><textarea name="Support-ReasonMaintenance" cols="34"><?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-ReasonMaintenance']!='') ? $this->order['forms']['spousal_support']['Support-ReasonMaintenance'] : ''?></textarea></td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">Monthly Amount</td>
+                                   <td width="40%" colspan="2">$<input type="number" name="Support-Monthly" value="<?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-Monthly']!='') ? $this->order['forms']['spousal_support']['Support-Monthly'] : ''?>"></td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">Length of Payment</td>
+                                   <td width="40%" colspan="2"><input type="number" name="Support-Length" value="<?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-Length']!='') ? $this->order['forms']['spousal_support']['Support-Length'] : ''?>"> month</td>
+                               </tr>
+                               <tr>
+                                   <td width="60%" colspan="2">First Payment Date (MM/DD/YYYY)</td>
+                                   <td width="40%" colspan="2"><input type="date" name="Support-PaymentDate" value="<?=(is_array($this->order['forms']['spousal_support']) && $this->order['forms']['spousal_support']['Support-PaymentDate']!='') ? $this->order['forms']['spousal_support']['Support-PaymentDate'] : ''?>"></td>
+                               </tr>
+                          
+                           </tbody>
+                           
+                                <tr>
+                                    <td colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                </tr>
+                               
+                           </table>
+                        </form>
+                   </div>
+
+                   <div class="NameChange contForm" style="display: block;">
+                       <h2>Name Change</h2>
+                       <form name="name_change" id="name_change">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="hidden" name="_id_form" value="<?=$this->id_form?>">
+                        <input type="hidden" name="_item" value="<?=$this->order['form_info']['item_producto']?>">
+                        <input type="hidden" name="_form_part" value="name_change">
+                       <table cellpadding="0" cellspacing="0" width="100%">
+                           <tr>
+                               <td colspan="4">If the Wife changed her name when the parties married, she can change it back to her maiden or other former name.</td>
+                           </tr>
+                           <tr>
+                               <td width="60%" colspan="2">Does Wife want a name change?</td>
+                               <td width="20%"><input type="radio" name="NameChange" value="Yes" <?=(is_array($this->order['forms']['name_change']) && $this->order['forms']['name_change']['NameChange']=='Yes') ? 'checked="checked"' : ''?>> <label for="">Yes</label></td>
+                               <td width="20%"><input type="radio" name="NameChange" value="No" <?=(is_array($this->order['forms']['name_change']) && $this->order['forms']['name_change']['NameChange']=='No') ? 'checked="checked"' : ''?>> <label for="">No</label></td>
+                           </tr>
+                           
+                       </table>
+                        </form>
+                   </div>
+               </section>
+
+               
+           </main>
+       </div>
+       <div class="containerForm">
+           
+           <footer>
+               Please review each of the pages in the interview and provide any additional information needed for your Florida documents. Upon completing the online interview, you will be able to request your documents be shipped to you. Use the Navigation Pane on the left to jump to any section of the interview at any time.
+           </footer>
+       </div>
+    </section>
+</main>
+
+
+
+

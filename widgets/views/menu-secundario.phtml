@@ -1,0 +1,10 @@
+<ul class="nav nav-pills menu-secundario">
+	<?php for($i=0;$i<count($menuSecundario);$i++):?>
+    <?php $estilo = ($menuSecundario[$i]['item'] == $menuSecundario[$i]['id']) ? 'activo' : '';?>
+    <li class="<?php echo $estilo?>">
+    	<a href="<?php echo $menuSecundario[$i]['enlace']?>">
+        	<?php echo $menuSecundario[$i]['titulo']?>
+        </a>
+    </li>
+    <?php endfor?>
+</ul>

@@ -1,0 +1,10 @@
+[01-Dec-2013 21:12:33 CST6CDT] PHP Fatal error:  Uncaught exception 'ActiveRecord\DatabaseException' with message 'exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in /home/cyberwal/public_html/libs/ar/lib/Connection.php:202
+Stack trace:
+#0 /home/cyberwal/public_html/libs/ar/lib/Connection.php(202): PDO->__construct('mysql:host=127....', 'test', 'test', Array)
+#1 /home/cyberwal/public_html/libs/ar/lib/Connection.php(99): ActiveRecord\Connection->__construct(Object(stdClass))
+#2 /home/cyberwal/public_html/libs/ar/lib/ConnectionManager.php(33): ActiveRecord\Connection::instance('development')
+#3 /home/cyberwal/public_html/libs/ar/lib/Table.php(83): ActiveRecord\ConnectionManager::get_connection(NULL)
+#4 /home/cyberwal/public_html/libs/ar/lib/Table.php(61): ActiveRecord\Table->__construct('Book')
+#5 /home/cyberwal/public_html/libs/ar/lib/Model.php(725): ActiveRecord\Table::load('Book')
+#6 /home/cyberwal/public_html/libs/ar/lib/Model.php(1428): ActiveRecord\Model::table()
+#7 [internal in /home/cyberwal/public_html/libs/ar/lib/Connection.php on line 204

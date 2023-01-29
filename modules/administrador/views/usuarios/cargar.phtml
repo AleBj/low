@@ -1,0 +1,230 @@
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Usuarios Administrador</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Cargar Usuario</h5>
+                        </div>
+                        <form class="form-horizontal" id="cargar_noticia" action="" method="POST" role="form">
+                        <input type="hidden" name="envio01" value="1" />
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                       
+                        
+                        
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Nombre y Apellido</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="text" name="usuario_nombre" id="usuario_nombre" value="<?php if(isset($this->data['usuario_nombre'])) echo $this->data['usuario_nombre']?>" placeholder="Nombre">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Usuario</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="text" name="usuario_usuario" id="usuario_usuario" value="<?php if(isset($this->data['usuario_usuario'])) echo $this->data['usuario_usuario']?>" placeholder="Usuario">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Email</label>
+                                <div class="col-lg-9">
+                                   <input class="form-control" type="text" name="usuario_email" id="usuario_email" value="<?php if(isset($this->data['usuario_email'])) echo $this->data['usuario_email']?>" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Password</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="password" name="usuario_pass" id="usuario_pass" value="" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                      
+                      <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Confirmar Password</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="password" name="usuario_repetir_pass" id="usuario_repetir_pass" value="" placeholder="Repetir Password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Rol</label>
+                                <div class="col-lg-9">
+                                  <select class="form-control" name="usuario_rol" id="usuario_rol">
+                                  <?php foreach($this->roles as $roles):?>
+                                  <option value="<?php echo $roles->id_role?>"><?php echo $roles->role?></option>
+                                  <?php endforeach?>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- <div id="cont_gestion" class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Provincias a gestionar</label>
+                                <div class="col-lg-9">
+                                  <select class="form-control provs multipleSelect" multiple name="prov_gestion[]">
+                                  <?php foreach($this->provincias as $prov):?>
+                                  <option value="<?=$prov->id?>"><?=$prov->nombre?></option>
+                                  <?php endforeach?>                      
+                                  </select>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Guardar" />
+                                    </div>                                                                       
+                                </div>
+                                
+                             
+                            </div>                            
+                        </div>
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<div id="head-bg-fix"></div>
+<div class="wpContent">   
+  <div class="btn-group-usuario">
+      <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios'?>">
+        Administrar Usuario
+      </a>
+
+      <a href="#" class="active">
+        Cargar Usuario
+      </a>
+  </div>    	
+  <div class="wpFormNewUser">
+    <form class="form-horizontal" id="cargar_noticia" action="" method="POST" role="form">
+      <input type="hidden" name="envio01" value="1" />
+      <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+
+      <div class=" <?php if(isset($this->errorNombre)) echo $this->errorNombre?>">
+        <label for="Categoria" class="labelInput">Nombre y Apellido</label>
+        <div class="wpFormInput">
+          <input type="text" name="usuario_nombre" id="usuario_nombre" value="<?php if(isset($this->data['usuario_nombre'])) echo $this->data['usuario_nombre']?>" placeholder="Nombre">
+        </div>
+      </div>
+
+      <div class=" <?php if(isset($this->errorEmail)) echo $this->errorEmail?>">
+        <label for="Categoria" class="labelInput">Email</label>
+        <div class="wpFormInput">
+          <input type="text" name="usuario_email" id="usuario_email" value="<?php if(isset($this->data['usuario_email'])) echo $this->data['usuario_email']?>" placeholder="Email">
+        </div>
+      </div>
+
+      <div class=" <?php if(isset($this->errorUsuario)) echo $this->errorUsuario?>">
+        <label for="Categoria" class="labelInput">Usuario</label>
+        <div class="wpFormInput">
+          <input type="text" name="usuario_usuario" id="usuario_usuario" value="<?php if(isset($this->data['usuario_usuario'])) echo $this->data['usuario_usuario']?>" placeholder="Usuario">
+        </div>
+      </div>
+
+
+
+      <div class=" <?php if(isset($this->errorPass)) echo $this->errorPass?>">
+        <label for="Categoria" class="labelInput">Password</label>
+        <div class="wpFormInput">
+          <input type="password" name="usuario_pass" id="usuario_pass" value="" placeholder="Password">
+        </div>
+      </div>
+
+      <div class=" <?php if(isset($this->errorPassRepetir)) echo $this->errorPassRepetir?>">
+        <label for="Categoria" class="labelInput">Repetir Password</label>
+        <div class="wpFormInput">
+          <input type="password" name="usuario_repetir_pass" id="usuario_repetir_pass" value="" placeholder="Repetir Password">
+        </div>
+      </div>
+
+      <div class="">
+        <label for="Categoria" class="labelInput">Rol</label>
+        <div class="wpFormInput select">
+          <select name="usuario_rol" id="usuario_rol">
+          <?php foreach($this->roles as $roles):?>
+          <option value="<?php echo $roles->id_role?>"><?php echo $roles->role?></option>
+          <?php endforeach?>
+          </select>
+        </div>
+      </div>
+
+      <div id="cont_gestion">
+
+        <div class=" <?php if(isset($this->errorProv)) echo $this->errorProv?>">
+          <label for="prov_gestion" class="labelInput">Provincias a gestionar</label>
+
+          <div class="wpProvs">           
+            
+            <select class="provs multipleSelect" multiple name="prov_gestion[]">
+            <?php foreach($this->provincias as $prov):?>
+            <option value="<?=$prov->id?>"><?=$prov->nombre?></option>
+            <?php endforeach?>                      
+            </select>
+            
+            <?php foreach($this->provincias as $prov):?>
+            <div class="third">
+                <input type="checkbox" class="regular-checkbox" name="prov_gestion[]" value="<?=$prov->id?>"> 
+                <span><?=$prov->nombre?></span>
+            </div>
+            <?php endforeach?>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="btnNewUser">
+
+        <input type="submit" class="btn" id="validatex" name="cargar" value="Cargar Usuario" />
+   
+      </div>
+
+    </form>
+  </div>  
+</div> -->

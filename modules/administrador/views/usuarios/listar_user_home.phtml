@@ -1,0 +1,149 @@
+<div id="head-bg-fix"></div>
+<div class="wpContent">        
+   		   <div class="btn-group-usuario">
+              <a href="#" class="active">
+                Administrar Usuario
+              </a>
+      	
+              <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/cargarUserHome'?>">
+                Cargar Usuario
+              </a>
+        	</div>
+          <div class="contFiltroUsuario">
+            	
+            <form role="form" action="" method="post" name="filtrar_usuarios">
+              <input type="hidden" name="_filtrar" value="1" />
+              <div style="min-width: 300px">
+                <select class="form-control" name="_roles">
+                  <?php foreach($this->roles as $roles):?>
+                  <option value="<?php echo $roles->id_role?>"> <?php echo $roles->role?> </option>
+                  <?php endforeach?>
+                  <option value=""> Sin Filtro </option>
+                </select>
+              </div>
+
+              <input class="btn btn-danger" type="submit" value="Filtrar"/>
+              
+            </form>
+
+        </div>
+        
+		  <ul class="list-group listar">
+        
+      <?php foreach($this->usuarios as $usuarios):?>
+
+          <li class="list-group-item">
+              <p>
+                <strong><?php echo $usuarios->nombre?></strong>
+                <small>Rol: <?=usuarios::combertirRole($usuarios->role)->role?></small>
+              </p> 
+              
+              <span>
+                                                    
+                  <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/editarUserHome/' . $usuarios->id?>">
+                    <img src="<?=$this->_conf['base_url']?>public/img/ico-pencil.png" alt="editar" style="width: 27px"/>
+                  </a>
+                 
+                  <!-- <a href="#borrarUsuario_<?php echo $usuarios->id?>" data-toggle="modal">                     
+                    <img src="<?=$this->_conf['base_url']?>public/img/ico-cruz.png" alt="eliminar"/>
+                  </a>  -->   
+
+                  <a href="javascript:void(0);" class="_borrar_<?php echo $usuarios->id?>" title="Borrar">
+                      <img src="<?=$this->_conf['base_url']?>public/img/ico-cruz.png" alt="eliminar"/>
+                  </a>                 
+                   
+              </span>
+          </li>
+            
+          <script>
+            $(document).ready(function () {
+                  $('._borrar_<?php echo $usuarios->id?>').click(function () {
+                      swal({
+                          title: "Estas seguro de borrar este usuario?",
+                          text: "Los datos se perderán permanentemente!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Si, que se borre!",
+                          cancelButtonText: "No, mejor no!",
+                          closeOnConfirm: false,
+                          closeOnCancel: false },
+                      function (isConfirm) {
+                          if (isConfirm) {
+                              var url= _root_ + "administrador/usuarios/borrar/<?php echo $usuarios->id?>";
+                              $.ajax({
+                                      type: "POST",
+                                      url: url,
+                                      success: function(data){
+                                        if(data=='ok'){
+                                          swal("Borrado!", "El usuario se borró con exito.", "success");
+                                          setTimeout(function() {
+                                              location.reload();
+                                          }, 200);
+                                        }else{
+                                          swal("Cancelado", "No se puede borrar porque el usuario esta en uso", "error");
+                                        }
+                                          
+                                          
+                                      }
+                              });
+                          } else {
+                              swal("Cancelado", "El usuario esta guardado", "error");
+                          }
+                      });
+                  });
+              });
+           </script> 
+         
+        	<!-- <div class="modal fade" id="borrarUsuario_<?php echo $usuarios->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         		<div class="modal-dialog">
+                  	<div class="modal-content">
+                    	<div class="modal-header">
+                      		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      		<h4 class="modal-title">Borrar Usuario <em><?php echo $usuarios->usuario?></em></h4>
+                    	</div>
+                    	<div class="modal-body">
+                      		<p>El usuario se borrar&aacute; permanentemente. &iquest;Desea continuar?</p>
+                            <?php if($usuarios->role == 1):?>
+                            <p><em class="text-danger">El usuario <strong>Admin</strong> no puede ser borrado</em></p>
+                            <?php endif?>
+                    	</div>
+                    	<div class="modal-footer">
+                      		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                      		<a class="btn btn-danger" <?php if($usuarios->role == 1) echo "disabled=\"disabled\"";?> href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/borrar/' . $usuarios->id?>">
+                            	Borrar
+                            </a>
+                    	</div>
+                  	</div>
+           		</div>
+       		</div> -->
+        
+        
+        
+        
+        <?php endforeach?>
+        </ul>
+        
+    
+</div>
+<?php //echo $this->paginacion?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

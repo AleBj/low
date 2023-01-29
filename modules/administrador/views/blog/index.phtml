@@ -1,0 +1,203 @@
+<script language="javascript">
+$(document).ready(function() {
+
+  $("#formBuscador").submit(function(){ 
+  
+  
+    if ($("#buscador").val() == "") {
+      return false;        
+    } 
+    
+    var valor = $("#buscador").val();
+    
+    var dataString = 'valor='+valor+'&_csrf=<?=$this->_sess->get('_csrf')?>';
+    $.ajax({            
+            type: 'POST',
+            url: _root_+"administrador/blog/buscador", 
+            data: dataString,
+            beforeSend: function(){
+              //$('.pagination').hide();
+              $('#contenedor').fadeOut('fast', function(){
+                $('.loader').fadeIn('fast');        
+              });
+            },
+            success: function(data){
+              $('#contenedor').html(data);
+              $('.pagination').hide();
+              $('.loader').fadeOut('fast', function(){
+                $('#contenedor').fadeIn('fast');  
+                $('.loader').fadeOut('fast');     
+              });
+        
+            },
+            error: function(){
+                 alert('error!!');
+            }
+        });
+    return false; 
+    
+  })
+  
+  // $(".botonExcel").click(function(event) {
+  //     $("#datos_a_enviar").val( $("<div>").append( $("#Exportar_a_Excel").eq(0).clone()).html());
+  //     $("#FormularioExportacion").submit();
+  // });
+
+  /*$("#_exportar").click(function(){
+       
+           
+      //var _data_ = $("#Exportar_a_Excel").eq(0).clone()).html();
+      //$('input[name="_fondos"]').val(_data_);
+     
+      var url = _root_ + "administrador/users/exportaDatos";     
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: "exportar=si",
+        success: function(data){
+
+          window.open(data,'_self' );
+           
+        }
+      });
+      return false;
+  });*/
+   
+
+});
+</script>
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Blog</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content">  
+    <div class="ibox-title">  
+        <a class="btn btn-w-m btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/blog/cargar">
+          Add post
+        </a> 
+
+        <!-- <a class="btn btn-w-m btn-info" id="_exportar" href="<?php echo $this->_conf['url_enlace']?>administrador/users/exportaDatos">
+          Exportar datos
+        </a>  -->
+
+    </div>
+    <div class="ibox-content forum-container">
+        <div class="row">
+            <div class="col-lg-4">
+                <form id="formBuscador" role="form" method="post" action="">
+                    <input type="hidden" id="estado" name="estado" value="alta" />
+                    <div class="btn-group">
+                        <div class="input-group m-b">
+                          <input class="form-control m-b" id="buscador" name="buscador" placeholder="Search for title" type="text" />
+                            <span class="input-group-btn">
+                                <button id="btBuscador" type="submit" class="btn btn-primary">
+                                     <i class="fa fa-search"></i>
+                                </button> 
+                            </span> 
+                            
+                        </div>
+                    </div>
+                </form>
+          </div>
+      </div> 
+    </div>
+
+
+    <div id="contenedor" class="ibox-content forum-container">
+    
+        <?php if($this->datos):?>
+        <?php foreach($this->datos as $datos):?>
+
+      
+
+        <div class="forum-item">
+            <div class="row">
+                <div class="col-md-8">                    
+                    <a href="" class="forum-item-title">
+                        <?php echo admin::convertirCaracteres($datos['titulo'])?>
+                    </a>                                    
+                </div>
+
+                <div class="col-md-4 forum-info">
+                    <div class="tooltip-demo pull-right">    
+
+                        <!-- <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/users/exportaDatosUser/<?php echo $datos['id']?>">
+                          Exportar datos
+                        </a>&nbsp;&nbsp;   -->              
+
+                        <a class="btn btn-warning" href="<?php echo $this->_conf['url_enlace']?>administrador/blog/editar/<?php echo $datos['id']?>">
+                           Edit
+                        </a>&nbsp;&nbsp;
+
+                        <a href="javascript:void(0);" class="btn btn-danger _borrar_<?php echo $datos['id']?>" title="Borrar">
+                            Delete
+                        </a>&nbsp;&nbsp;
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+          $(document).ready(function () {
+                $('._borrar_<?php echo $datos['id']?>').click(function () {
+                    swal({
+                        title: "Are you sure you want to delete this content?",
+                        text: "The data will be permanently deleted!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "Don't delete!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            var url= _root_ + "administrador/blog/borrar";
+                            var dataString = '_id=<?=$datos['id']?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                            $.ajax({
+                                    type: "POST",
+                                    url: url,
+                                    data: dataString,
+                                    success: function(data){
+                                      if(data=='ok'){
+                                        swal("Deleted!", "The content was successfully deleted", "success");
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 200);
+                                      }else{
+                                        swal("Cancelled", "It cannot be deleted because the content is in use", "error");
+                                      }
+                                        
+                                        
+                                    }
+                            });
+                        } else {
+                             swal("Cancelled", "The content is saved", "error");
+                        }
+                    });
+                });
+            });
+        </script>
+       
+
+        <?php endforeach?> 
+
+        <?php else:?>
+        <p>No data loaded!</p>
+        <?php endif?>
+    </div>
+    <div class="loader"></div> 
+   <?php echo (isset($this->paginacion)) ? $this->paginacion : ''?>
+</div>
+
+
+
+
+

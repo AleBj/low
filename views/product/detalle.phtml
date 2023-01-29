@@ -1,0 +1,86 @@
+<main>
+    <?php if($this->productos['item'] == 'ppa' || $this->productos['item'] == 'msa' || $this->productos['item'] == 'msappa'):?>
+    <div class="not-qualify__header">
+        <h3><span>Congratulations!</span> You are qualified to use our services.</h3>
+    </div>
+    <?php endif?>
+    
+    <section class="not-qualify whity">
+
+        <div class="container">
+            <?=$this->productos['descripcion']?>
+            <!-- match price -->
+            <div class="qualify__pay">
+                <h4 class="qualify__pay--tit"><?=$this->productos['titulo']?></h4>
+                <img src="<?php echo $_params['ruta_img']?>icons-01.png" alt="suitcase">
+                <p class="qualify__pay--monto">$<span><?=number_format($this->productos['precio'], 2, '.', ',')?></span></p>
+                <a href="javascript:void(0)" onclick="$().agregarCarro(<?=$this->productos['id']?>, 1,'<?=$this->productos['precio']?>','<?=$this->productos['item']?>');" class="qualify__pay--button"><p>Add to cart</p></a>
+            </div>
+
+            <p>
+                *Package does not include initial filing fee required by the circuit courts, which are approximately $414. Please note that TQD will collect your credit card information for the sole purpose of paying this fee directly to the county court on your behalf. This cost of filing is independent of the services provided by TQD.
+            </p>
+        </div>            
+    </section>
+
+    <?php if($this->productos['item'] == 'ppa' || $this->productos['item'] == 'msa' || $this->productos['item'] == 'msappa'):?>
+    <div class="qualify__steps">
+        <div class="container">
+            <p>
+                <strong>Step 2</strong> Fill out the intake form after checkout.
+            </p>
+            <p>
+                <strong>Step 3</strong> Complete the form package via the link sent to your email.<br>
+                Wait for the Court to issue your Final Judgement, ending your legal proceeding.
+            </p>
+        </div>
+    </div>
+    <?php endif?>
+</main>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+  
+    $.fn.agregarCarro = function(_id, _cant, _precio, _item){  
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/llenarCarro",
+            dataType: "json",
+            cache: false,
+            data: {"_id" : _id, "_cantidad" : _cant, "_precio" : _precio, "_item" : _item, "_csrf" : "<?=$this->_sess->get('_csrf')?>"}, 
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                // console.log(data);
+
+                // data = JSON.parse(data);
+
+                // console.log(data.cart);
+
+                if(data.cart=='ok'){
+                    setTimeout(function(){ 
+                        window.location = _root_+'cart';
+                    }, 1000);
+                }
+
+                
+
+
+            }
+        });        
+
+    };
+    
+    
+    
+});
+
+
+
+</script>

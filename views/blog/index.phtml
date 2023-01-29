@@ -1,0 +1,38 @@
+<main>
+    <div class="main-blog__header">
+        <h3>OUR BLOG</h3>
+    </div>
+    <section class="main-blog">   
+        <!-- cards ↓ -->         
+        <div class="container">
+
+            <?php if($this->blogs):?>
+            <?php foreach($this->blogs as $blogs):?>
+            
+            <article class="card">
+                <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__img">
+                    <?php $_img = admin::traerImg($blogs['identificador'],'blog');?>
+                    <?php if($_img):?>
+                    <img src="<?= $this->_conf['base_url'] . "public/img/subidas/blog/thumb/" . $_img->path?>" alt="">
+                    <?php endif?>
+                </a>
+                <div class="card__content">
+                    <h3 class="card__content--tit">
+                        <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>"><?=$blogs['titulo']?></a>
+                    </h3>
+                    <p class="card__content--date"><?=date('F d, Y', strtotime($blogs['fecha']))?></p>
+                    <p class="card__content--down">
+                       <?=strip_tags(home::limitarTitulo($blogs['texto'], 15))?>
+                    </p>
+                    <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__content--more">READ MORE <span>&gt;</span></a>
+                </div>
+
+            </article>
+
+            <?php endforeach?>
+            <?php endif?>
+
+        </div>
+    </section>
+</main>
+

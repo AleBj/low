@@ -1,0 +1,411 @@
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Orders</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="background-color: #d1f0d1;">
+                          <div class="col-lg-12">
+                            <h5>Order information</h5>
+                          </div>
+                        </div>
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="envio01" value="1" />        
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">  
+
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Status</label>
+                                <div class="col-lg-9">
+                                                                    
+                                  <select class="form-control" name="estado">
+                                    <option value="aprobado" <?php echo ($this->trabajo['estado'] == 'approved') ? 'selected="selected"' : ''?>>Approved</option>
+                                    <option value="rechazado" <?php echo ($this->trabajo['estado'] == 'rejected') ? 'selected="selected"' : ''?>>Rejected</option>
+                                    <option value="pendiente" <?php echo ($this->trabajo['estado'] == 'pending') ? 'selected="selected"' : ''?>>Pending</option>
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+                        
+                        
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="numero_compra" class="col-lg-2 control-label">Order date</label>
+                              <div class="col-lg-9">
+                               
+                                <input class="form-control" id="fecha_compra" name="fecha_compra" placeholder="Order date" type="text" value="<?php echo date ("Y-m-d H:i:s", strtotime($this->trabajo['fecha']));?>" readonly="readonly" /> 
+                              </div>
+                        </div>
+                      </div>           
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="numero_compra" class="col-lg-2 control-label">Nº order</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="numero_compra" name="numero_compra" placeholder="Nº order" type="text" value="<?php echo $this->trabajo['id']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>  
+
+                      <div class="ibox-content">  
+                        <div class="form-group ">
+                          <label class="col-lg-2 control-label">Total Amount</label>
+                            <div class="col-lg-9 input-group"> 
+                              <div class="input-group-addon">$</div>
+                               <input class="form-control" id="total" name="total" placeholder="Total Amount" type="text" value="<?php echo number_format($this->trabajo['total'], 2, '.', ',')?>" readonly="readonly" />                       
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <!-- <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="tipo_retiro" class="col-lg-2 control-label">Tipo de retiro</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="tipo_retiro" name="tipo_retiro" placeholder="Tipo de retiro" type="text" value="<?= ($this->trabajo['tipo_envio']==1) ? 'Retiro en sucursal' : 'Envio a domicilio'?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>  
+
+                      <?php if($this->trabajo['tipo_envio']==1):?>
+                      <?php $_suc = admin::traerSucursalCompra($this->trabajo['id']);?>
+                        <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label class="col-lg-2 control-label">Sucursal</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="sucursal" name="numero_compra" placeholder="Sucursal" type="text" value="<?php echo $_suc['nombre_sucursal']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div> 
+                      <?php endif?>    
+
+
+                      <?php if($this->trabajo['tipo_envio']==2):?>
+                      <?php $_env = admin::traerEnvioCompra($this->trabajo['id']);?>
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label class="col-lg-2 control-label">Nombre Carrier</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="nombre_carrier" name="nombre_carrier" placeholder="Nombre Carrier" type="text" value="<?php echo $_env['carrier_name']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div> 
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label class="col-lg-2 control-label">Codigo Carrier</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="codigo_carrier" name="codigo_carrier" placeholder="Codigo Carrier" type="text" value="<?php echo $_env['carrier_service_code']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div> 
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label class="col-lg-2 control-label">Costo Carrier</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="costo_carrier" name="costo_carrier" placeholder="Costo Carrier" type="text" value="<?php echo number_format($_env['carrier_total_amount'], 2, '.', '')?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div> 
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label  class="col-lg-2 control-label"></label>
+                              <div class="col-lg-9">
+                                <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/compras/direccion/<?=$_env['id_direccion']?>" target="_blank">Ver direccion envio</a>                               
+                                <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/compras/detalle_envio/<?=$this->trabajo['id']?>" target="_blank">Ver detalle envio</a>                               
+                              </div>
+                        </div>
+                      </div>
+                      <?php endif?>                       
+                                     -->       
+                      
+
+                        
+                      
+                     <!--  <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label  class="col-lg-2 control-label"></label>
+                              <div class="col-lg-9">
+                                <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/compras/detalle/<?=$this->trabajo['id']?>" target="_blank">Ver detalle de pago</a>
+                              </div>
+                        </div>
+                      </div> -->
+                      
+
+
+                     <!--  <h3 class="text-info">Datos Cliente</h3><br> -->
+                      <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Client information</h5>
+                        </div>
+
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="nombre" class="col-lg-2 control-label">First name</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="nombre" name="nombre" placeholder="First name" type="text" value="<?php echo $this->user['nombre']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+                        
+                        
+
+                        <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="apellido" class="col-lg-2 control-label">Last name</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="apellido" name="apellido" placeholder="Last name" type="text" value="<?php echo $this->user['apellido']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label  class="col-lg-2 control-label">Phone</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="telefono" name="telefono" placeholder="Phone" type="text" value="<?php echo $this->user['telefono']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div> 
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">Email</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="text" value="<?php echo $this->user['email']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">Country</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="pais" name="pais" placeholder="Country" type="text" value="<?php echo $this->user['pais']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">State</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="state" name="state" placeholder="State" type="text" value="<?php echo $this->user['state']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">City</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="ciudad" name="ciudad" placeholder="City" type="text" value="<?php echo $this->user['ciudad']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">Street Address</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="direccion" name="direccion" placeholder="Street Address" type="text" value="<?php echo $this->user['direccion']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">Zip code</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="cod_postal" name="cod_postal" placeholder="Zip code" type="text" value="<?php echo $this->user['cod_postal']?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="email" class="col-lg-2 control-label">Order notes</label>
+                              <div class="col-lg-9">
+                                <textarea class="form-control" id="order_notes" name="order_notes" readonly="readonly"><?php echo $this->user['order_notes']?></textarea>
+                              </div>
+                        </div>
+                      </div>
+
+                       
+
+
+                      <!-- <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label  class="col-lg-2 control-label"></label>
+                              <div class="col-lg-9">
+                                <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/users/editar/<?=$this->trabajo['id_user']?>" target="_blank">Ver detalle usuario</a>
+                              </div>
+                        </div>
+                      </div> -->
+
+
+                      <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Payment information</h5>
+                        </div>
+
+                        <div class="ibox-content">                        
+                            <div class="form-group ">
+                              <label for="nombre" class="col-lg-2 control-label">Payment method</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" id="plataforma_pago" name="plataforma_pago" placeholder="Payment method" type="text" value="<?=$this->trabajo['data_pago']->source->funding?>" readonly="readonly" />
+                                </div>
+                          </div>
+                        </div>
+                        
+                       
+
+                      
+                        <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="nombre" class="col-lg-2 control-label">Card Name</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="nombre" name="nombre"  type="text" value="<?=$this->trabajo['data_pago']->source->name?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+                        
+                        
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="apellido" class="col-lg-2 control-label">Card Brand</label>
+                              <div class="col-lg-9">
+                                <input class="form-control" id="apellido" name="apellido" type="text" value="<?=$this->trabajo['data_pago']->source->brand?>" readonly="readonly" />
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-content">  
+                        <div class="form-group ">
+                          <label class="col-lg-2 control-label">Card Number</label>
+                            <div class="col-lg-9 "> 
+                               <input class="form-control" id="total" name="total" type="text" value="**** **** **** <?=$this->trabajo['data_pago']->payment_method_details->card->last4?>" readonly="readonly" />                       
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label  class="col-lg-2 control-label"></label>
+                              <div class="col-lg-9">
+                                <a class="btn btn-success" href="<?=$this->trabajo['data_pago']->receipt_url?>" target="_blank">Receipt</a>
+                              </div>
+                        </div>
+                      </div>
+
+                      <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Product information</h5>
+                        </div>
+
+
+                      <div class="ibox-content">                        
+                          <div class="form-group ">
+                            <label for="nombre" class="col-lg-2 control-label"></label>
+                              <div class="col-lg-9">
+
+                                <?php if($this->productos):?>
+                               
+                                  <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tr align="center" bgcolor="#CCCCCC" style="font-weight:bold">
+                                              <td>Product</td> 
+                                              <td>Quantity</td> 
+                                              <td>Price</td> 
+                                              <td></td> 
+                                          </tr>
+                                        <?php foreach($this->productos as $prod):?>
+
+                                          <tr align="center">
+                                              <td><?=admin::convertirCaracteres(admin::traerProductoPorTipoStatic($prod['id_producto'], $prod['tipo_producto'])->titulo)?></td>
+                                               <td><?=$prod['cantidad']?></td>
+                                              <td>$<?=number_format($prod['precio'], 2, ',', '.')?></td>
+                                              <!-- <td>$<?=number_format($prod['precio']*$prod['cantidad'], 2, '.', ',')?></td> -->
+                                              <td>
+                                                <?php if($prod['tipo_producto']=='fijo'):?>
+                                                  <a href="<?php echo $this->_conf['url_enlace']?>administrador/productos/editar/<?=$prod['id_producto']?>" class="btn btn-success btn-sm" target="_blank">
+                                                      go to product
+                                                  </a>
+                                                <?php else:?>
+                                                  <a href="<?php echo $this->_conf['url_enlace']?>administrador/productos/editarvariables/<?=$prod['id_producto']?>" class="btn btn-success btn-sm" target="_blank">
+                                                      go to product
+                                                  </a>
+                                                <?php endif?>
+                                                  
+                                              </td>
+                                         </tr>
+                                       <?php endforeach?>
+                                       <tr>
+                                          <td class="total" align="right" colspan="3">Subtotal: $<?=number_format($this->trabajo['subtotal'], 2, '.', ',')?></td>
+                                      </tr>
+
+                                      <!-- <tr>
+                                          <td class="total" align="right" colspan="6">Descuento: $<?=number_format($this->trabajo['descuento'], 2, '.', ',')?></td>
+                                      </tr> -->
+
+                                       <tr>
+                                          <td class="total" align="right" colspan="3"><strong>Total: $<?=number_format($this->trabajo['total'], 2, '.', ',')?></strong></td>
+                                      </tr>
+                                    </table>
+                                  </div>
+
+                                <?php else:?>
+                                <p>No hay datos</p>
+                                <?php endif?>
+
+
+
+                              </div>
+                        </div>
+                      </div>
+
+
+                     
+                        
+
+                      
+                      
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-info" id="validatex" nname="cargar" value="Save" />                                      
+                                    </div>                                                                       
+                                </div>
+                                
+                              
+                            </div>                            
+                        </div>
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+

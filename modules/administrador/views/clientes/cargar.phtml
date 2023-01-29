@@ -1,0 +1,373 @@
+<script>
+$(document).ready(function() {
+  
+    
+  $('#cargar_trabajo').submit(function(){
+    
+    
+  
+
+     /* $('input[type=checkbox]:checked').each(function() {
+          console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") Seleccionado");
+      });*/
+
+      /*var $fields = $(this).find('input[type=checkbox]:checked');
+      if (!$fields.length) {
+            alert('Debe seleccionar al menos una categoria');
+            return false; 
+        }
+
+            
+      if ($("#titulo").val() == "") {
+        alert("Debe completar el campo titulo");
+        $("#titulo").val('');
+        $('#titulo').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }
+
+      if ($("#codigo").val() == "") {
+        alert("Debe completar el campo codigo DDS");
+        $("#codigo").val('');
+        $('#codigo').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }
+
+      if ($("#bajada").val() == "") {
+          alert('Debe completar el campo bajada');
+          var _algo = "bajada";
+          CKEDITOR.instances[_algo].focus();
+          return false;        
+      }
+      
+      if ($("#descripcion").val() == "") {
+          alert('Debe completar el campo descripcion');
+          var _algo = "descripcion";
+          CKEDITOR.instances[_algo].focus();
+          return false;        
+      }
+
+      if($('._load_img_final_thumb').children().length == 0){
+        alert("Debe seleccionar una imagen");
+        return false; 
+      }*/
+      
+      /*var _vig_desde = $("#vigencia_desde").val();
+      _vig_desde = convertDateFormat(_vig_desde);
+      var _vig_hasta = $("#vigencia_hasta").val();
+      _vig_hasta = convertDateFormat(_vig_hasta);
+      
+      var _desde = new Date(_vig_desde);
+      var _hasta = new Date(_vig_hasta);
+      console.log(_desde);
+      console.log(_hasta);
+      if (_desde >= _hasta) {
+        alert("La fecha de inicio debe ser menor que la de finalizacion");
+        $("#vigencia_desde").val('');
+        $('#vigencia_desde').focus();     
+        return false; 
+      } */      
+      
+      return true;
+    
+  
+  });
+  
+  
+  
+});
+
+</script>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Clientes</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Editar excel</h5>
+                        </div>
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="envio01" value="1" />        
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">  
+
+
+                                               
+                        
+                        
+                      
+                      <div class="ibox-content">
+                        <div class="row">
+                          <label for="video" class="col-lg-2 control-label">Excel</label>
+                          <div class="col-lg-2">
+                              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_pdf">
+                                 Subir archivo excel
+                              </button>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="list-group aa conexionThumb _load_archivo_final" id="bloque_imgs_usuario">
+                            <?php $_vid = admin::traerArchivoId($this->_sess->get('carga_actual'));?>
+                            <?php if($_vid !=''):?>
+                              <h4><?=$_vid->path?></h4>                              
+                            <?php endif?>
+                            </div>
+                          </div>                                      
+                        </div>
+                      </div> 
+
+                      
+
+                       
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Guardar" />
+                                    </div>                                                                       
+                                </div>
+                                
+                             
+                            </div>                            
+                        </div>
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- 
+
+<div id="head-bg-fix"></div>
+<div class="wpContent"> 
+  <div class="btn-group-usuario">
+    <a class="active" href="#">
+      Cargar excel
+    </a>
+  </div> 
+        
+        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" enctype="multipart/form-data">
+            <input type="hidden" name="envio01" value="1" />        
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">  
+
+                       
+               
+        
+              
+                    
+
+              <div class="form-group formulario_back">
+                  <label for="video" class="col-lg-2 control-label">Excel</label>
+                    <div class="col-lg-2">
+                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_pdf">
+                           Subir archivo excel
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                       <div class="list-group aa conexionThumb _load_archivo_final" id="bloque_imgs_usuario">
+                            <?php $_vid = admin::traerArchivoId($this->_sess->get('carga_actual'));?>
+                            <?php if($_vid !=''):?>
+                              <h4><?=$_vid->path?></h4>                              
+                            <?php endif?>
+                            </div>
+                    </div>
+              </div>
+                             
+               
+              
+                
+                <div class="btnEditCont">
+                        <input type="submit" class="btn" id="validatex" name="cargar" value="Cargar" />
+                 
+                </div>
+  </form>
+    
+</div>
+
+ -->
+
+<div class="modal inmodal fade" id="_car_pdf" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Cargar archivo</h4>
+            </div>
+            <div class="modal-body">
+      <script>
+          Dropzone.options.myAwesomeDropzone = {
+            autoProcessQueue: false,
+            paramName: 'file',
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxFilesize: <?=$this->_conf['peso_maximo_archivos']?>, //MB
+            dictDefaultMessage: 'Arrastre aqui para cargar, o click para seleccionar',
+            acceptedFiles: ".xlsx",
+           
+            init: function() {
+      
+              var myDropzone = this,
+                maxVideosize = <?=$this->_conf['peso_maximo_archivos']?>;
+      
+              myDropzone.on("addedfile", function(file) {
+                file.previewElement.addEventListener("click", function() { 
+                  myDropzone.removeFile(file);
+                });
+              });
+      
+              this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation(); 
+
+                //alert("llego");
+                myDropzone.processQueue();
+                //$("#_car_imgg .recortar_img").fadeOut('slow');
+              });
+      
+              this.on("thumbnail", function(file) {
+                /*if(file.width > file.height){
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La orientación de la imagen debe ser vertical");
+                  return false;
+                }*/
+                
+                /*if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }*/
+                
+                /*if (file.width > maxImageWidth || file.height > maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }*/
+              })
+              
+              this.on("queuecomplete", function(file) {
+                this.removeAllFiles(file);
+              });
+              this.on("maxfilesexceeded", function(file){
+                this.removeFile(file);
+              });
+              this.on("error", function(file) {
+                //alert(file);
+                if(file.size > 1024*1024*24){
+                  //3MB
+                  this.removeFile(file);
+                  alert("El peso del video no puede superar los "+maxVideosize+"MB");
+                  return false;
+                }
+              });
+              this.on("success", function(file) {
+                this.removeAllFiles(file);
+               archivo_final();
+              });
+            }/*,
+            accept: function(file, done) {
+              file.acceptDimensions = done;
+              file.rejectDimensions = function() {
+                //$("#_car_imgg .recortar_img").fadeOut('slow');
+                done('La imagen tiene un formato ilegal');
+              };
+            },*/
+          };
+               
+                      
+              
+        
+                function archivo_final(){
+                    var url= _root_ + "administrador/archivos/traerArchivoFinalExcel/<?=$this->_sess->get('carga_actual')?>";
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            $("._load_archivo_final").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/archivos'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_archivo_final").html(datas).fadeIn("slow");
+                            // $("#_car_imgg .ambito_recorte").html('');
+                            //$(".finalizar_proceso").show();
+                            $('#_car_pdf').modal('hide');
+                        },
+                        type:"POST",
+                        timeout:3000
+                    });
+                }
+        
+        
+        
+        
+                </script>
+                <div class="loader"></div>
+                <div id="contenedor">
+            
+                    <form class="form-inline dropzone" id="my-awesome-dropzone" action="<?=$this->_conf['base_url']?>administrador/archivos/cargarArchivosExcel/<?=$this->_sess->get('carga_actual')?>">
+                                                        
+                        <div class="dropzone-previews"></div>
+                        <button type="submit" class="btn btn-primary pull-right">Cargar</button>
+                    </form>
+                    <p class="eliminarThumb">Hace click sobre la miniatura para eliminarla.</p>
+                    
+                     <hr> 
+                     
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="text-danger"> 
+                                <small>Peso máximo video: <strong><?=$this->_conf['peso_maximo_archivos']?> Mb.</strong></small>        
+                            </p>
+                        </div>
+                    </div>
+                    
+                 
+                    
+                </div>
+          </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>        
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

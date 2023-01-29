@@ -1,0 +1,111 @@
+<main>
+    <nav class="nav-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="<?=$this->_conf['base_url']?>user/myaccount">My account</a></li>
+            <?php if($this->user['estado'] == 'customer'):?>
+            <li class="breadcrumb-item active">My orders</li>
+            <?php endif?>
+            <li class="breadcrumb-item" ><a href="<?=$this->_conf['base_url']?>user/signout">Sign Out</a></li>
+        </ol>
+    </nav>
+
+
+    <section class="cart whity">
+        <div class="container">
+            
+            <!-- items table -->
+            <?php if($this->orders):?>
+            <table class="items-table" id="items-table" cellspacing="0">
+                
+                    <thead>
+                        <th colspan="1"></th>
+                        <th>N° ORDER</th>
+                        <th>PRODUCT</th>
+                        <th>PAYMENT METHOD</th>
+                        <th>PRICE</th>  
+                        <th>TOTAL</th> 
+                        <th>STATUS</th>                    
+                    </thead>
+
+                <?php foreach($this->orders as $val):?>
+                <?php for ($i=0; $i <count($val['detalle']); $i++):?>
+
+                <?php if($val['detalle'][$i]['tipo_producto'] == 'fijo'):?>
+                <?php if($val['forms'][$i]['estado'] != 'close'):?>
+                <tr>
+                    <td><img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase"></td>
+                    <td><?=$val['id']?></td>
+                    <?php if($val['detalle'][$i]['tipo_producto'] == 'fijo'):?>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=home::traerProductoPorId($val['detalle'][$i]['id_producto'])->item?>"><?=home::convertirCaracteres(home::traerProductoPorId($val['detalle'][$i]['id_producto'])->titulo)?></a></td>
+                    <?php else:?>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=home::traerProductoVariablePorId($val['detalle'][$i]['id_producto'])->item?>"><?=home::convertirCaracteres(home::traerProductoVariablePorId($val['detalle'][$i]['id_producto'])->titulo)?></a></td>
+                    <?php endif?>
+                    <td><?=$val['metodo_pago']?></td>
+                    <td>$<?=number_format($val['detalle'][$i]['precio'], 2, '.', ',')?></td>
+                    <td>$<?=number_format($val['total'], 2, '.', ',')?></td>
+                    <?php if($val['detalle'][$i]['tipo_producto'] == 'fijo'):?>
+                    <td class="form_status <?=($val['forms'][$i]['estado'] == 'complete') ? 'form_complete' : ''?>">
+                        <?php if($val['forms'][$i]['estado'] == 'complete'):?>
+                        Interview <?=$val['forms'][$i]['estado']?>
+                        <?php else:?>
+                        <a href="<?=$this->_conf['base_url']?>user/myforms/<?=$val['id']?>/<?=$val['forms'][$i]['id']?>">Interview <?=$val['forms'][$i]['estado']?></a>                        
+                        <?php endif?>
+                        
+                    </td>
+                    <?php else:?>
+                    <td></td>
+                    <?php endif?>
+                </tr>
+                <?php endif?>
+
+                <?php else:?>
+
+                <tr>
+                    <td><img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase"></td>
+                    <td><?=$val['id']?></td>
+                    <?php if($val['detalle'][$i]['tipo_producto'] == 'fijo'):?>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=home::traerProductoPorId($val['detalle'][$i]['id_producto'])->item?>"><?=home::convertirCaracteres(home::traerProductoPorId($val['detalle'][$i]['id_producto'])->titulo)?></a></td>
+                    <?php else:?>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=home::traerProductoVariablePorId($val['detalle'][$i]['id_producto'])->item?>"><?=home::convertirCaracteres(home::traerProductoVariablePorId($val['detalle'][$i]['id_producto'])->titulo)?></a></td>
+                    <?php endif?>
+                    <td><?=$val['metodo_pago']?></td>
+                    <td>$<?=number_format($val['detalle'][$i]['precio'], 2, '.', ',')?></td>
+                    <td>$<?=number_format($val['total'], 2, '.', ',')?></td>
+                    <?php if($val['detalle'][$i]['tipo_producto'] == 'fijo'):?>
+                    <td class="form_status <?=($val['forms'][$i]['estado'] == 'complete') ? 'form_complete' : ''?>">
+                        <?php if($val['forms'][$i]['estado'] == 'complete'):?>
+                        Interview <?=$val['forms'][$i]['estado']?>
+                        <?php else:?>
+                        <a href="<?=$this->_conf['base_url']?>user/myforms/<?=$val['id']?>/<?=$val['forms'][$i]['id']?>">Interview <?=$val['forms'][$i]['estado']?></a>                        
+                        <?php endif?>
+                        
+                    </td>
+                    <?php else:?>
+                    <td></td>
+                    <?php endif?>
+                </tr>
+                
+                <?php endif?>
+                <?php endfor?>
+                <?php endforeach?>
+                
+
+
+            </table>
+
+            <?php endif?>
+            
+        </div>
+    </section>
+
+</main>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,330 @@
+<script src="https://cdn.ckeditor.com/4.5.11/full-all/ckeditor.js"></script>
+<script>
+$(document).ready(function() {
+
+
+  /*$('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+  });*/
+
+  
+    
+  $('#cargar_trabajo').submit(function(){
+    
+    
+    if ($("#titulo").val() == "") {
+      alert("You must complete the title field");
+      $("#titulo").val('');
+      $('#titulo').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }
+
+    /*if ($("#cantidad").val() == "") {
+      alert("Debe completar el campo cantidad");
+      $("#cantidad").val('');
+      $('#cantidad').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }*/
+
+    if ($("#precio").val() == "") {
+      alert("You must complete the price field");
+      $("#precio").val('');
+      $('#precio').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }
+      
+      return true;
+    
+  
+  });
+  
+  
+  
+});
+
+</script>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Static Products</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Add</h5>
+                        </div>
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" >
+                          <input type="hidden" name="envio01" value="1" />
+                          <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+
+
+                         <!--  <div class="ibox-content">
+                            <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Estado</label>
+                                <div class="col-lg-9">
+                                  <select class="form-control" name="estado">
+                                      <option value="alta">Alta</option>
+                                        <option value="baja">Baja</option>
+                                    </select>
+                                </div>
+                              </div>
+                          </div> -->
+
+                          
+
+                          <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Title</label>
+                                  <div class="col-lg-9">
+                                     <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Title" >
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="ibox-content">
+                            <div class="form-group">
+                            <label for="precio" class="col-lg-2 control-label">Price</label>
+                              <div class="col-lg-9 input-group"> 
+                                <div class="input-group-addon">$</div>
+                                <input class="form-control" id="precio" name="precio" placeholder="Price" type="text"  /> 
+                              </div>  
+                              </div>                            
+                          </div>
+
+                          <div class="ibox-content">
+                            <div class="form-group">
+                              <label class="col-lg-2 control-label">Description</label>
+                              <div class="col-lg-9">
+                                <textarea class="form-control" id="desc" name="desc"></textarea>
+                                  <script>
+                                      CKEDITOR.replace('desc', {
+                                        language: 'en',
+                                          extraPlugins: 'colorbutton',
+                                          allowedContent: true,
+                                      });
+                                  </script>                              
+                                 
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <!-- <div class="ibox-content">
+                            <div class="form-group">
+                            <label for="cantidad" class="col-lg-2 control-label">Cantidad</label>
+                              <div class="col-lg-9 ">                                         
+                                <input class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" type="number" />
+                              </div>
+                            </div>
+                          </div>-->
+ 
+
+                          
+
+                          
+
+                         <!--  <div class="ibox-content">
+                            <div class="form-group">
+                              <label for="contenido" class="col-lg-2 control-label">Imagen Principal</label>
+                                <div class="col-lg-9">
+                                    <div class="col-lg-5">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_imgg_medidas">
+                                            Cargar Imagen
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-7">
+                                      <div class="list-group aa conexion _load_img_final_medidas" id="bloque_imgs_usuario">
+                                        <?php $_img = admin::traerImg($this->_sess->get('carga_actual'),'cursos','principal');?>
+                                        <?php if($_img !=''):?>
+                                        <div><img src=" <?= $this->_conf['base_url'] . "public/img/subidas/cursos/principal/thumb/" . $_img->path ?>"  class="img-thumbnail"></div>
+                                        <?php endif?>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>                  
+                          </div>  -->
+                         
+
+                          <div class="ibox-content">
+                            <div class="row">
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-2">
+                                        <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Save" />
+                                      </div>                                                                       
+                                  </div>
+                              </div>                            
+                          </div>
+
+
+
+                        </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal inmodal fade" id="_car_imgg_medidas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Cargar Imagen</h4>
+            </div>
+            <div class="modal-body">
+      <script>
+          Dropzone.options.myAwesomeDropzoneMedidas = {
+            autoProcessQueue: false,
+            paramName: 'file',
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxFilesize: 15, //MB
+            dictDefaultMessage: 'Arrastre aqui para cargar, o click para seleccionar',
+            acceptedFiles: 'image/*',
+           
+            init: function() {
+      
+              var myDropzone = this;
+              var maxImageWidth = <?=$this->_conf['formatos_img']['cursos_principal_grandes']['ancho']?>, 
+                  maxImageHeight = <?=$this->_conf['formatos_img']['cursos_principal_grandes']['alto']?>,
+                  maxImagesize = <?=$this->_conf['peso_maximo_imagenes']?>;
+      
+              myDropzone.on("addedfile", function(file) {
+                file.previewElement.addEventListener("click", function() { myDropzone.removeFile(file);});
+              });
+      
+              this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();                                
+                myDropzone.processQueue();
+              });
+      
+              this.on('thumbnail', function(file) {
+
+                if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  // file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }
+              
+              });
+              
+              this.on("queuecomplete", function(file) {this.removeAllFiles(file);img_final_medidas('cargar','cursos','principal');});
+              this.on("maxfilesexceeded", function(file){this.removeFile(file);});
+              //this.on("complete", function(file) {this.removeAllFiles(file);});
+              this.on("error", function(file) {
+                //alert(file);
+                if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }
+                /*if(file.size > 1024*1024*2){
+                  //2MB
+                  this.removeFile(file);
+                  alert("El peso de la imagen no puede superar los "+maxImagesize+"MB");
+                  return false;
+                }*/
+              });
+            }
+          };
+               
+                      
+        
+        
+               /* function img_final(_seccion){
+                    var url= _root_ + "administrador/imagenes/traerImagenfinal/"+_seccion;
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            $("._load_img_final").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/imagenes'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_img_final").html(datas).fadeIn("slow");
+                           // $("#_car_imgg .ambito_recorte").html('');
+              //$(".finalizar_proceso").show();
+              $('#_car_imgg').modal('hide');
+                        },
+                        type:"POST",
+                        timeout:3000
+                    });
+                }*/
+        
+         function img_final_medidas(_accion, _tipo, _pos){
+                    var url= _root_ + "administrador/imagenes/traerImagenfinal/"+_accion+"/"+_tipo+"/"+_pos;
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            //$("._load_img_final_logo").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/imagenes'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_img_final_medidas").html(datas).fadeIn("slow");
+                            $('#_car_imgg_medidas').modal('hide');
+                        },
+                        type:"POST"
+                    });
+                }
+        
+        
+                </script>
+                <div class="loader"></div>
+                <div id="contenedor">
+            
+                    <form class="form-inline dropzone" id="my-awesome-dropzone-medidas" action="<?=$this->_conf['base_url']?>administrador/imagenes/cargImg/cursos/principal">
+                        <input type="hidden" name="envio_img_princip" value="1">
+                        <div class="dropzone-previews"></div>
+                        <button type="submit" class="btn btn-primary pull-right">Cargar</button>
+                    </form>
+                    <p class="eliminarThumb">Hacer click sobre la miniatura para eliminarla.</p>
+                    
+                     <hr> 
+                     
+                    <div class="row">
+                        <div class="col-lg-12">
+                             <p class="text-danger"> 
+                              <small>Tamaño: <strong><?=$this->_conf['formatos_img']['cursos_principal_grandes']['ancho']?> x <?=$this->_conf['formatos_img']['cursos_principal_grandes']['alto']?> px</strong></small>
+                              <br>
+                              <small>Peso máximo imágen: <strong><?=$this->_conf['peso_maximo_imagenes']?> Mb.</strong></small>   
+                          </p>
+                        </div>
+                    </div>
+                    
+                  
+                    
+                </div>
+          </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>        
+      </div>
+    </div>
+</div> -->

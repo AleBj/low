@@ -1,0 +1,12 @@
+{
+    "require": {
+        "mpdf/mpdf": "^8.0",
+        "phpmailer/phpmailer": "^6.5",
+        "spipu/html2pdf": "^5.2",
+        "dompdf/dompdf": "^1.2",
+        "laminas/laminas-escaper": "^2.6",
+        "phpoffice/phpword": "^0.18.3",
+        "docusign/esign-client": "^5.7",
+        "mailjet/mailjet-apiv3-php": "^1.5"
+    }
+}

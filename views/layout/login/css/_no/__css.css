@@ -1,0 +1,267 @@
+#logIn, #form{display:none}
+
+html, body{font-size:79.09%;width:100%;height:100%;}
+*{box-sizing:border-box;}
+a{color:inherit;transition:all ease 0.3s;-webkit-transition:all ease 0.3s}
+h1, h2, h3, h4, h5, h6{font-weight:normal}
+.wp{width:100%;max-width:1200px;padding:0 8px;position:relative;margin:0 auto;}
+.wp-benef{width:100%;max-width:1200px;margin:auto}
+.wp:after,
+.wp-benef:after{content:'';display:block;clear:both;}
+
+#logIn:after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(26,49,106,0.9);z-index:-1;display:block;}
+#logIn{position:absolute;top:0;left:0;width:100%;height:100%;z-index:999;display:block;}
+#logIn .login-activos,
+#logIn .login-nuevos{width:100%;padding:0 20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%)}
+#logIn img.logo-cts{display:block;margin:auto}
+#logIn h2{font-size:2.2em;color:#FFF;margin-top:40px;text-align:center;text-transform:uppercase;font-family:'brandon_b';}
+#logIn form{margin-top:40px}
+#logIn input{max-width:380px;display:block;width:100%;padding:0 20px;font-size:1.4em;color:#6c6c6c;border:0;margin:1px auto;font-family: 'Open Sans', sans-serif;height:40px;border-radius:3px;-webkit-appearance:none;outline:none}
+#logIn button{display:block;width:180px;line-height:40px;background:#ee293c;font-family:'brandon_b';color:#FFF;text-transform:uppercase;font-size:1.4em;text-align:center;border-radius:3px;margin:35px auto;border:0;cursor:pointer;-webkit-appearance:none;outline:none;transition:all ease 0.3s;-webkit-transition:all ease 0.3s;padding:0}
+#logIn span{display:block;text-align:center;line-height:30px;font-size:1.4em;color:#FFF;font-family: 'Open Sans', sans-serif;}
+#logIn span a{text-decoration:underline}
+#logIn p{text-align:center;font-size:1.4em;color:#FFF;font-family: 'Open Sans', sans-serif;padding-top:15px}
+#logIn .foot{position:absolute;width:100%;bottom:20px;left:0;}
+#logIn .foot a{text-decoration:underline}
+
+#form:after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(26,49,106,0.9);z-index:-1;display:block;}
+#form{position:absolute;top:0;left:0;width:100%;height:100%;z-index:999;display:none;}
+#form .wp{padding:0 20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%)}
+#form #close{position:absolute;right:20px;top:0px;padding:20px;cursor:pointer}
+#form img.logo-cts{display:block;margin:auto}
+#form h2{font-size:2.2em;color:#FFF;text-align:center;text-transform:uppercase;font-family:'brandon_b';}
+#form h2 img{position:relative;width:60px;top:15px;margin-right:10px}
+#form form{margin-top:40px}
+#form input,
+#form textarea{max-width:380px;display:block;width:100%;padding:0 20px;font-size:1.4em;color:#6c6c6c;border:0;margin:1px auto;font-family: 'Open Sans', sans-serif;height:40px;border-radius:3px;-webkit-appearance:none;outline:none;resize:none}
+#form textarea{height:125px;padding:15px 20px}
+#form button{display:block;width:180px;line-height:40px;background:#ee293c;font-family:'brandon_b';color:#FFF;text-transform:uppercase;font-size:1.4em;text-align:center;border-radius:3px;margin:35px auto;border:0;cursor:pointer;-webkit-appearance:none;outline:none;transition:all ease 0.3s;-webkit-transition:all ease 0.3s;padding:0}
+
+#logIn .login-nuevos button:after,
+#form button:after{content:'enviar'}
+#logIn .login-nuevos button.ok,
+#logIn .login-activos button.ok,
+#form button.ok{width:380px;background:#09805f}
+#logIn .login-nuevos button.ok:after,
+#logIn .login-activos button.ok:after,
+#form button.ok:after{content:'MENSAJE ENVIADO CON ÉXITO'}
+
+#logIn .login-activos button:after{content:'ingresar'}
+#logIn .login-activos button.error{width:380px;background:#000}
+#logIn .login-activos button.error:after{content:'datos incorrectos'}
+
+#logInAdmin{margin-top:5%}
+#logInAdmin h2{font-size:2.2em;color:#FFF;text-align:center;text-transform:uppercase;font-family:'brandon_b';}
+#logInAdmin form{margin-top:40px}
+#logInAdmin form input{max-width:380px;display:block;width:100%;padding:0 20px;font-size:1.4em;color:#6c6c6c;border:0;margin:1px auto;font-family: 'Open Sans', sans-serif;height:40px;border-radius:3px;-webkit-appearance:none;outline:none}
+#logInAdmin form button{display:block;width:180px;line-height:40px;background:#ee293c;font-family:'brandon_b';color:#FFF;text-transform:uppercase;font-size:1.4em;text-align:center;border-radius:3px;margin:35px auto;border:0;cursor:pointer;-webkit-appearance:none;outline:none;transition:all ease 0.3s;-webkit-transition:all ease 0.3s;padding:0}
+
+
+
+header{position:absolute;top:0;left:0;width:100%;z-index:99;padding-top:25px;font-family:'brandon_b';color:#FFF;text-transform:uppercase;font-size:1em}
+header h1{float:left;}
+header .user{float:left;margin-left:25px;font-size:1.2em;padding-top:28px}
+header .user a{font-size:0.86em;margin-top:10px;display:block}
+header .facebook{float:right;width:32px;height:32px;border-radius:32px;background:url(../img/ico-fb.png) no-repeat center;margin-left:35px;margin-top:28px}
+header nav{float:right;padding-top:15px}
+header nav li{position:relative;float:left;}
+header nav li:first-child:after{opacity:0}
+header nav li:after{content:'';position:absolute;width:1px;height:26px;background:#3865ae;top:18px;left:-1px;z-index:0;transition:all ease 0.3s;-webkit-transition:all ease 0.3s}
+header nav li a{display:block;line-height:60px;border-radius:4px;position:relative;z-index:1;padding:0 35px;font-size:1.4em;color:#bdcee5;}
+header nav li ul{opacity:0;position:absolute;top:56px;left:0;background:#1c3572;border-radius:4px;transition:opacity ease 0.3s;-webkit-transition:opacity ease 0.3s;height:0;overflow:hidden;}
+header nav li ul:before,
+header nav li ul:after{content:'';height:10px;display:block;}
+header nav li ul li a{line-height:30px;color:#bdcee5 !important;font-size:1.2em;padding:0px 35px;white-space:nowrap;}
+header nav li ul li{float:none}
+header nav li ul li:after{height:0;width:0}
+header nav li a.active{color:#FFF}
+
+footer{font-family:'brandon_b';color:#333;text-transform:uppercase;font-size:1.2em;height:180px}
+footer p{left:8px;position:absolute;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%)}
+footer p a{padding:0 10px}
+footer p a:first-child{padding-left:0}
+footer p:last-child{right:8px;left:auto}
+footer img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%)}
+footer .wp{height:100%;}
+
+#home{height:100%;background:url(../img/bg-home.jpg) no-repeat;background-size:cover;min-height:600px;padding-top:120px}
+#slider, #slider ul, #slider li, #home .wp{height:100%}
+#slider li img{float:right;height:100%;margin:0 60px 0 0;max-height:797px}
+#slider li .copy{float:left;max-width:450px;font-family:'brandon_b';text-transform:uppercase;margin-top:100px}
+#slider li .copy h2{font-size:4.2em;color:#FFF;line-height:1.1}
+#slider li .copy a{display:block;width:180px;line-height:40px;background:#ee293c;color:#FFF;font-size:1.4em;text-align:center;border-radius:3px;margin-top:50px}
+#slider .flex-direction-nav{display:none}
+#slider .flex-control-nav{position:absolute;left:5px;top:50%;list-style:none;z-index:9}
+#slider .flex-control-nav li{float:left;width:12px;height:12px;border:2px solid #FFF;margin:0 5px;font-size:0;border-radius:100%}
+#slider .flex-control-nav li a{display:block;width:100%;height:100%;cursor:pointer}
+#slider .flex-control-nav li a.flex-active{background:#FFF}
+#home aside{position:absolute;width:100%;height:200px;bottom:60px;padding:0 8px;left:0px;z-index:8}
+#home aside .box{width:33.33%;float:left;height:200px;position:relative;}
+#home aside .box .copy{background:#FFF;padding:23px;color:#6c6c6c;position:absolute;width:100%;height:100%;top:0;left:0;transition:ease all 0.3s;-webkit-transition:ease all 0.3s;opacity:0}
+#home aside .box .copy p{font-family: 'Open Sans', sans-serif;font-size:1.4em;font-weight:600;margin-top:30px;line-height:1.2}
+#home aside .box .copy a{display:block;max-width:180px;line-height:40px;background:#ee293c;color:#FFF;font-size:1.4em;text-align:center;border-radius:3px;margin-top:35px;font-family:'brandon_b';}
+#home aside .box.ctsSkip{background:#274594}
+#home aside .box.ctsSkip:hover > .copy{opacity:1}
+#home aside .box img{float:left;margin-right:20px}
+#home aside .box h3{overflow:hidden;color:#FFF;font-size:2.2em;font-family:'brandon_b';line-height:1.1;padding-top:20px}
+#home aside span{width:100%;position:absolute;top:50%;left:0;transform:translateY(-50%);-webkit-transform:translateY(-50%);padding-left:45px}
+#home aside #formContacto{background:#1b316c;cursor:pointer}
+#home aside #formContacto span{top:47%;padding-left:55px}
+
+#beneficios{height:550px;background:url(../img/bg-home.jpg) no-repeat;background-size:cover;padding-top:60px;}
+#beneficios .wp{height:100%;}
+#beneficios h2{font-size:4.2em;color:#FFF;line-height:1.1;position:absolute;left:8px;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);font-family:'brandon_b';max-width:585px}
+#beneficios .todos_beneficios{position:absolute;right:8px;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);background:#153b75;padding:50px;padding-bottom:35px;color:#FFF;min-width:380px}
+#beneficios .todos_beneficios p{font-family: 'Open Sans', sans-serif;font-size:1.4em;font-weight:400;line-height:26px}
+#beneficios .todos_beneficios span{display:block;width:80px;line-height:20px;font-size:1em;color:#FFF;font-family:'brandon_b';text-align:center;border:2px solid #FFF;border-radius:13px;text-transform:uppercase;cursor:pointer;margin-top:10px}
+#beneficios .todos_beneficios a{display:block;width:100%;line-height:40px;background:#ee293c;color:#FFF;font-size:1.4em;text-align:center;border-radius:3px;margin-top:35px;font-family:'brandon_b';text-transform:uppercase}
+#list_benef{padding:35px 0;background:#eaeaea;padding-bottom:200px}
+#list_benef h3{text-align:center;font-size:3.2em;color:#161616;padding:70px 0;font-family:'brandon_b';text-transform:uppercase;}
+#list_benef .box_benf{width:calc(33.33% - 20px);float:left;margin:20px 10px;background:#FFF;float:left;height:450px}
+#list_benef .box_benf img{display:block;width:100%}
+#list_benef .box_benf h2{color:#161616;padding:30px 20px 15px;font-family:'brandon_b';text-transform:uppercase;font-size:1.8em}
+#list_benef .box_benf p{font-family: 'Open Sans', sans-serif;font-size:1.4em;font-weight:600;line-height:1.2;color:#6c6c6c;padding:0 20px 30px}
+#list_benef a.ver_todos{display:block;width:270px;line-height:40px;background:#ee293c;color:#FFF;font-size:1.4em;text-align:center;border-radius:3px;margin:auto;font-family:'brandon_b';text-transform:uppercase;clear:both;position:relative;top:70px}
+
+#ayuda{height:550px;background:url(../img/bg-home.jpg) no-repeat;background-size:cover;padding-top:60px;}
+#ayuda .wp{height:100%;}
+#ayuda h2{font-size:4.2em;color:#FFF;line-height:1.1;position:absolute;left:0;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);font-family:'brandon_b';width:100%;text-align:center}
+#manuales{padding:110px 0;background:#eaeaea}
+#manuales h3{text-align:center;font-size:3.2em;color:#161616;font-family:'brandon_b';text-transform:uppercase;}
+#manuales h4{text-align:center;font-size:1.6em;color:#6c6c6c;font-family:'brandon_b';text-transform:uppercase;padding:20px 0 60px}
+#manuales .box_manual{width:calc(20% - 20px);float:left;margin:10px;float:left;border:1px solid #FFF;transition:all ease 0.3s;-webkit-transition:all ease 0.3s;}
+#manuales .box_manual a{display:block}
+#manuales .box_manual img{width:100%;display:block}
+#capacitacion{background:#f4f4f4;padding:110px 0;}
+#capacitacion h3{text-align:center;font-size:3.2em;color:#161616;font-family:'brandon_b';text-transform:uppercase;}
+#capacitacion h4{text-align:center;font-size:1.6em;color:#6c6c6c;font-family:'brandon_b';text-transform:uppercase;padding:20px 0 60px}
+#capacitacion .slides li{width:380px;margin:10px;background:#FFF;height:410px}
+#capacitacion .slides li .video{background:#274594;position:relative;width:100%;height:250px}
+#capacitacion .slides li .video img{position:absolute;z-index:5;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);width:auto;height:auto}
+#capacitacion .slides h2{color:#161616;padding:30px 20px 15px;font-family:'brandon_b';text-transform:uppercase;font-size:1.8em}
+#capacitacion .slides p{font-family: 'Open Sans', sans-serif;font-size:1.4em;font-weight:600;line-height:1.2;color:#6c6c6c;padding:0 20px 30px}
+#capacitacion .slides strong{color:#161616;font-weight:600}
+#capacitacion .flex-direction-nav{display:none}
+#capacitacion .flex-control-nav{display:block;width:100%;text-align:center;padding-top:40px}
+#capacitacion .flex-control-nav li{display:inline-block;width:12px;height:12px;border:2px solid #6c6c6c;margin:0 5px;font-size:0;border-radius:100%}
+#capacitacion .flex-control-nav li a{display:block;width:100%;height:100%;cursor:pointer}
+#capacitacion .flex-control-nav li a.flex-active{background:#6c6c6c}
+
+header nav li:hover a{color:#FFF;background:#1c3572}
+header nav li ul li a:hover{color:#FFF !important}
+header nav li:hover > ul{opacity:1;height:auto;transition-delay:0.2s;-webkit-transition-delay:0.2s;}
+header nav li:hover:after{opacity:0}
+@media (min-width:1100px){
+	header .user a:hover{color:#bdcee5}
+	header .facebook:hover{background-color:#1c3572}
+	footer p a:hover{text-decoration:underline}
+	#slider li .copy a:hover,
+	#home aside .box .copy a:hover,
+	#beneficios .todos_beneficios a:hover{background:#1c336a}
+	#manuales .box_manual:hover{border-color:#ee293c}
+	#sliderVid li:hover h2{text-decoration:underline}
+}
+@media (max-width:1100px){
+	footer{height:110px}
+	#slider li .copy a{margin-top:30px}
+	#slider .flex-control-nav{display:none}
+	#home aside{bottom:10px}
+}
+@media (max-width:900px){
+	.wp{padding:0 15px}
+	header.open{position:fixed}
+	header{padding-top:15px}
+	header h1 img{width:50px}
+	header .user{padding-top:10px;margin-left:15px}
+	header nav li:after{opacity:0}
+	header .facebook{margin:8px 10px 0 0;}
+	#btMob{float:right;width:50px;position:relative;padding:10px;}
+	#btMob i{display:block;width:100%;height:2px;background:#FFF;border-radius:1px;transition:all ease 0.3s;-webkit-transition:all ease 0.3s}
+	#btMob i{margin:5px 0}
+	header.open #btMob i:nth-child(2){opacity:0}
+	header.open #btMob i{transform:rotate(45deg);-webkit-transform:rotate(45deg);margin-top:12px}
+	header.open #btMob i:last-child{transform:rotate(135deg);-webkit-transform:rotate(135deg);margin-top:-20px}
+	header nav{float:none;padding-top:15px;position:fixed;width:100%;height:100%;top:0;background:#1f3d87;left:0;z-index:-1;display:none}
+	header nav > ul{position:absolute;width:100%;top:25%}	
+	header nav li a{color:#FFF}
+	header nav li{float:none;width:100%;line-height:40px;text-align:center}
+	header nav li ul{position:static;border-radius:0}
+	
+	footer p{left:15px}
+	footer p:last-child{right:15px}
+	
+	#slider li .copy{position:absolute;}
+	#slider .flex-control-nav{display:none}
+	#home aside{bottom:0px;padding:0}
+	#home aside span{position:static;padding:0 !important}
+	#home aside .box .copy p{margin:0}
+	#home aside .box .copy a{margin-top:15px}
+	#home aside .box{padding:20px 0;}
+	#home aside .box img{display:block;margin:auto;float:none;max-height:75px;}
+	#home aside .box h3{text-align:center;}
+	#formContacto img{position:relative;left:10px}
+	
+	#form #close{display:block;margin:auto;position:static}
+	
+	#beneficios{height:auto}
+	#beneficios h2,
+	#beneficios .todos_beneficios{position:static;transform:translate(0);-webkit-transform:translate(0);width:100%;text-align:center;margin:30px auto;}
+	#beneficios .todos_beneficios{max-width:300px;margin:40px auto;}
+	#beneficios .todos_beneficios span{margin-left:auto;margin-right:auto}
+	#list_benef .box_benf{width:calc(50% - 20px);margin:10px}
+	#list_benef h3{padding:30px 0}
+	
+	#ayuda{height:auto;}
+	#ayuda h2{position:static;transform:translate(0);-webkit-transform:translate(0);width:100%;text-align:center;margin:50px auto;max-width:500px}
+	#ayuda h2 br{display:none}
+	#manuales,
+	#capacitacion{padding:50px 0}
+	#manuales .box_manual{width:calc(25% - 20px);}
+	#manuales h4,
+	#capacitacion h4{padding-bottom:40px}
+}
+@media (max-width:600px){
+	#logIn .login-activos, #logIn .login-nuevos{position:static;transform:translate(0);-webkit-transform:translate(0);padding:60px 0}
+	#logIn img.logo-cts{width:60px}
+	#logIn h2{margin-top:30px;font-size:1.8em}
+	#logIn form{margin-top:30px}
+	#logIn input{max-width:300px}
+	#logIn button{margin:20px auto}
+	#logIn span{lien-height:25px}
+	#logIn .foot{position:static;line-height:1.2}
+	#logIn p{padding-left:20px;padding-right:20px}
+	
+	header{padding-top:10px}
+	header nav > ul{top:20%}
+	header nav li a{line-height:45px}
+	header nav li ul:before{height:0px}
+	header h1 img{width:44px;}
+	header .user{padding-top:6px;margin-left:10px}
+	#btMob{right:-10px;top:-5px}
+	header .facebook{margin-top:3px;margin-right:-6px}
+	
+	footer{height:auto;padding:5px}
+	footer .wp{padding:0}
+	footer p a{padding:0 2px}
+	footer p,
+	footer img{display:block;text-align:center;margin:10px auto;position:static;transform:translate(0);-webkit-transform:translate(0);font-size:0.87em}
+	
+	#home{padding-top:80px;height:auto}
+	#slider{min-height:660px}
+	#slider li .copy h2{font-size:3em;text-align:center}
+	#slider li .copy{position:static;margin-top:0;margin-bottom:30px}
+	#slider li .copy a{margin-left:auto;margin-right:auto}
+	#slider li img{display:block;width:90%;max-width:350px;margin:auto}
+	#home aside{position:relative;bottom:auto;left:auto;top:auto;right:auto;height:auto;padding-bottom:15px}
+	#home aside .box{float:none;width:100%;text-align:center}
+	#home aside .box .copy a{margin-left:auto;margin-right:auto}
+	
+	#beneficios h2,
+	#ayuda h2{font-size:3em}
+	#beneficios .todos_beneficios{padding:20px !important;min-width:280px}
+	#beneficios .todos_beneficios a{margin-top:20px}
+	#list_benef .box_benf{height:auto;width:calc(100% - 20px);float:none;}
+	#list_benef{padding-bottom:100px}
+	#list_benef a.ver_todos{top:40px;width:calc(100% - 20px);}
+	#manuales .box_manual{width:calc(50% - 20px)}
+}

@@ -1,0 +1,29 @@
+<h2>Administración de permisos</h2>
+<?php if(isset($this->permisos) && $this->permisos):?>
+<table class="table table-bordered table-condensed table-striped" style="width:500px;">
+    <tr>
+        <th>ID</th>
+        <th>Permiso</th>
+        <th>Llave</th>
+        <th></th>
+    </tr>
+
+    <?php for($i=0;$i<count($this->permisos);$i++):?>
+    <tr>
+		<td><?php echo $this->permisos[$i]['id_permiso']?></td>
+    	<td><?php echo $this->permisos[$i]['permiso']?></td>
+   	    <td><?php echo $this->permisos[$i]['key']?></td>
+		<td>Editar</td>
+	</tr>
+    <?php endfor?>
+
+</table>
+<?php endif ?>
+
+
+
+<p>
+	<a href="<?php echo $this->_conf['base_url']?>acl/nuevo_permiso" class="btn btn-primary">
+    	<i class="icon-plus-sign icon-white"> </i> Agregar Permiso
+    </a>
+</p>

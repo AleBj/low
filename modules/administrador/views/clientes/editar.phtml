@@ -1,0 +1,559 @@
+<script>
+$(document).ready(function() {
+	
+  /*$('._agregar').click(function(){
+
+    $('#cont_agregar').slideDown();
+    $('#agregar_dir').val('si');
+
+
+  });*/
+
+  // $("#fecha_nacimiento").mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
+		
+	$('#editar_trabajo').submit(function(){
+		
+		
+
+
+            
+     /*  if ($("#titulo").val() == "") {
+        alert("Debe completar el campo titulo");
+        $("#titulo").val('');
+        $('#titulo').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }
+
+     if ($("#codigo").val() == "") {
+        alert("Debe completar el campo codigo DDS");
+        $("#codigo").val('');
+        $('#codigo').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }
+
+      if ($("#descripcion").val() == "") {
+          alert('Debe completar el campo descripcion');
+          var _algo = "descripcion";
+          CKEDITOR.instances[_algo].focus();
+          return false;        
+      }
+
+      if($('._load_img_final_thumb').children().length == 0){
+        alert("Debe seleccionar una imagen");
+        return false; 
+      }*/
+					
+			
+	return true;
+		
+	
+	});
+	
+	
+	
+});
+
+</script>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Clients</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Client detail</h5>
+                        </div>
+                        <form class="form-horizontal" id="editar_trabajo" action="" method="POST" role="form" >
+                        <input type="hidden" name="envio01" value="1" />
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        
+
+                       <!--  <hr> -->                        
+
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Status</label>
+                                <div class="col-lg-9">
+                                  
+                                  <select class="form-control" name="estado">
+                                    <option value="lead" <?php echo ($this->trabajo['estado'] == 'lead') ? 'selected="selected"' : ''?>>Lead</option>
+                                    <option value="customer" <?php echo ($this->trabajo['estado'] == 'customer') ? 'selected="selected"' : ''?>>Customer</option>
+                                    <option value="inactivo" <?php echo ($this->trabajo['estado'] == 'inactive') ? 'selected="selected"' : ''?>>Inactive</option>
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Datos Personales</h5>
+                        </div> -->
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">First name</label>
+                                <div class="col-lg-9">
+                                   <input type="text" class="form-control" id="nombre" name="nombre" placeholder="First name" value="<?php echo $this->trabajo['nombre']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Last name</label>
+                                <div class="col-lg-9">
+                                   <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Last name" value="<?php echo $this->trabajo['apellido']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Email</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $this->trabajo['email']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Phone</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="telefono" name="Phone" placeholder="Telefono" value="<?php echo $this->trabajo['telefono']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Country</label>
+                                <div class="col-lg-9">
+                                  
+                                  <select class="form-control" name="pais" id="pais">
+                                    <option value="United State (US)" <?php echo ($this->trabajo['pais'] == 'United State (US)') ? 'selected="selected"' : ''?>>United State (US)</option>
+                                    <!-- <option value=">fghanistan">Afghanistan</option>
+                                    <option value=">rgentina">Argentina</option>
+                                    <option value="United Kingdom">United Kingdom (UK)</option>                               
+                                   <option value="United State (US) Minor Outlyin Islands">United State (US) Minor Outlyin Islands</option> -->
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">State</label>
+                                <div class="col-lg-9">
+                                  
+                                  <select class="form-control" name="estado" id="estado">
+                                    <option value="United State (US)" <?php echo ($this->trabajo['state'] == 'Florida') ? 'selected="selected"' : ''?>>Florida</option>
+                                        <!-- <option value="Alabama">Alabama</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="California">California</option>                                
+                                            <option value="Hawaii">Hawaii</option> -->
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">City</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="City" value="<?php echo $this->trabajo['ciudad']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Street Address</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Street Address" value="<?php echo $this->trabajo['direccion']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Zip Code</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="cod_postal" name="cod_postal" placeholder="Zip Code" value="<?php echo $this->trabajo['cod_postal']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Order Notes</label>
+                                <div class="col-lg-9">
+                                <textarea class="form-control" id="order_notes" name="order_notes"><?php echo $this->trabajo['order_notes']?></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ibox-title" style="background-color: #d1f0d1;">
+                            <h5>Modify Password</h5>
+                            &nbsp;
+                            <small><em>(Do not complete the next info if you don't want to modify it)</em></small>
+                        </div>
+
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">New Password</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="password" name="password" id="password" placeholder="New Password">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Repeat New Password</label>
+                                <div class="col-lg-9">
+                                  <input class="form-control" type="password" name="repeat_password" id="repeat_password" placeholder="Repeat New Password" >
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                     <!--    <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Fecha Nacimiento</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha Nacimiento" value="<?php echo $this->trabajo['fecha_nacimiento']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Acepta Publicidad</label>
+                                <div class="col-lg-9">
+                                  
+                                  <select class="form-control" name="acepta_publicidad" id="acepta_publicidad">
+                                    <option value="si" <?php echo ($this->trabajo['acepta_publicidad'] == 'si') ? 'selected="selected"' : ''?>>Si</option>
+                                      <option value="no" <?php echo ($this->trabajo['acepta_publicidad'] == 'no') ? 'selected="selected"' : ''?>>No</option>
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Empresa</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Empresa" value="<?php echo $this->trabajo['empresa']?>">
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label for="num_referencia" class="col-lg-2 control-label">Factura</label>
+                                <div class="col-lg-9">
+                                  
+                                  <select class="form-control" name="factura" id="factura">
+                                    <option value="si" <?php echo ($this->trabajo['factura'] == 'si') ? 'selected="selected"' : ''?>>Si</option>
+                                      <option value="no" <?php echo ($this->trabajo['factura'] == 'no') ? 'selected="selected"' : ''?>>No</option>
+                                  </select>
+                                </div>
+                          </div>
+                        </div>
+
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Notas</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="notas" name="notas" placeholder="Notas" value="<?php echo $this->trabajo['notas']?>">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Etiquetas</label>
+                                <div class="col-lg-9">
+                                  <input type="text" class="form-control" id="etiquetas" name="etiquetas" placeholder="Etiquetas" value="<?php echo $this->trabajo['etiquetas']?>">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Descuento</label>
+                                <div class="col-lg-2 input-group" style="padding-left: 15px;">                                
+                                <input type="text" class="form-control" id="descuento" name="descuento" placeholder="Descuento" value="<?php echo $this->trabajo['descuento']?>"> 
+                                <div class="input-group-addon">%</div>                   
+                              </div>
+                            </div>
+                        </div> 
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Modificar Contraseña</label>
+                                <div class="col-lg-9">
+                                  <input type="password" class="form-control" id="password" name="password" placeholder="Modificar Contraseña" >
+                                  <small>Deje vacio si quiere mantener la contraseña actual</small>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+
+
+
+
+                        
+
+
+
+                        <!-- <div class="ibox-title">
+                            <h5>Agregar dirección</h5>
+                            <a class="btn btn-info btn-xs _agregar" href="javascript:void(0);" style="margin-left: 20px;">agregar</a>
+                        </div>
+
+
+                        
+                        <div id="cont_agregar" style="display: none;">
+                        
+
+                            <input type="hidden" id="agregar_dir" name="agregar_dir" value="no">
+                          
+                            <div class="ibox-content">  
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Titulo</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="titulo" name="agregar_direccion[0][titulo]" placeholder="Titulo" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Código Postal</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="codigo_postal" name="agregar_direccion[0][codigo_postal]" placeholder="Código Postal" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Calle</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="calle" name="agregar_direccion[0][calle]" placeholder="Calle" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Número interior</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="numero_int" name="agregar_direccion[0][numero_int]" placeholder="Número interior" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Número exterior</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="numero_ext" name="agregar_direccion[0][numero_ext]" placeholder="Número exterior" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="ibox-content"> 
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Tipo de hospedaje</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="tipo_hospedaje" name="agregar_direccion[0][tipo_hospedaje]" placeholder="Tipo de hospedaje">
+                                     
+                                    </div> 
+                              </div>
+                            </div>
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Colonia</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="colonia" name="agregar_direccion[0][colonia]" placeholder="Colonia" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Municipio</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="municipio" name="agregar_direccion[0][municipio]" placeholder="Municipio" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Estado</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="estado" name="agregar_direccion[0][estado]" placeholder="Estado" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ibox-content">                           
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">País</label>
+                                    <div class="col-lg-9">
+                                      <input type="text" class="form-control" id="pais" name="agregar_direccion[0][pais]" placeholder="País" >
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+
+                        </div>
+                         -->
+
+                       
+
+                        
+
+
+                       
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Save" />
+                                    </div>                                                                       
+                                </div>
+                            </div>                            
+                        </div>
+
+
+
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<!-- 
+
+<div id="head-bg-fix"></div>
+<div class="wpContent"> 
+	<div class="btn-group-usuario">
+	  <a class="active" href="#">
+	    Editar Usuario
+	  </a>
+	</div> 
+        
+    <form class="form-horizontal" id="editar_trabajo" action="" method="POST" role="form" >
+        <input type="hidden" name="envio01" value="1" />
+        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+       
+                         
+               
+              <div class="form-group formulario_back">
+                  <label for="numero_cliente" class="col-lg-2 control-label">Numero cliente</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="numero_cliente" name="numero_cliente" placeholder="Numero cliente" value="<?php echo $this->trabajo['numero_cliente']?>">
+                    </div>
+              </div>  
+
+              <div class="form-group formulario_back">
+                  <label for="razon_social" class="col-lg-2 control-label">Razon social</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="razon_social" name="razon_social" placeholder="Razon social" value="<?php echo $this->trabajo['razon_social']?>">
+                    </div>
+              </div> 
+
+              <div class="form-group formulario_back">
+                  <label for="ciudad" class="col-lg-2 control-label">Ciudad</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<?php echo $this->trabajo['ciudad']?>">
+                    </div>
+              </div> 
+
+              <div class="form-group formulario_back">
+                  <label for="provincia" class="col-lg-2 control-label">Provincia</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Provincia" value="<?php echo $this->trabajo['provincia']?>">
+                    </div>
+              </div> 
+
+              <div class="form-group formulario_back">
+                  <label for="fecha_nacimiento" class="col-lg-2 control-label">Fecha Nacimiento</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha Nacimiento" value="<?php echo $this->trabajo['fecha_nacimiento']?>">
+                    </div>
+              </div> 
+
+              <div class="form-group formulario_back">
+                  <label for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $this->trabajo['email']?>">
+                    </div>
+              </div> 
+
+              <div class="form-group formulario_back">
+                  <label for="password" class="col-lg-2 control-label">Contraseña</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="password" name="password" placeholder="Contraseña" value="<?php echo $this->trabajo['password']?>">
+                    </div>
+              </div> 
+
+              
+
+             
+             
+            
+      		<div class="btnEditCont">
+              	<input type="submit" class="btn" id="validatex" name="cargar" value="Guardar" />
+            
+            </div>
+	</form>
+</div>
+     -->
+
+

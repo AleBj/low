@@ -1,0 +1,316 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+$.datepicker.regional['es'] = {
+closeText: 'Cerrar',
+prevText: '<Ant',
+nextText: 'Sig>',
+currentText: 'Hoy',
+monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+weekHeader: 'Sm',
+dateFormat: 'dd-mm-yy',
+firstDay: 1,
+isRTL: false,
+showMonthAfterYear: false,
+yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['es']);
+
+
+$(document).ready(function() {
+
+	// $("#fecha").datetimepicker().datetimepicker("setDate", new Date());
+	
+	$('#fecha').datepicker({
+	    dateFormat: "dd-mm-yy",
+	    // timeFormat: "HH:mm",
+	    // locale: 'es'
+	});
+
+
+	$("#btFecha").click(function(){  
+  
+  
+	    if ($("#fecha").val() == "") {
+	      return false;        
+	    } 
+	    
+	    var valor = $("#fecha").val();
+	    
+	    var dataString = 'valor='+valor+'&_csrf=<?=$this->_sess->get('_csrf')?>';
+	    $.ajax({            
+            type: 'POST',
+            url: _root_+"administrador/index/buscadorData", 
+            data: dataString,
+            beforeSend: function(){
+              $('#contenedor').slideUp(500, function(){
+              	// $('#contenedor').html('');
+                $('.loader').fadeIn('fast');        
+              });
+            },
+            success: function(data){  
+            	setTimeout(function(){ 
+            		if(data != '') {
+	            		$('#contenedor').html(data);
+						$('.loader').fadeOut('fast', function(){
+							$('#contenedor').slideDown(500);  
+							$.getScript("https://code.highcharts.com/highcharts.js");
+							$('.loader').fadeOut('fast');     
+						});
+	            	}else{
+	            		$('#contenedor').html('<div class="ibox-content"><h2>No hay datos</h2></div>');
+	            		$('#contenedor').slideDown(500);
+	            		$('.loader').fadeOut('fast'); 
+	            	} 
+            	 }, 500);
+            	       	
+				
+        
+            },
+            error: function(){
+                 alert('error!!');
+            }
+        });	    
+	    
+	   
+
+	});
+  
+
+   /* Highcharts.chart('chart', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Plataformas de pago mas usadas'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+	            }
+	        }
+	    },
+	    series: [{
+	        name: 'Plataformas',
+	        colorByPoint: true,
+	        data: [
+	        	<?php foreach ($this->datos as $val):?>
+	        	{
+		            name: '<?=$val['plataforma_pago']?>',
+		            y: <?=$val['cantidad']?>,
+		            sliced: true,
+		            selected: true
+		        },
+		        <?php endforeach?>
+		       ]
+	    }]
+	});*/
+
+	Highcharts.chart('chart1', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Cursos mas vendidos'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}<b>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.name}<br> {point.percentage:.1f} %'
+	            }
+	        }
+	    },
+	    series: [{
+	        name: '',
+	        colorByPoint: true,
+	        data: [
+	        	<?php if(isset($this->datos1) && is_array($this->datos1)):?>
+	        	<?php foreach ($this->datos1 as $val):?>
+	        	{
+		            name: '<?=$val['nombre']?><br>Sucursal: <?=$val['sucursal']?>',
+		            y: <?=$val['cantidad']?>,
+		            sliced: true,
+		            selected: true
+		        },
+		        <?php endforeach?>
+		    	<?php endif?>
+		       ]
+	    }]
+	});
+
+
+	Highcharts.chart('chart2', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Ventas por sucursales'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}<b>{point.y} ventas<br>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.name}:<br> {point.y} ventas<br>{point.percentage:.1f} %'
+	            }
+	        }
+	    },
+	    series: [{
+	        name: '',
+	        colorByPoint: true,
+	        data: [
+	        	<?php if(isset($this->datos2) && is_array($this->datos2)):?>
+	        	<?php foreach ($this->datos2 as $val):?>
+	        	{
+		            name: '<?=$val['nombre']?>',
+		            y: <?=$val['cantidad']?>,
+		            sliced: true,
+		            selected: true
+		        },
+		        <?php endforeach?>
+		        <?php endif?>
+		       ]
+	    }]
+	});
+
+
+	Highcharts.chart('chart3', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    title: {
+	        text: 'Plataformas de pago mas usadas'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}<b>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '{point.name}<br>{point.percentage:.1f} %'
+	            }
+	        }
+	    },
+	    series: [{
+	        name: '',
+	        colorByPoint: true,
+	        data: [
+	        	<?php if(isset($this->datos3) && is_array($this->datos3)):?>
+	        	<?php foreach ($this->datos3 as $val):?>
+	        	{
+		            name: '<?=$val['nombre']?>',
+		            y: <?=$val['cantidad']?>,
+		            sliced: true,
+		            selected: true
+		        },
+		        <?php endforeach?>
+		        <?php endif?>
+		       ]
+	    }]
+	});
+});
+</script>
+<style type="text/css">
+	.highcharts-credits{display: none;}
+</style>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Estadisticas</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content"> 
+
+    <div class="ibox-title">  
+        <div class="row">
+        	<div class="col-lg-12">
+	            <div class="col-lg-2 input-group">
+	            	<form role="form" method="post" action="">
+	            		<div class="input-group">
+			            	<input class="form-control" type="text" id="fecha" name="fecha" value="<?=date("d-m-Y", strtotime($this->fecha))?>">
+							<span class="input-group-btn">
+								<button id="btFecha" type="button" class="btn btn-info">buscar</button> 
+							</span>
+						</div>
+					</form>
+	            </div>
+	        </div>
+        </div>
+    </div> 
+
+    <div id="contenedor">
+
+	    <div class="ibox-content">  
+	       <h2>Cantidad ventas en el mes: <?=(isset($this->datos) && is_array($this->datos)) ? count($this->datos) : 0?></h2>
+	    </div> 
+	    <div class="ibox-content">  
+	       <div id="chart1"></div>
+	    </div> 
+	    <div class="ibox-content">  
+	       <div id="chart2"></div>
+	    </div> 
+	    <div class="ibox-content">  
+	       <div id="chart3"></div>
+	    </div> 
+
+	</div>
+    <div class="loader"></div> 
+</div>

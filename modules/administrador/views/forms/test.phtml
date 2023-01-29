@@ -1,0 +1,16 @@
+<?php
+// ini_set('allow_url_include', false);
+require_once  RAIZ.'vendor/autoload.php';
+// use Spipu\Html2Pdf\Html2Pdf;
+// $html2pdf = new Html2Pdf();
+
+try {
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->WriteHTML('Hello World');
+    // Other code
+    $mpdf->Output();
+} catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
+    // Process the exception, log, print etc.
+    echo $e->getMessage();
+}
+?>

@@ -1,0 +1,31 @@
+<main>
+    <h3 class="faqs__header">FAQs</h3>
+    <section class="faqs">            
+        <div class="container">
+
+            <?php if($this->faqs):?>
+            <?php for ($i=0; $i <count($this->faqs); $i++):?>
+                
+            <div class="faquest">
+                <p class="faquest__question" id="quest<?=$i?>"> 
+                    <span class="toggle-icon">
+                        <span class="toggle-icon__plus" id="plus<?=$i?>">
+                            <i class="fas fa-plus"></i></span>
+                        <span class="toggle-icon__less" id="less<?=$i?>">
+                            <i class="fas fa-minus"></i></span>
+                    </span>
+                    <?=strip_tags($this->faqs[$i]['pregunta'])?>
+                </p>
+
+                <div class="faquest__answer" id="answ<?=$i?>">
+                    <?=$this->faqs[$i]['respuesta']?>
+                </div>
+            </div>
+
+            <?php endfor?>
+            <?php endif?>
+
+        </div>
+    </section>
+</main>
+

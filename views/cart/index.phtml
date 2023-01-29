@@ -1,0 +1,420 @@
+<div class="cart" style="padding-top:100px;">
+    
+
+	<form id="finalizar_carrito" name="finalizar_carrito" action="">
+	<input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+	<input type="hidden" id="_subtotal" name="_subtotal" value="">
+
+    <div class="container">
+        <div class="content">
+
+        	
+
+			<?php if(isset($_SESSION['_carro']) && !empty($_SESSION['_carro']) ):?>	 
+
+            <div class="items">
+
+
+            	<?php $_total_parcial=0;?> 
+				<?php $_total=0;?> 
+				
+		        <?php foreach($_SESSION['_carro'] as $id => $val):?>
+		        <?php     
+		        	$_id = $id;
+	                // $idd = explode('_', $id);
+	                // $id = $idd[0];    
+		            $_subtotal = $val['cantidad']*$val['precio'];
+		            $_total_parcial += $_subtotal; 
+		            $_total += $_subtotal; 
+		            // $_pres = $val['presentacion'];
+		            // $_nombre['name'] = unserialize(home::traerProductoPorId($id)->nombre);       
+		        ?>
+
+
+                <div id="tr_<?=$_id?>" class="item">
+                	<!-- <?php if(home::traerImg(home::traerCursoPorId($id)->identificador,'cursos','principal')->path):?>
+		            <div class="image">
+                        <img src="<?= $this->_conf['base_url'] . "public/img/subidas/cursos/principal/grandes/" . home::traerImg(home::traerCursoPorId($id)->identificador,'cursos','principal')->path ?>" alt="">
+                    </div>
+					<?php endif?>-->
+ 
+                    
+                     <div class="title">
+                        <h4><?=home::convertirCaracteres(home::traerProductoPorId($id)->titulo)?></h4>
+                    </div> 
+                   <!--  <div class="qty">
+                        <input type="number" class="cantidad" id="cantidad_<?=$_id?>" name="cantidad_<?=$_id?>" value="<?=$val['cantidad']?>" min="1" max="<?=home::traerCursoPorId($id)->cantidad?>">
+                    </div> -->
+                    <div class="price">
+                        <span>$<?=number_format($val['cantidad']*$val['precio'], 2, '.', '')?></span>
+                    </div>
+                    <div class="delete">
+                        <a class="btn" onclick="$().eliminarProd('<?=$_id?>');" href="javascript:void(0);">
+                            <img src="<?php echo $_params['ruta_img']?>icons/trash.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+
+               <?php endforeach?>
+
+                <!-- <div class="item">
+                    <div class="shipping">
+                        <h5><?=$this->_conf['text_lang']['carrito']['item'][$_SESSION['_lang']]['texto2']?></h5>
+                        <p><?=$this->_conf['text_lang']['carrito']['item'][$_SESSION['_lang']]['texto3']?></p>
+                    </div>
+                    <div class="price _shipping">
+                        <span>$<?=number_format($this->shipping, 2, '.', '')?></span>
+                    </div>
+                </div> -->
+
+                <!-- <div class="item">
+                    <?php if(!isset($_SESSION['_codesc'])):?>                                       
+                        <input type="text" id="cod_desc" name="cod_desc" placeholder="Código de descuento" maxlength="8">
+                        <button id="btCodDesc">Aplicar</button>                 
+                    <?php endif?>                   
+                </div> -->
+
+
+            </div>
+
+
+
+            <div class="resume">
+                <div class="inner">
+                    <h5>Cart Totals</h5>
+                    <div class="row">
+                        <div class="col">
+                            <span>Subtotal</span>
+                        </div>
+                        <div class="col">
+                            <span class="price _subtotal">$<?=number_format($_total_parcial, 2, '.', '')?></span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row descuento codesc">
+                        <?php if(isset($_SESSION['_codesc'])):?>
+                        <?php 
+                            // $_cod = home::traerCodigoDescuentoPorId($_SESSION['_codesc']);
+                            $_descod = ($_total_parcial*$_SESSION['_codesc'])/100;
+                            $_total = $_total - $_descod;
+                        ?>
+                        <div class="col">
+                            <span>Cupón de descuento</span>
+                        </div>
+                        <div class="col">
+                            <span class="price _subtotal _desc">$<?=number_format($_descod, 2, '.', '')?></span>
+                        </div>
+                        
+                        <?php else:?>
+
+                        <div class="col">
+                            <span>Cupón de descuento</span>
+                        </div>
+                        <div class="col">
+                            <span class="price _subtotal _desc"></span>
+                        </div> 
+                                      
+                        <?php endif?>                   
+                    </div> -->
+                    
+                    <div class="row">
+                        <div class="col">
+                            <b>Total</b>
+                        </div>
+                        <div class="col">
+                            <b class="price _total">$<?=number_format($_total, 2, '.', '')?></b>
+                        </div>
+                    </div>
+
+                    <div class="buy">
+                        <a href="<?=$this->_conf['base_url'] ?>cart/register" class="btn btn-verde biggest d-block bordered">Proceed to checkout</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <?php else:?>
+	    	<h3>No hay productos</h3>
+	        <?php endif?>
+
+	    	
+
+        </div>
+    </div>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	
+	$('#cartHeader').hide();		
+
+	// var _beforelast = $("#categorias a").eq(-3).attr('id');
+	// var _last = $("#categorias a").eq(-1).attr('id');
+	// $("#"+_last).insertBefore("#"+_beforelast);
+	// console.log(_last);
+
+
+  	/*$("#btBuscador").click(function(){    
+  
+      if ($("#buscar").val() == "") {
+        return false;        
+      } 
+      $('#search').submit();   
+    
+    })*/
+
+    $('#btCodDesc').click(function(e){
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var _val = $("#cod_desc").val(); 
+
+        // console.log(e);
+        //  return false;
+
+        if(_val.length ==8){    
+
+            $('#_codesc').val(_val);                    
+ 
+            $.ajax({
+                type: 'POST',
+                url: _root_+"cart/traerCodigoDescuento",
+                //data: datastring,
+                dataType: "json",
+                data: {"_cod" : _val, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},             
+                beforeSend: function(){
+                    //$('.formPostulante').animate({'opacity': '0'}, 300);
+
+                },
+                success: function(data){
+                    // $('#tr_'+data.id+' .subtotal strong').html(data.subtotal);
+                    // $('#cartpopup').html(data.cart);
+
+
+                    if (data.total!='vacio') {
+                          
+                        $('._desc').html(data.codesc);             
+                        // $('.total strong:first-child').next().html(data.total);
+                        $('.resume ._total').html(data.total);
+
+                        // return false;
+
+                    }else{
+                        alert('El código no existe');
+                    }
+                }
+            });
+            
+
+
+            return false;
+
+        }else{
+            return false;
+        }
+
+    });
+
+
+    
+	$('.cantidad').on('change', function(){
+    
+        // alert($(this).attr('name'));
+        var _val = $(this).attr('name'); 
+        var _valor = _val.split('_');
+        var _cant = $(this).val();
+
+
+        
+        // console.log(_valor[0]);
+        
+        //var datastring = "id="+_valor[0]+"&cantidad="+_valor[1];
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/modificarCantProd",
+            //data: datastring,
+            dataType: "json",           
+            data: {"id" : _valor[1], "cantidad" : _cant, "tipo" : _valor[0], "_csrf" : "<?=$this->_sess->get('_csrf')?>"},
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                $('#tr_'+data.id+' .price span').html(data.subtotal);               
+                $('.resume ._subtotal').html(data.totalparcial);
+                // $('.resume ._shipping').html(data.shipping);
+                // $('.item ._shipping span').html(data.shipping);
+                $('.resume ._total').html(data.total);
+                
+                
+            }
+        });
+        
+    
+    });
+
+
+    
+    $.fn.eliminarProd = function(_val){ 
+        //var url = window.location.href;
+        //var datastring = "data="+_data+"&posicion="+_pos+"&valor="+_val;
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/eliminarProd",
+            //data: datastring,
+            dataType: "json",           
+            data: {"id" : _val, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},   
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                // $(data.item).remove();       
+                $("div").remove(data.item);
+
+                
+                $('.resume ._subtotal').html(data.totalparcial);
+                // $('.resume ._shipping').html(data.shipping);
+                // $('.item ._shipping span').html(data.shipping);
+                $('.resume ._total').html(data.total);
+                
+
+                if(data.total == '$0.00'){
+                    $('.cart .content').html('<h3>No hay productos</h3>');
+                }
+            }
+        });
+
+
+
+    };
+
+
+    /*$.fn.agregarCarro = function(_id, _cant, _precio){  
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/llenarCarro2",
+            dataType: "json",
+            data: {"_id" : _id, "_cantidad" : _cant, "_precio" : _precio, "_csrf" : "<?=$this->_sess->get('_csrf')?>"}, 
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            }
+        });
+
+    };*/
+
+
+	$('#empezarCompra').click(function(e){
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		
+	
+		// console.log('checkout');
+		
+		$.ajax({
+			type: 'POST',
+			url: _root_+"cart/continuarCompra",
+			// data: "total="+_total[1]+"&_csrf=<?=$this->_sess->get('_csrf')?>",
+			data: $('#finalizar_carrito').serialize(),
+			//dataType: "json",
+			//data: {"id" : _valor[1], "cantidad" : _cant},				
+			beforeSend: function(){
+				//$('.formPostulante').animate({'opacity': '0'}, 300);
+			},
+			success: function(data){
+				if(data=='no'){
+					// $('#popUplogin').fadeIn('fast');
+					$('#register').modal('show');
+				}else{
+					if(data == 'shipping'){
+						window.location.href = _root_+"cart/shipping";
+					}else{
+						window.location.href = _root_+"cart/payment";
+					}
+					
+				}
+			}
+		});
+		
+		return false;
+
+	});
+	
+	
+	/*$('#cargarUser').click(function(e){
+	
+		$('.login').fadeIn('fast');		
+	
+	});*/
+
+	/*$('#btEntrarComprar').on('click', function() {
+        
+       
+        if($('#email_login').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error_login').html("Debe ingresar un email").fadeIn('slow');
+          $("#email_login").focus();
+          return false;
+        }
+
+        if($('#pass_login').val()==''){
+          // alert("Debe ingresar un password");
+          $('.error_login').html("Debe ingresar una contraseña").fadeIn('slow');
+          $("#pass_login").focus();
+          return false;
+        }
+
+
+        var datastring = $('#formLogin').serialize();
+        //alert(url)
+        $.ajax({
+            type: 'POST',
+            url: _root_+"registro/login",
+            data: datastring,
+            beforeSend: function(){
+              //$('#juego').html('<option>Cargando...</option>');
+            },        
+            success: function(data){
+                if(data=='ok'){
+                    $('.error_login').html('').fadeOut('fast');
+                    $('.ok_login').html('Acceso exitoso').fadeIn('slow');
+                    setTimeout(function() {
+                          window.location.href = _root_+'carrito/finalizarCompra';
+                          // window.location.reload();
+                      }, 2000);
+                    
+                }else{
+                    $('.error_login').html(data).fadeIn('slow');
+                }
+              
+            }
+        });
+
+        return false;    
+    });*/
+	
+	
+	
+	
+	
+	
+});
+</script>
+

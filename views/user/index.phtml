@@ -1,0 +1,531 @@
+<?php if(!$this->_sess->get('autenticado_front')):?>
+<main>
+<section class="white">
+
+
+    <div class="container _login">
+        <p class="white__intro" style="text-align:center;">Login</p>
+
+        <!-- <form action="" id="whiteForm"> -->
+        <form action="" name="login" id="form-login" class="whiteForm" method="POST">
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+            
+
+            <div class="white__form--single">
+                <label for="email">Email <span>*</span></label>
+                <input type="email" name="email_login" id="email_login" >
+            </div>
+
+            <div class="white__form--single">
+                <label for="subject">Password <span>*</span></label>
+                <input type="password" name="password_login" id="password_login">
+            </div>
+
+            <button class="button" type="submit" id="enviar_data_login"><p>Send</p></button>
+            <div class="mensaje_login"></div>
+            <a class="btn_recuperar" href="javascript:void(0);">Recover  Password</a>
+            <br>
+            <a class="btn_register" href="javascript:void(0);">Register</a>
+        </form>
+    </div>
+
+
+    <div class="container _recuperar" style="display:none;">
+        <p class="white__intro" style="text-align:center;">Recover  Password</p>
+
+        <!-- <form action="" id="whiteForm"> -->
+        <form action="" name="recover" id="form-recover" class="whiteForm" method="POST">
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+            
+            <div class="white__form--single">
+                <label for="subject">Email <span>*</span></label>
+                <input type="email" name="email_recover" id="email_recover" >
+            </div>
+
+            <button class="button" type="submit" id="enviar_data_recover"><p>Send</p></button>
+            <div class="mensaje_recover"></div>
+            <a class="btn_login" href="javascript:void(0);">Login</a>
+        </form>
+    </div>
+
+
+    <div class="container _reg" style="display:none;">
+        <p class="white__intro" style="text-align:center;">Register</p>
+
+        <!-- <form action="" id="whiteForm"> -->
+        <form action="" name="register" id="form-register" class="whiteForm" method="POST">
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+            
+            <div class="white__form--row">
+                <div class="white__form--name">
+                    <label for="firstname">Name <span>*</span></label>
+                    <input type="text" name="nombre" id="nombre" >
+                    <span>First</span>
+                </div>
+
+                <div class="white__form--name">
+                    <label for=""></label>
+                    <input type="text" name="apellido" id="apellido">
+                    <span>Last</span>
+                </div>
+            </div>
+
+            <div class="white__form--single">
+                <label for="email">Email <span>*</span></label>
+                <input type="email" name="email" id="email" >
+            </div>
+
+            <div class="white__form--single">
+                <label for="subject">Password <span>*</span></label>
+                <input type="password" name="password" id="password" >
+            </div>
+
+            <div class="white__form--single">
+                <label for="subject">Repeat Password <span>*</span></label>
+                <input type="password" name="repeat_password" id="repeat_password">
+            </div>
+
+            <button class="button" type="submit" id="enviar_data"><p>Send</p></button>
+            <div class="mensaje"></div>
+            <a class="btn_login" href="javascript:void(0);">Login</a>
+        </form>
+    </div>
+
+
+
+
+</section>
+</main>
+
+
+<?php else:?>
+
+<main>
+    <section class="started">
+        <article class="started__step">
+            <div class="border-line">
+                <div class="container">
+                    <h4>LET’S GET STARTED!</h4>
+                    <p>Find out if you qualify<br>
+                        and purchase your package</p>
+                        <span class="digit">1</span>
+                </div>
+            </div>
+        </article>
+
+        <div class="container">           
+
+
+            <!-- <form action="" id="started__form"> -->
+            <form action="" name="questions" id="started__form" method="POST">
+                <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                <div class="started__form--line">
+                    <label for="resident">
+                        Are you a legal resident of Florida<br> for more than 6 months? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg1" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg1" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="partner">
+                        Can you locate your partner? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg2" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg2" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="married">
+                        Are you legally married? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg3" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg3" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="children">
+                        Do you have children together? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg4" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg4" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="recaptcha">
+                    <div class="recaptcha__delim">
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            <p>No soy un robot</p>
+                        </label>
+                        <img src="./img/recaptcha-ejemplo.png" alt="">
+                    </div>
+
+                </div> -->
+
+                <button class="button" type="submit" id="enviar_data_questions"><p>Check Eligibility</p></button>
+                <div class="mensaje_questions"></div>
+                <p class="acepTerms">By clicking “Check Eligibility,” you agree to the <a href="<?=$this->_conf['base_url']?>termsandconditions">Terms & Conditions</a></p>
+            </form>           
+
+        </div>
+    </section>
+</main>
+
+
+<?php endif?>
+
+
+
+<script>
+$(document).ready(function() {
+
+    $('.btn_login').on('click', function(){
+        $('._recuperar').fadeOut('fast');
+        $('._reg').fadeOut('fast', function(){
+            $('._login').fadeIn(400);
+        });
+    });
+
+    $('.btn_register').on('click', function(){
+        // $('._recuperar').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._reg').fadeIn(400);
+        });
+    });
+
+    $('.btn_recuperar').on('click', function(){
+        // $('._reg').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._recuperar').fadeIn(400);
+        });
+    });
+
+
+    $("#form-login").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_login").val() == "") {
+            $(".mensaje_login").html("You must complete the email field");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_login").val().indexOf('@', 0) == -1 || $("#email_login").val().indexOf('.', 0) == -1) {
+            $(".mensaje_login").html("You must enter a valid email");
+            $$('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password_login").val() == "") {
+            $(".mensaje_login").html("You must complete the password field");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#password_login').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+       
+        
+        
+        
+        $('#enviar_data_login').prop('disabled', true);
+        $(".mensaje_login").html("");
+
+        $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/login",
+            data: $("#form-login").serialize(),            
+            success: function(data){
+                $(".mensaje_login").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-login input, #form-login textarea').val('');
+                    $(".mensaje_login").append('Successful delivery!');
+                    $('#enviar_data_login').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_login").html("");
+                        window.location.reload();
+                    }, 1000);                    
+
+                }else{
+                    $('#enviar_data_login').prop('disabled', false);
+                    $(".mensaje_login").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_login").append(data);
+            }
+        });
+        return false;
+    });
+    
+    $("#form-recover").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_recover").val() == "") {
+            $(".mensaje_recover").html("You must complete the email field");
+            $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_recover").val().indexOf('@', 0) == -1 || $("#email_recover").val().indexOf('.', 0) == -1) {
+            $(".mensaje_recover").html("You must enter a valid email");
+            $$('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+   
+        
+        
+        
+        $('#enviar_data_recover').prop('disabled', true);
+        $(".mensaje_recover").html("");
+
+        $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/recoverPass",
+            data: $("#form-recover").serialize(),            
+            success: function(data){
+                $(".mensaje_recover").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-recover input, #form-recover textarea').val('');
+                    $(".mensaje_recover").append('The new password was sent to your email');
+                    $('#enviar_data_recover').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_recover").html("");
+                    }, 1000);                    
+
+                }else{
+                    $('#enviar_data_recover').prop('disabled', false);
+                    $(".mensaje_recover").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_recover").append(data);
+            }
+        });
+        return false;
+    });
+  
+    $("#form-register").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+        
+        if ($("#nombre").val() == "") {
+            $(".mensaje").html("You must complete the first name field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#nombre').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#apellido").val() == "") {
+            $(".mensaje").html("You must complete the last name field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#apellido').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        }            
+        
+
+        if ($("#email").val() == "") {
+            $(".mensaje").html("You must complete the email field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1) {
+            $(".mensaje").html("You must enter a valid email");
+            $$('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password").val() == "") {
+            $(".mensaje").html("You must complete the password field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#repeat_password").val() == "") {
+            $(".mensaje").html("You must complete the repeat password field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#repeat_password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+        
+        
+        
+        $('#enviar_data').prop('disabled', true);
+        $(".mensaje").html("");
+
+        $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/register",
+            data: $("#form-register").serialize(),            
+            success: function(data){
+                $(".mensaje").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-register input, #form-register textarea').val('');
+                    $(".mensaje").append('Check your email account to activate your account');
+                    $('#enviar_data').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje").html("");
+                    }, 1000);                    
+
+                }else{
+                    $('#enviar_data').prop('disabled', false);
+                    $(".mensaje").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje").append(data);
+            }
+        });
+        return false;
+    });
+
+
+    $("#started__form").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+
+        // console.log($("#form-questions input:radio:checked").length);
+
+
+        if($("#started__form input:radio:checked").length < 4){
+            $(".mensaje_questions").html("You must complete all questions");
+            $('#started__form input, #started__form select, #started__form textarea').removeAttr('style');
+            // $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;  
+        }
+                      
+        
+
+        
+        $('#enviar_data_questions').prop('disabled', true);
+        $(".mensaje_questions").html("");
+
+        // $('#form-questions input:text, #form-questions select, #form-questions textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/questions",
+            data: $("#started__form").serialize(),            
+            success: function(data){
+                $(".mensaje_questions").html("");
+                // data = $.trim(data);
+                
+                    // $('#form-questions input:text, #form-questions input:number, #form-questions textarea').val('');
+                    // $(".mensaje_questions").append('Envio exitoso!');
+                    $('#enviar_data_questions').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    /*setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_questions").html("");
+                    }, 4000);  */    
+
+
+                if(data=="msa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="ppa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="msappa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="no_califica"){
+
+                    window.location = _root_+'notqualified';
+
+                }else{
+                    $('#enviar_data_questions').prop('disabled', false);
+                    $(".mensaje_questions").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_questions").append(data);
+            }
+        });
+        return false;
+    });
+    
+    
+});
+
+
+</script> 
+
+
+
+
+

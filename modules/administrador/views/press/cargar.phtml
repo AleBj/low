@@ -1,0 +1,595 @@
+<script>
+$.datepicker.regional['es'] = {
+closeText: 'Cerrar',
+prevText: '<Ant',
+nextText: 'Sig>',
+currentText: 'Hoy',
+monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+weekHeader: 'Sm',
+dateFormat: 'dd-mm-yy',
+firstDay: 1,
+isRTL: false,
+showMonthAfterYear: false,
+yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['es']);
+
+
+$(document).ready(function() {
+
+  $('#fecha_publicacion').datepicker({
+    dateFormat: "dd/mm/yy",
+    // timeFormat: "HH:mm",
+    locale: 'es'
+  });
+
+  $('._link').show();
+  $('._archivo').hide();
+
+  $('input:radio[name="elegir"]').change(function() {
+      if ($(this).val() == '_archivo') {
+          $('._link').slideUp('fast', function(){
+            $('._archivo').slideDown(500);
+          });
+         
+      } else {
+          $('._archivo').slideUp('fast', function(){
+            $('._link').slideDown(500);
+          });
+      }
+  });
+  
+    
+  $('#cargar_trabajo').submit(function(){
+
+
+    if ($("#titulo").val() == "") {
+      alert("Debe completar el campo titulo");
+      $("#titulo").val('');
+      $('#titulo').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }
+
+    
+    
+    if ($("#medio").val() == "") {
+      alert("Debe completar el campo medio");
+      $("#medio").val('');
+      $('#medio').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }
+
+    if ($('._link').is(':hidden')) {
+      $('#radio_activo').val('_archivo');
+    } else if($('._archivo').is(':hidden')){
+      $('#radio_activo').val('_link');
+    }
+
+   /*if ($("#fecha_publicacion").val() == "") {
+      alert("Debe completar el campo fecha de publicacion");
+      $("#fecha_publicacion").val('');
+      $('#fecha_publicacion').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }*/
+    
+
+
+      /*if($('._load_img_final_thumb').children().length == 0){
+        alert("Debe seleccionar una imagen");
+        return false; 
+      }*/
+      
+          
+      
+      return true;
+    
+  
+  });
+  
+  
+  
+});
+
+</script>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Press</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+<div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Cargar</h5>
+                        </div>
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" >
+                          <input type="hidden" name="envio01" value="1" />
+                          <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                          <input type="hidden" name="radio_activo" id="radio_activo" value="" />
+
+
+                          <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Titulo</label>
+                                  <div class="col-lg-9">
+                                     <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" >
+                                  </div>
+                              </div>
+                          </div>
+
+
+                          <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Medio</label>
+                                  <div class="col-lg-9">
+                                     <input type="text" class="form-control" id="medio" name="medio" placeholder="Medio" >
+                                  </div>
+                              </div>
+                          </div>
+
+
+                          <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Fecha publicación</label>
+                                  <div class="col-lg-9">
+                                     <input type="text" class="form-control" id="fecha_publicacion" name="fecha_publicacion" placeholder="Fecha publicación" >
+                                  </div>
+                              </div>
+                          </div>
+
+
+                         <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Link/Archivo</label>
+                                
+                                <div class="col-lg-1 radio">
+                                  <label>
+                                    <input type="radio" name="elegir" value="_link" checked> Link
+                                  </label>
+                                </div>
+                                <div class="col-lg-1 radio">
+                                  <label>
+                                    <input  type="radio" name="elegir" value="_archivo"> Archivo
+                                  </label>
+                                </div>
+                                
+                            </div>
+                          </div>
+
+
+                         <div class="ibox-content _link">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Link</label>
+                                  <div class="col-lg-9">
+                                     <input type="text" class="form-control" id="link" name="link" placeholder="Link" >
+                                  </div>
+                              </div>
+                          </div>
+
+
+
+                          <div class="ibox-content _archivo">
+                            <div class="form-group">
+                              <label for="video" class="col-lg-2 control-label">Archivo</label>
+                              <div class="col-lg-9">
+                                <div class="col-lg-5">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_pdf">
+                                       Cargar archivo
+                                    </button>
+                                </div>
+                                <div class="col-lg-7">
+                                  <div class="list-group aa conexionThumb _load_archivo_final" id="bloque_imgs_usuario">
+                                    <?php $_vid = admin::traerArchivosIdentificador($this->_sess->get('carga_actual'));?>
+                                    <?php if($_vid !=''):?>
+                                    <?php foreach ($_vid as $val):?>
+                                    <h4>
+                                      <?=$val->path?>
+                                      <a href="javascript:void(0);" class="btn btn-danger btn-xs _borrar_<?=$val->id?>" title="Borrar">X</a>
+                                    </h4>
+                                    <script>
+                                        $(document).ready(function () {
+                                              $("._borrar_<?=$val->id?>").click(function () {
+                                                  swal({
+                                                      title: "Estas seguro de borrar este contenido?",
+                                                      text: "Los datos se perderán permanentemente!",
+                                                      type: "warning",
+                                                      showCancelButton: true,
+                                                      confirmButtonColor: "#DD6B55",
+                                                      confirmButtonText: "Si, que se borre!",
+                                                      cancelButtonText: "No, mejor no!",
+                                                      closeOnConfirm: false,
+                                                      closeOnCancel: false },
+                                                  function (isConfirm) {
+                                                      if (isConfirm) {
+                                                          var url= _root_ + "administrador/archivos/borrar";
+                                                          var dataString = '_id=<?=$val->id?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                                                          $.ajax({
+                                                                  type: "POST",
+                                                                  url: url,
+                                                                  data: dataString,
+                                                                  success: function(data){
+                                                                    if(data=="ok"){
+                                                                      swal("Borrado!", "El contenido se borró con exito.", "success");
+                                                                      setTimeout(function() {
+                                                                          location.reload();
+                                                                      }, 200);
+                                                                    }else{
+                                                                      swal("Cancelado", "No se puede borrar porque el contenido esta en uso", "error");
+                                                                    }
+                                                                      
+                                                                      
+                                                                  }
+                                                          });
+                                                      } else {
+                                                          swal("Cancelado", "El contenido esta guardado", "error");
+                                                      }
+                                                  });
+                                              });
+                                          });
+                                    </script>  
+                                    <?php endforeach?>                                                          
+                                    <?php endif?>
+                                  </div>
+                                </div> 
+                              </div>                                     
+                            </div>
+                          </div>
+                         
+                        
+                        
+
+
+                          <div class="ibox-content">
+                            <div class="form-group">
+                              <label for="contenido" class="col-lg-2 control-label">Imagen</label>
+                                <div class="col-lg-9">
+                                    <div class="col-lg-5">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_imgg_medidas">
+                                            Cargar Imagen
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-7">
+                                      <div class="list-group aa conexion _load_img_final_medidas" id="bloque_imgs_usuario">
+                                        <?php $_img = admin::traerImg($this->_sess->get('carga_actual'),'press');?>
+                                        <?php if($_img !=''):?>
+                                        <div><img src=" <?= $this->_conf['base_url'] . "public/img/subidas/press/thumb/" . $_img->path ?>"  class="img-thumbnail"></div>
+                                        <?php endif?>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>                  
+                          </div> 
+
+                          <!-- <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Google Map latitud</label>
+                                  <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="latitud" name="latitud" placeholder="Google Map latitud" >
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="ibox-content">                           
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Google Map longitud</label>
+                                  <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="longitud" name="longitud" placeholder="Google Map longitud" >
+                                  </div>
+                              </div>
+                          </div> -->
+
+                          <div class="ibox-content">
+                            <div class="row">
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-2">
+                                        <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Guardar" />
+                                      </div>                                                                       
+                                  </div>
+                              </div>                            
+                          </div>
+
+
+
+                        </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="modal inmodal fade" id="_car_imgg_medidas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Cargar Imagen</h4>
+            </div>
+            <div class="modal-body">
+      <script>
+          Dropzone.options.myAwesomeDropzoneMedidas = {
+            autoProcessQueue: false,
+            paramName: 'file',
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxFilesize: <?=$this->_conf['peso_maximo_imagenes']?>, //MB
+            dictDefaultMessage: 'Arrastre aqui para cargar, o click para seleccionar',
+            acceptedFiles: 'image/*',
+           
+            init: function() {
+      
+              var myDropzone = this;
+              var maxImageWidth = <?=$this->_conf['formatos_img']['press_grandes']['ancho']?>, 
+                  maxImagesize = <?=$this->_conf['peso_maximo_imagenes']?>;
+      
+              myDropzone.on("addedfile", function(file) {
+                file.previewElement.addEventListener("click", function() { myDropzone.removeFile(file);});
+              });
+      
+              this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();                                
+                myDropzone.processQueue();
+              });
+      
+              this.on('thumbnail', function(file) {
+
+                if (file.width < maxImageWidth ) {
+                  // file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"px de ancho");
+                  return false;
+                }
+              
+              });
+              
+              this.on("queuecomplete", function(file) {this.removeAllFiles(file);img_final_medidas('cargar','press');});
+              this.on("maxfilesexceeded", function(file){this.removeFile(file);});
+              // this.on("error", function(file) {alert(file)});
+              //this.on("complete", function(file) {this.removeAllFiles(file);});
+              this.on("error", function(file) {
+                //alert(file);
+                if (file.width < maxImageWidth) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"px de ancho");
+                  return false;
+                }
+                /*if(file.size > 1024*1024*2){
+                  //2MB
+                  this.removeFile(file);
+                  alert("El peso de la imagen no puede superar los "+maxImagesize+"MB");
+                  return false;
+                }*/
+              });
+            }
+          };
+               
+                      
+        
+      
+        
+         function img_final_medidas(_accion, _tipo){
+                    var url= _root_ + "administrador/imagenes/traerImagenfinal/"+_accion+"/"+_tipo;
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            //$("._load_img_final_logo").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/imagenes'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_img_final_medidas").html(datas).fadeIn("slow");
+                             $('#_car_imgg_medidas').modal('hide');
+                        },
+                        type:"POST"
+                    });
+                }
+        
+        
+                </script>
+                <div class="loader"></div>
+                <div id="contenedor">
+            
+                    <form class="form-inline dropzone" id="my-awesome-dropzone-medidas" action="<?=$this->_conf['base_url']?>administrador/imagenes/cargImg/press">
+                        <input type="hidden" name="envio_img_princip" value="1">
+                        <div class="dropzone-previews"></div>
+                        <button type="submit" class="btn btn-primary pull-right">Cargar</button>
+                    </form>
+                    <p class="eliminarThumb">Hacer click sobre la miniatura para eliminarla.</p>
+                    
+                     <hr> 
+                     
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="text-danger"> 
+                              <small>Tamaño: <strong><?=$this->_conf['formatos_img']['press_grandes']['ancho']?> px de ancho</strong></small>
+                              <br>
+                              <small>Peso máximo: <strong><?=$this->_conf['peso_maximo_imagenes']?> Mb.</strong></small>   
+                          </p>
+                        </div>
+                    </div>
+                    
+                  
+                    
+                </div>
+          </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>        
+      </div>
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="_car_pdf" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Cargar archivo</h4>
+            </div>
+            <div class="modal-body">
+      <script>
+          Dropzone.options.myAwesomeDropzone = {
+            autoProcessQueue: false,
+            paramName: 'file',
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxFilesize: <?=$this->_conf['peso_maximo_archivos']?>, //MB
+            dictDefaultMessage: 'Arrastre aqui para cargar, o click para seleccionar',
+            acceptedFiles: ".pdf",
+           
+            init: function() {
+      
+              var myDropzone = this,
+                maxVideosize = <?=$this->_conf['peso_maximo_archivos']?>;
+      
+              myDropzone.on("addedfile", function(file) {
+                file.previewElement.addEventListener("click", function() { 
+                  myDropzone.removeFile(file);
+                });
+              });
+      
+              this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation(); 
+
+                //alert("llego");
+                myDropzone.processQueue();
+                //$("#_car_imgg .recortar_img").fadeOut('slow');
+              });
+      
+              this.on("thumbnail", function(file) {
+                /*if(file.width > file.height){
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La orientación de la imagen debe ser vertical");
+                  return false;
+                }*/
+                
+                /*if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }*/
+                
+                /*if (file.width > maxImageWidth || file.height > maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("La imagen debe ser de "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }*/
+              })
+              
+              this.on("queuecomplete", function(file) {
+                this.removeAllFiles(file);
+              });
+              this.on("maxfilesexceeded", function(file){
+                this.removeFile(file);
+              });
+              this.on("error", function(file) {
+                //alert(file);
+                if(file.size > 1024*1024*24){
+                  //3MB
+                  this.removeFile(file);
+                  alert("El peso del video no puede superar los "+maxVideosize+"MB");
+                  return false;
+                }
+              });
+              this.on("success", function(file) {
+                this.removeAllFiles(file);
+               archivo_final();
+              });
+            }/*,
+            accept: function(file, done) {
+              file.acceptDimensions = done;
+              file.rejectDimensions = function() {
+                //$("#_car_imgg .recortar_img").fadeOut('slow');
+                done('La imagen tiene un formato ilegal');
+              };
+            },*/
+          };
+               
+                      
+              
+        
+                function archivo_final(){
+                    var url= _root_ + "administrador/archivos/traerArchivoFinal/<?=$this->_sess->get('carga_actual')?>";
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            $("._load_archivo_final").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/archivos'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_archivo_final").append(datas).fadeIn("slow");
+                            // $("#_car_imgg .ambito_recorte").html('');
+                            //$(".finalizar_proceso").show();
+                            $('#_car_pdf').modal('hide');
+                        },
+                        type:"POST",
+                        timeout:3000
+                    });
+                }
+        
+        
+        
+        
+                </script>
+                <div class="loader"></div>
+                <div id="contenedor">
+            
+                    <form class="form-inline dropzone" id="my-awesome-dropzone" action="<?=$this->_conf['base_url']?>administrador/archivos/cargarArchivos/<?=$this->_sess->get('carga_actual')?>">
+                                                        
+                        <div class="dropzone-previews"></div>
+                        <button type="submit" class="btn btn-primary pull-right">Cargar</button>
+                    </form>
+                    <p class="eliminarThumb">Hace click sobre la miniatura para eliminarla.</p>
+                    
+                     <hr> 
+                     
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="text-danger"> 
+                                <small>Peso máximo: <strong><?=$this->_conf['peso_maximo_archivos']?> Mb.</strong></small>        
+                            </p>
+                        </div>
+                    </div>
+                    
+                 
+                    
+                </div>
+          </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>        
+      </div>
+    </div>
+</div>

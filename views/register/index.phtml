@@ -1,0 +1,422 @@
+<section id="hero" class="interna"></section>
+<section id="commerce" class="centerSection">
+<div class="about">
+   <div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            	
+
+                <div class="wrapper centerSection _login">
+                    <h3 class="anima ">Login</h3>
+                    <form action="" name="login" id="form-login" method="POST">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="email" name="email_login" id="email_login" required="" placeholder="Email*">
+                        <input type="password" name="password_login" id="password_login" required="" placeholder="Password*">
+                        
+                        <button type="submit" id="enviar_data_login">Send</button>
+                        <div class="mensaje_login"></div>
+                    </form>
+                    <a class="btn_recuperar" href="javascript:void(0);">Recover Password</a>
+                    <br>
+                    <a class="btn_register" href="javascript:void(0);">Register</a>
+                </div>
+
+                 <div class="wrapper centerSection _recuperar" style="display:none;">
+                    <h3 class="anima hideme">Recover Password</h3>
+                    <form action="" name="recover" id="form-recover" method="POST">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="email" name="email_recover" id="email_recover" required="" placeholder="Email*">
+                        
+                        <button type="submit" id="enviar_data_recover">Send</button>
+                        <div class="mensaje_recover"></div>
+                    </form>
+                    <a class="btn_login" href="javascript:void(0);">Login</a>
+                </div>
+
+
+                <div class="wrapper centerSection _reg" style="display:none;">
+                    <h3 class="anima hideme">Register</h3>
+                    <form action="" name="register" id="form-register" method="POST">
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                        <input type="text" name="nombre" id="nombre" required="" placeholder="Name*">
+                        <input type="text" name="apellido" id="apellido" required="" placeholder="LastName*">
+                        <input type="email" name="email" id="email" required="" placeholder="Email*">
+                        <input type="password" name="password" id="password" required="" placeholder="Password*">
+                        <input type="password" name="repeat_password" id="repeat_password" required="" placeholder="Repeat Password*">
+                        
+                        <button type="submit" id="enviar_data">Send</button>
+                        <div class="mensaje"></div>
+                    </form>
+                    <a class="btn_login" href="javascript:void(0);">Login</a>
+                </div>
+
+            	
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+</section>
+
+
+<script>
+$(document).ready(function() {
+
+    $('.btn_login').on('click', function(){
+        $('._recuperar').fadeOut('fast');
+        $('._reg').fadeOut('fast', function(){
+            $('._login').fadeIn(400);
+        });
+    });
+
+    $('.btn_register').on('click', function(){
+        // $('._recuperar').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._reg').fadeIn(400);
+        });
+    });
+
+    $('.btn_recuperar').on('click', function(){
+        // $('._reg').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._recuperar').fadeIn(400);
+        });
+    });
+
+
+    /*$.fn.sucursal = function(_id){  
+
+        // var _suc = this.value;
+
+        $.ajax({
+            type: 'POST',
+            url: _root_+"compraonline/procesarSucursal",
+            // data: "_suc="+_suc+"&_csrf=<?=$this->_sess->get('_csrf')?>",
+            dataType: "json",
+            data: {"_suc" : _id, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},             
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                // $('#cartpopup').html(data.cart);
+                // $('#cartpopupMob').html(data.cart);
+                // $('header .navbar .navbar-collapse ul.navbar-nav li.cart a span .inCart').html(data.cant_item);
+                // $('header .navbar .hide-large .cart a span .inCart span').html(data.cant_item);
+                // $('._cursos').fadeIn(500).html(data.cursos);
+                if(data.response == 'ok'){
+                    setTimeout(function() {
+                        window.location.href = _root_+"cursos";
+                    }, 1000);
+                    // window.location.href = _root_+"cursos";
+                }
+                
+            }
+        });
+
+         
+    };*/
+
+
+    $("#form-login").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_login").val() == "") {
+            $(".mensaje_login").html("Debe completar el campo email");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_login").val().indexOf('@', 0) == -1 || $("#email_login").val().indexOf('.', 0) == -1) {
+            $(".mensaje_login").html("Debe ingresar un email valido");
+            $$('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password_login").val() == "") {
+            $(".mensaje_login").html("Debe completar el campo password");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#password_login').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+       
+        
+        
+        
+        $('#enviar_data_login').prop('disabled', true);
+        $(".mensaje_login").html("");
+
+        $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "register/login",
+            data: $("#form-login").serialize(),            
+            success: function(data){
+                $(".mensaje_login").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-login input, #form-login textarea').val('');
+                    $(".mensaje_login").append('Envio exitoso!');
+                    $('#enviar_data_login').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_login").html("");
+                        window.location.reload();
+                    }, 4000);                    
+
+                }else{
+                    $('#enviar_data_login').prop('disabled', false);
+                    $(".mensaje_login").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_login").append(data);
+            }
+        });
+        return false;
+    });
+    
+    $("#form-recover").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_recover").val() == "") {
+            $(".mensaje_recover").html("Debe completar el campo email");
+            $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_recover").val().indexOf('@', 0) == -1 || $("#email_recover").val().indexOf('.', 0) == -1) {
+            $(".mensaje_recover").html("Debe ingresar un email valido");
+            $$('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+   
+        
+        
+        
+        $('#enviar_data_recover').prop('disabled', true);
+        $(".mensaje_recover").html("");
+
+        $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "register/recoverPass",
+            data: $("#form-recover").serialize(),            
+            success: function(data){
+                $(".mensaje_recover").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-recover input, #form-recover textarea').val('');
+                    $(".mensaje_recover").append('Se envio la nueva contraseña a tu email');
+                    $('#enviar_data_recover').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_recover").html("");
+                    }, 4000);                    
+
+                }else{
+                    $('#enviar_data_recover').prop('disabled', false);
+                    $(".mensaje_recover").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_recover").append(data);
+            }
+        });
+        return false;
+    });
+  
+    $("#form-register").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+        
+        if ($("#nombre").val() == "") {
+            $(".mensaje").html("Debe completar el campo nombre");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#nombre').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#apellido").val() == "") {
+            $(".mensaje").html("Debe completar el campo apellido");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#apellido').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        }            
+        
+
+        if ($("#email").val() == "") {
+            $(".mensaje").html("Debe completar el campo email");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1) {
+            $(".mensaje").html("Debe ingresar un email valido");
+            $$('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password").val() == "") {
+            $(".mensaje").html("Debe completar el campo password");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#repeat_password").val() == "") {
+            $(".mensaje").html("Debe completar el campo repeat password");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#repeat_password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+        
+        
+        
+        $('#enviar_data').prop('disabled', true);
+        $(".mensaje").html("");
+
+        $('#form-register input:text, #form-register select, #form-register textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "register/register",
+            data: $("#form-register").serialize(),            
+            success: function(data){
+                $(".mensaje").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-register input:text, #form-register input:number, #form-register textarea').val('');
+                    $(".mensaje").append('Verifique su cuenta de email para activar su cuenta');
+                    $('#enviar_data').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje").html("");
+                    }, 4000);                    
+
+                }else{
+                    $('#enviar_data').prop('disabled', false);
+                    $(".mensaje").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje").append(data);
+            }
+        });
+        return false;
+    });
+
+
+   /* $("#form-questions").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+
+        // console.log($("#form-questions input:radio:checked").length);
+
+
+        if($("#form-questions input:radio:checked").length < 4){
+            $(".mensaje_questions").html("Debe completar todas las preguntas");
+            $('#form-questions input, #form-questions select, #form-questions textarea').removeAttr('style');
+            // $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;  
+        }
+                      
+        
+
+        
+        $('#enviar_data_questions').prop('disabled', true);
+        $(".mensaje_questions").html("");
+
+        // $('#form-questions input:text, #form-questions select, #form-questions textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/questions",
+            data: $("#form-questions").serialize(),            
+            success: function(data){
+                $(".mensaje_questions").html("");
+                // data = $.trim(data);
+                
+                    // $('#form-questions input:text, #form-questions input:number, #form-questions textarea').val('');
+                    // $(".mensaje_questions").append('Envio exitoso!');
+                    $('#enviar_data_questions').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    
+
+
+                if(data=="msa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="ppa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="msappa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="no_califica"){
+
+                    window.location = _root_+'notqualified';
+
+                }else{
+                    $('#enviar_data_questions').prop('disabled', false);
+                    $(".mensaje_questions").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_questions").append(data);
+            }
+        });
+        return false;
+    });*/
+    
+    
+});
+
+
+</script> 
+
+
+
+
+

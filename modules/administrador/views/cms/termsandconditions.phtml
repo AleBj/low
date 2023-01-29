@@ -1,0 +1,304 @@
+<script src="https://cdn.ckeditor.com/4.5.11/full-all/ckeditor.js"></script>
+<script>
+$(document).ready(function() {
+	
+ 
+		
+	$('#editar_trabajo').submit(function(){
+		
+		          
+    /*if ($("#titulo").val() == "") {
+      alert("Debe completar el campo titulo");
+      $("#titulo").val('');
+      $('#titulo').focus();     
+      //$("#titulo").attr('placeholder', 'Titulo');
+      return false;        
+    }*/
+
+    /*if ($("#video").val() == "") {
+        alert("Debe completar el campo video");
+        $('#video').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }*/
+
+    /*if($('._load_img_final_medidas').children().length == 0){
+        alert("Debe seleccionar una imagen");
+        return false; 
+      }	*/
+			
+	   return true;
+		
+	
+	});
+	
+	
+	
+});
+
+</script>
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>CMS</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+ <div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Terms and Conditions</h5>
+                        </div>
+
+
+
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="envio01" value="1" />        
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">     
+                        <input type="hidden" name="_id" value="<?=(isset($this->seo['id_seccion'])) ? $this->seo['id_seccion'] : 0?>">
+                        <input type="hidden" name="_tipo" value="seccion">                       
+                       
+                        
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label class="col-lg-2 control-label">Text</label>
+                              <div class="col-lg-9">
+                                <textarea class="form-control" id="texto" name="texto"><?php if(isset($this->trabajo['texto'])) echo $this->trabajo['texto']?></textarea>
+                                  <script>
+                                      CKEDITOR.replace('texto', {
+                                        language: 'en',
+                                          extraPlugins: 'colorbutton'
+                                      });
+                                  </script>                               
+                                 
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <!-- SEO -->
+
+                        <div class="ibox-title" style="background-color: #d1e9ee;">
+                            
+                                <h5 class="col-lg-2" style="text-align: right;">SEO</h5>
+                           
+                        </div>
+
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><small>Title <code>title</code></small></label>
+                                <div class="col-lg-9">
+                                    <input type="text" placeholder="Title" class="form-control" name="titulo_seo" id="titulo_seo" value="<?=(isset($this->seo['titulo']) && $this->seo['titulo']!='') ? admin::convertirCaracteres3($this->seo['titulo']) : ''?>" maxlength="65">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ibox-content">                           
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><small>Description <code>meta-description</code></small></label>
+                                <div class="col-lg-9">
+                                    <textarea class="form-control" name="desc_seo" id="desc_seo" maxlength="10"><?=(isset($this->seo['descripcion']) && $this->seo['descripcion']!='') ? $this->seo['descripcion'] : ''?></textarea>
+                                    <script>
+                                        CKEDITOR.plugins.addExternal( 'wordcount', '/libs/ckeditor/plugins/wordcount/', 'plugin.js' );
+                                        CKEDITOR.replace('desc_seo', {
+                                            language: 'en',
+                                            allowedContent: true,
+                                            extraPlugins: 'colorbutton,wordcount',
+                                            height: 250,
+                                             wordcount: {
+                                                showCharCount: true,
+                                                showWordCount: false,
+                                                showParagraphs: false,
+                                                countHTML: true,
+                                                maxCharCount: -1,
+                                                maxCharCount: 156,
+                                            }
+                                        } );
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="ibox-content">
+                            <div class="form-group">
+                              <label for="contenido" class="col-lg-2 control-label">OG:image</label>
+                                <div class="col-lg-9">
+                                    <div class="col-lg-5">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#_car_img_seo">
+                                            Add Image
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-7">
+                                      <div class="list-group aa conexion _load_img_final_seo" id="bloque_imgs_seo">
+                                        <?php $_img = admin::traerImg($this->_sess->get('edicion_actual'),'seo');?>
+                                        <?php if($_img !=''):?>
+                                        <div>
+                                            <img src="<?= $this->_conf['base_url'] . "public/img/subidas/seo/thumb/" . $_img->path ?>"  class="img-thumbnail">
+                                            <input type="hidden" name="_seo_img" value="<?=$_img->id?>">
+                                        </div>
+                                        <?php endif?>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>                  
+                          </div> 
+
+                      
+                      
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-success" id="validatex" nname="cargar" value="Save" />                                      
+                                    </div>                                                                       
+                                </div>
+                                
+                              
+                            </div>                            
+                        </div>
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div> 
+
+<div class="modal inmodal fade" id="_car_img_seo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Add Image</h4>
+            </div>
+            <div class="modal-body">
+      <script>
+          Dropzone.options.myAwesomeDropzoneSeo = {
+            autoProcessQueue: false,
+            paramName: 'file',
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxFilesize: <?=$this->_conf['peso_maximo_imagenes']?>, //MB
+            dictDefaultMessage: 'Drag here to add, or click to select',
+            acceptedFiles: 'image/*',
+           
+            init: function() {
+      
+              var myDropzone = this;
+              var maxImageWidth = <?=$this->_conf['formatos_img']['seo_grandes']['ancho']?>, 
+                  maxImageHeight = <?=$this->_conf['formatos_img']['seo_grandes']['alto']?>,
+                  maxImagesize = <?=$this->_conf['peso_maximo_imagenes']?>;
+      
+              myDropzone.on("addedfile", function(file) {
+                file.previewElement.addEventListener("click", function() { myDropzone.removeFile(file);});
+              });
+      
+              this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();                                
+                myDropzone.processQueue();
+              });
+      
+              this.on('thumbnail', function(file) {
+
+                if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  // file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("The image must be "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }
+              
+              });
+              
+              this.on("queuecomplete", function(file) {this.removeAllFiles(file);img_final_seo('editar','seo');});
+              this.on("maxfilesexceeded", function(file){this.removeFile(file);});
+              // this.on("error", function(file) {alert(file)});
+              //this.on("complete", function(file) {this.removeAllFiles(file);});
+              this.on("error", function(file) {
+                //alert(file);
+                if (file.width < maxImageWidth || file.height < maxImageHeight) {
+                  //file.rejectDimensions();
+                  this.removeFile(file);
+                  alert("The image must be "+maxImageWidth+"x"+maxImageHeight+"px");
+                  return false;
+                }
+                /*if(file.size > 1024*1024*2){
+                  //2MB
+                  this.removeFile(file);
+                  alert("El peso de la imagen no puede superar los "+maxImagesize+"MB");
+                  return false;
+                }*/
+              });
+            }
+          };
+               
+                      
+        
+      
+        
+         function img_final_seo(_accion, _tipo){
+                    var url= _root_ + "administrador/imagenes/traerImagenfinal/"+_accion+"/"+_tipo;
+                    $.ajax({
+                        url:url,
+                        contentType:"application/x-www-form-urlencoded",
+                        dataType:"html",
+                        error:function(){
+                            //$("._load_img_final_logo").html("La conexion se ha perdido. <a href='" + _root_ + "administrador/imagenes'>Reinicie el proceso.</a>");
+                        },
+            
+                        ifModified:false,
+                        processData:true,
+                        success:function(datas){
+                            $("._load_img_final_seo").html(datas).fadeIn("slow");
+                             $('#_car_img_seo').modal('hide');
+                        },
+                        type:"POST"
+                    });
+                }
+        
+        
+                </script>
+                <div class="loader"></div>
+                <div id="contenedor">
+            
+                    <form class="form-inline dropzone" id="my-awesome-dropzone-seo" action="<?=$this->_conf['base_url']?>administrador/imagenes/cargImgEditar/seo">
+                        <input type="hidden" name="envio_img_princip" value="1">
+                        <div class="dropzone-previews"></div>
+                        <button type="submit" class="btn btn-primary pull-right">Add</button>
+                    </form>
+                    <p class="eliminarThumb">Click on the thumbnail to delete it.</p>
+                    
+                     <hr> 
+                     
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="text-danger"> 
+                              <small>Image Size: <strong><?=$this->_conf['formatos_img']['seo_grandes']['ancho']?> x <?=$this->_conf['formatos_img']['seo_grandes']['alto']?> px</strong></small>
+                              <br>
+                              <small>Image max weight: <strong><?=$this->_conf['peso_maximo_imagenes']?> Mb.</strong></small>   
+                          </p>
+                        </div>
+                    </div>
+                    
+                  
+                    
+                </div>
+          </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">close</button>
+            </div>        
+      </div>
+    </div>
+</div>

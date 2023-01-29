@@ -1,0 +1,379 @@
+<section class="testimonials home" style="margin-top: 100px;">
+    <div class="container">
+        <?php foreach($this->cursos as $cursos):?>
+        <article>
+            <h2><?=$cursos['nombre']?></h2>
+            <select name="qty" id="qty_<?=$cursos['id']?>">
+                <?php for($i=1;$i <= $cursos['cantidad'];$i++):?>   
+                <option value="<?=$i?>"><?=$i?></option>
+                <?php endfor?>
+            </select>
+            <p><?=number_format($cursos['precio'], 2, '.', '')?></p>
+            <a href="javascript:void(0);" onclick="$().agregarCarro(<?=$cursos['id']?>, $('#qty_<?=$cursos['id']?>').val(), <?=$cursos['precio']?>);">Comprar</a>
+        </article>
+        <?php endforeach?>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  
+    $.fn.agregarCarro = function(_id, _cant, _precio){  
+        
+        // $('#cartHeader .dropdown-toggle').dropdown();       
+
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/llenarCarro",
+            dataType: "json",
+            data: {"_id" : _id, "_cantidad" : _cant, "_precio" : _precio, "_csrf" : "<?=$this->_sess->get('_csrf')?>"}, 
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                console.log(data);
+
+                /*$('.msg_prod').fadeIn(500);
+                $('#cartpopup').html(data.cart);
+                $('#cartpopupMob').html(data.cart);
+                $('header .navbar .navbar-collapse ul.navbar-nav li.cart a span .inCart').html(data.cant_item);
+                $('header .navbar .hide-large .cart a span .inCart span').html(data.cant_item);
+                if($('._navmob').css("visibility") == "hidden"){
+                    // console.log('desk');
+                    $('#cartHeader .dropdown-toggle').dropdown();
+                }else{
+                    // console.log('mob');
+                    $('#cartHeaderMob .dropdown-toggle').dropdown();
+                }
+
+                setTimeout(function(){ 
+                    $('.msg_prod').fadeOut(500);
+                }, 3000);*/
+
+
+            }
+        });
+
+        
+
+    };
+    
+    
+    
+});
+
+
+
+</script>
+
+
+
+<!--
+ <?php if($this->slider):?>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="height: auto;padding-top: 100px;">
+
+   
+    <div class="carousel-inner">
+
+    	<?php foreach($this->slider as $key => $slider):?>
+
+    	<?php reset($this->slider);?>
+    	<div class="carousel-item <?=($key === key($this->slider)) ? 'active' : ''?>">
+    		<?php if($slider['link']!=''):?>
+    		<a href="<?=$slider['link']?>" target="_blank">
+    			<img src="<?=$this->_conf['base_url']?>public/img/subidas/slider/grandes/<?=$slider['path']?>" class="w-100 d-block" alt="<?=$slider['titulo']?>" id="#products">
+    		</a>
+    		<?php else:?>
+    		<img src="<?=$this->_conf['base_url']?>public/img/subidas/slider/grandes/<?=$slider['path']?>" class="w-100 d-block" alt="<?=$slider['titulo']?>" id="#products">
+    		<?php endif?>
+            
+        </div>
+
+    	<?php endforeach?>
+       
+       
+    </div> 
+</div>
+<?php endif?>
+
+<script>
+    $('.carousel-item img').on('click', function(){
+      var strAncla=$(this).attr('id');
+
+        console.log(strAncla);
+        $('body,html').stop(true,true).animate({                
+            scrollTop: $(strAncla).offset().top - 120
+        },1000);  
+    })
+</script>
+
+<?php if($this->bestseller):?>
+
+<section class="bestseller gallery" style="padding:0rem 3rem 3 rem 3rem!important" id="products">
+    <div class="container">
+        <div class="top">
+            <div class="title"> 
+            <a name="products"> <h2><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['titulo']?></h2></a>
+                <h2 style="font-size:29px"><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['texto']?></h2>
+            </div>
+            <div class="view">
+                <a href="<?=$this->_conf['base_url']?>products" class="text-verde uppercase">
+                    <?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['boton']?>                        
+                </a>
+            </div>
+        </div>
+        <div class="products">
+           
+           <?php foreach($this->bestseller as $bestseller):?>
+
+            <div class="item">
+                <div class="content">
+                    <div class="image">
+                        <a href="<?=$this->_conf['base_url']?>products/details/<?=$bestseller['item']?>">
+                       <img src="<?=$this->_conf['base_url']?>public/img/subidas/productos/principal/grandes/<?=$bestseller['path']?>" class="h-100 d-block" id="oinmet-bs" alt="<?=home::convertirCaracteres($bestseller['name'][$_SESSION['_lang']])?>">
+                        </a>
+                    </div>
+                    <div class="data">
+                        <h3><?=home::convertirCaracteres($bestseller['name'][$_SESSION['_lang']])?></h3>
+                         <ul>
+                            <li><?=home::convertirCaracteres($bestseller['short_desc'][$_SESSION['_lang']])?></li>
+                        </ul> 
+                        
+                        <?=home::convertirCaracteres($bestseller['desc'][$_SESSION['_lang']])?>
+                        
+                        <div class="link">
+                            <div class="valor price_<?=$bestseller['id']?>">
+                                <span>$ <?=number_format($bestseller['price'][0], 2, '.', '')?></span>
+                            </div>	
+                            <div class="action">
+				                <?php if($bestseller['stock']!=0):?>
+                                <select name="qty" id="qty_<?=$bestseller['id']?>">
+                                	<?php for($i=1;$i <= $bestseller['cantidad'];$i++):?>	
+									<option value="<?=$i?>"><?=$i?></option>
+									<?php endfor?>
+				                </select>
+				
+                                <select name="qty" id="bestseller_size_<?=$bestseller['id']?>">
+                                    <?php  for ($i=0;$i<count($bestseller['presentacion']);$i++):?>
+                                    <?php if($i==0):?>
+                                    <option value="<?=$bestseller['presentacion'][$i]?>" selected><?=$bestseller['presentacion'][$i]?> OZ</option>
+                                    <?php else:?>
+                                    <option value="<?=$bestseller['presentacion'][$i]?>"><?=$bestseller['presentacion'][$i]?> OZ</option>
+                                    <?php endif?>
+                                    <?php endfor?>
+                                </select>
+                                <button class="btn btn-verde" onclick="$().agregarCarro(<?=$bestseller['id']?>, $('#qty_<?=$bestseller['id']?>').val(), $('#bestseller_size_<?=$bestseller['id']?>').val(), $('#_bestsellerprice_<?=$bestseller['id']?>').val());">
+                                    <?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['boton2']?>
+                                </button>
+                                <input type="hidden" name="_bestsellerprice" id="_bestsellerprice_<?=$bestseller['id']?>" value="<?=$bestseller['price'][0]?>">
+                                <?php else:?>
+								<div class="add-to-cart">Sin stock</div>
+								<?php endif?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		  <div class="features">
+			*
+                    <div class="feature">
+                        <img src="<?php echo $_params['ruta_img']?>icons/grupo1.png" class="d-block" alt="...">
+                        <span style="font-size:12px; width: 50px;"><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['feature1']?></span>
+                    </div>
+                    <div class="feature">
+                        <img src="<?php echo $_params['ruta_img']?>icons/100-natural.png" class="d-block" alt="...">
+                        <span style="font-size:12px; width: 87px;"><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['feature2']?></span>
+                    </div>
+                    <div class="feature">
+                        <img src="<?php echo $_params['ruta_img']?>icons/grupo2.png" class="d-block" alt="...">
+                        <span style="font-size:12px"><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['feature3']?></span>
+                    </div>
+                    <div class="feature">
+                        <img src="<?php echo $_params['ruta_img']?>icons/non-steriodal-antibiotics.png" class="d-block" alt="...">
+                        <span style="font-size:12px; line-height: 12px;">Steroid-Free <br><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['feature4']?></span>
+                    </div>
+                    <div class="feature">
+                        <img src="<?php echo $_params['ruta_img']?>icons/corazon.png" class="d-block" alt="...">
+                        <span style="font-size:12px"><?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['feature5']?></span>
+                    </div>
+                </div>
+                <div class="eyeLink">
+                    <a href="<?=$this->_conf['base_url']?>products/details/<?=$bestseller['item']?>">
+                        <img src="<?php echo $_params['ruta_img']?>icons/eye.jpg" class="d-block" alt="">
+                    </a>
+                </div>
+            </div>
+
+            <script>
+
+                $('#bestseller_size_<?=$bestseller['id']?>').change(function() {
+                    
+                    var _id = <?=$bestseller['id']?>;
+                    var _size = $(this).val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: _root_+"cart/changePrice",
+                        dataType: "json",
+                        data: {"_id" : _id, "_presentacion" : _size, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},  
+                        beforeSend: function(){
+                            //$('.formPostulante').animate({'opacity': '0'}, 300);
+                        },
+                        success: function(data){
+
+                            console.log(data.price);
+                            $('.price_<?=$bestseller['id']?> span').html(data.price);
+                            $('#_bestsellerprice_<?=$bestseller['id']?>').val(data.price_sin_format);                           
+
+                        }
+                    });
+
+                });
+
+            </script>
+
+            <?php endforeach?>
+           
+	</div>
+	<p> <?=$this->_conf['text_lang']['home']['bestseller'][$_SESSION['_lang']]['texto1']?></p>
+    </div>
+</section>
+
+<?php endif?>
+
+
+<?php if($this->testimonios):?>
+
+<section class="testimonials home">
+    <div class="container">
+        <div class="title text-center">
+            <h4 class="text-verde text-center"><?=$this->_conf['text_lang']['home']['testimonios'][$_SESSION['_lang']]['titulo']?></h4>
+            <p class="text-center"><?=$this->_conf['text_lang']['home']['testimonios'][$_SESSION['_lang']]['texto']?></p>
+        </div>
+        <div class="items">
+
+            <?php foreach($this->testimonios as $key => $test):?>
+
+            <?php end($this->testimonios);?>
+
+            <div class="item">
+                <div class="data">
+                    <h4><?=home::convertirCaracteres($test['nombre'])?></h4>
+                    <p class="testimonial<?=($key === key($this->testimonios)) ? 2 : 1?>" style="height:20px;">
+                        <?=home::convertirCaracteres($test['texto'])?>
+                    </p>
+                    <button class="text-verde readmore-t<?=($key === key($this->testimonios)) ? 2 : 1?>"><?=$this->_conf['text_lang']['home']['testimonios'][$_SESSION['_lang']]['boton']?></button>
+                </div>
+            </div>
+
+            <?php endforeach?>
+
+        </div>
+        <div class="title text-center">
+            <a href="<?=$this->_conf['base_url']?>testimonials" class="m-auto bordered btn btn-verde"><?=$this->_conf['text_lang']['home']['testimonios'][$_SESSION['_lang']]['boton2']?></a>
+        </div>
+    </div>
+
+    <div class="text-small" style="font-size:8px;padding: 35px 50px 0px 50px;margin-bottom: 0;">
+        <p><?=$this->_conf['text_lang']['home']['testimonios'][$_SESSION['_lang']]['texto2']?></p>
+    </div>
+</section>
+
+<script>
+
+$(document).ready(function(){
+  $(".readmore-t1").click(function(){
+    $(".testimonial1").css("height", "100px");
+  });
+});
+
+$(document).ready(function(){
+  $(".readmore-t2").click(function(){
+    $(".testimonial2").css("height", "100px");
+  });
+});
+
+</script>
+
+<?php endif?>
+
+
+<section class="mission">
+    <div class="container">
+        <div class="mission-row">
+            <div class="image">
+                <img src="<?php echo $_params['ruta_img']?>about/about-final.jpg" class="d-block m-auto w-100" alt="...">
+            </div>
+            <div class="content">
+                <h5 class="text-verde"><?=$this->_conf['text_lang']['home']['aboutus'][$_SESSION['_lang']]['titulo']?></h5>
+                <p><?=$this->_conf['text_lang']['home']['aboutus'][$_SESSION['_lang']]['texto']?></p>
+                <a href="<?=$this->_conf['base_url']?>aboutus" class="btn btn-verde bordered"><?=$this->_conf['text_lang']['home']['aboutus'][$_SESSION['_lang']]['boton']?></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+
+
+  
+    $.fn.agregarCarro = function(_id, _cant, _size, _precio){  
+        
+        // $('#cartHeader .dropdown-toggle').dropdown();
+
+        <?php if($this->_conf['geo_country'] != 'US'):?>
+
+        $('.msg_geo').fadeIn(500);
+        setTimeout(function(){ 
+            $('.msg_geo').fadeOut(500);
+        }, 3000);
+
+        <?php else:?>
+
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/llenarCarro",
+            dataType: "json",
+            data: {"_id" : _id, "_cantidad" : _cant, "_presentacion" : _size, "_precio" : _precio, "_csrf" : "<?=$this->_sess->get('_csrf')?>"}, 
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                $('.msg_prod').fadeIn(500);
+                $('#cartpopup').html(data.cart);
+                $('#cartpopupMob').html(data.cart);
+                $('header .navbar .navbar-collapse ul.navbar-nav li.cart a span .inCart').html(data.cant_item);
+                $('header .navbar .hide-large .cart a span .inCart span').html(data.cant_item);
+                if($('._navmob').css("visibility") == "hidden"){
+                    // console.log('desk');
+                    $('#cartHeader .dropdown-toggle').dropdown();
+                }else{
+                    // console.log('mob');
+                    $('#cartHeaderMob .dropdown-toggle').dropdown();
+                }
+
+                setTimeout(function(){ 
+                    $('.msg_prod').fadeOut(500);
+                }, 3000);
+
+
+            }
+        });
+
+        <?php endif?>
+
+    };
+    
+    
+    
+});
+
+
+
+</script>
+ -->

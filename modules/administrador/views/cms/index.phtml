@@ -1,0 +1,167 @@
+<script language="javascript">
+
+$(document).ready(function() {
+
+    
+    $("#btBuscador").click(function(){  
+  
+  
+        if ($("#buscador").val() == "") {
+          return false;        
+        } 
+    
+        var valor = $("#buscador").val();
+
+
+    
+        var dataString = 'valor='+valor+'&_csrf=<?=$this->_sess->get('_csrf')?>';
+        $.ajax({            
+            type: 'POST',
+            url: _root_+"administrador/faqs/buscador", 
+            data: dataString,
+            beforeSend: function(){
+              // $('.pagination').hide();
+              $('#contenedor').fadeOut('fast', function(){
+                $('.loader').fadeIn('fast');        
+              });
+            },
+            success: function(data){
+              $('#contenedor').html(data);
+              //$('.pagination').hide();
+              $('.loader').fadeOut('fast', function(){
+                $('.loader').fadeOut('fast');
+                $('#contenedor').fadeIn('fast');
+
+              });
+        
+            },
+            error: function(){
+                 alert('error!!');
+            }
+        });    
+    
+    })   
+
+});
+</script>
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>FAQs</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content">  
+    <div class="ibox-title">  
+        <a class="btn btn-success" href="<?php echo $this->_conf['url_enlace']?>administrador/faqs/cargar">
+          Cargar
+        </a>                
+    </div>
+    <div class="ibox-content forum-container">
+        <div class="row">
+            <div class="col-lg-4">
+                <form role="form" method="post" action="">
+                    <input type="hidden" id="estado" name="estado" value="alta" />
+                    <div class="btn-group">
+                        <div class="input-group m-b">
+                          <input class="form-control m-b" id="buscador" name="buscador" placeholder="Buscar por pregunta" type="text" />
+                            <span class="input-group-btn">
+                                <button id="btBuscador" type="button" class="btn btn-primary">
+                                     <i class="fa fa-search"></i>
+                                </button> 
+                            </span> 
+                            
+                        </div>
+                    </div>
+                </form>
+          </div>
+
+          
+
+      </div> 
+    </div>
+
+
+    <div id="contenedor" class="ibox-content forum-container grid">
+    
+        <?php if($this->datos):?>
+        <?php foreach($this->datos as $datos):?>       
+
+        <div class="forum-item">
+            <div class="row">
+                <div class="col-md-10">
+                    
+                    <a href="" class="forum-item-title">
+                        <?=admin::convertirCaracteres($datos['pregunta'])?>
+                    </a>                    
+                   
+                </div>
+
+                <div class="col-md-2 forum-info">
+                    <div class="tooltip-demo pull-right">                    
+
+                        <a class="btn btn-warning " href="<?php echo $this->_conf['url_enlace']?>administrador/faqs/editar/<?=$datos['id']?>">
+                           Editar
+                        </a>&nbsp;&nbsp;
+
+                        <a href="javascript:void(0);" class="btn btn-danger _borrar_<?=$datos['id']?>" title="Borrar">
+                            Eliminar
+                        </a>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <script>
+          $(document).ready(function () {
+                $('._borrar_<?=$datos['id']?>').click(function () {
+                    swal({
+                        title: "Estas seguro de borrar este contenido?",
+                        text: "Los datos se perderán permanentemente!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Si, que se borre!",
+                        cancelButtonText: "No, mejor no!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            var url= _root_ + "administrador/faqs/borrar";
+                            var dataString = '_id=<?=$datos['id']?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                            $.ajax({
+                                    type: "POST",
+                                    url: url,
+                                    data: dataString,
+                                    success: function(data){
+                                      if(data==1){
+                                        swal("Borrado!", "El contenido se borró con exito.", "success");
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 200);
+                                      }else{
+                                        swal("Cancelado", "No se puede borrar porque el contenido esta en uso", "error");
+                                      }
+                                        
+                                        
+                                    }
+                            });
+                        } else {
+                            swal("Cancelado", "El contenido esta guardado", "error");
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <?php endforeach?> 
+
+        <?php else:?>
+        <p>No hay datos cargados!</p>
+        <?php endif?>
+    </div>
+    <div class="loader"></div>
+   <?php echo (isset($this->paginacion)) ? $this->paginacion : ''?>
+</div>
+

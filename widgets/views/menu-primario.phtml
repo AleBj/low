@@ -1,0 +1,39 @@
+<?php
+/* echo '<pre>';
+ echo print_r($menuPrimario); 
+ echo '</pre>';*/
+
+//echo $this->_item;
+?>
+<ul class="nav navbar-nav">
+
+	<?php for($i=0;$i<count($menuPrimario);$i++): ?>	 
+    <?php $estilo = ($menuPrimario[$i]['item'] == $menuPrimario[$i]['id']) ? 'active' : '';?> 
+    <?php //echo $menuPrimario[$i]['id'].' - '. $menuPrimario[$i]['item'] ?>
+    <li class="<?php echo $estilo; if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])) echo ' dropdown'?>">
+    
+        <a class="<?php if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])) echo 'dropdown-toggle'?>" data-toggle="<?php if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])) echo 'dropdown'?>" href="<?php echo $menuPrimario[$i]['enlace']; ?>">
+        	<?php echo $menuPrimario[$i]['titulo']?>
+            <?php //echo ($this->_sess->get('idioma')==1) ? $menuPrimario[$i]['titulo'] : $menuPrimario[$i]['titulo_in']?>
+            
+            <?php if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])):?>
+            <span class="caret"></span>
+            <?php endif;?>
+        </a>
+        
+         <?php if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])):?>
+        	<ul class="<?php if(isset($menuPrimario[$i]['submenu']) && !empty($menuPrimario[$i]['submenu'])) echo 'dropdown-menu'?>">
+            	<?php foreach($menuPrimario[$i]['submenu'] as $submenu):?>
+            	<li>
+                	<a href="<?php echo $submenu['enlace']?>">
+                    	<?php echo $submenu['titulo']?>
+                        <?php //echo ($this->_sess->get('idioma')==1) ? $submenu['titulo'] : $submenu['titulo_in']?>
+                    </a>
+                </li>
+                <?php endforeach;?>
+            </ul>
+        <?php endif;?>
+    </li>
+    
+    <?php endfor;?>
+</ul>

@@ -1,0 +1,214 @@
+<main>
+    <section class="introduction">
+        <div class="slide-a">        
+            <p class="legend">
+                <strong>A CONSCIOUS SEPARATION POWERED BY THE QUICK DIVORCE PLATFORM &copy;.</strong><br/>
+                Your life is what you make of it <br/>
+                and you can live the life of your wildest <br/>
+                dreams if you take responsibility for it.<br>
+                <span>— Aliette H. Carolan</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="solution">
+        <div class="container">
+            <p class="tit--solution">
+                <strong>A SMART AND MINDFUL SOLUTION TO DIVORCE</strong>
+            </p>
+
+            <p>
+                Created by an experienced family law attorney specifically for couples<br>
+                who want the best way  out and quickest way forward.  Including
+            </p>
+            <ul>
+                <li>- Low fees so your money goes to your life goals</li>
+                <li>- Documents tailored to your needs to avoid delays and litigation</li>
+                <li>- Successful negotiation tools for budgeting and parenting plans</li>
+                <li>- Peace of mind by taking care of all court filing and legal processes</li>
+            </ul>
+            
+            <a href="<?=$this->_conf['base_url']?>getstarted" class="button">
+                <p><strong>GET STARTED NOW</strong></p>
+            </a>
+            
+        </div>
+    </section>
+
+    <section class="steps">
+        <div class="border-line">
+            <div class="container">
+                <p class="steps__intro">
+                    <strong>HOW IT WORKS</strong><br><br>
+                    Our 100% online platform is the most efficient choice for couples that want to save time and money while reaching a positive outcome. We break it down into three easy steps:
+
+                </p>
+
+                <div class="steps__by-steps">
+                    <article class="steps__by-steps--step1">
+                        <p>Find out if you qualify</p>
+                            <span class="digit">1</span>
+                    </article>
+                    <article class="steps__by-steps--step2">
+                        <p>Complete all forms <br>
+                            at your own pace</p>
+                            <span class="digit">2</span>
+                    </article>
+                    <article class="steps__by-steps--step3">
+                        <p>Sign all legal documents<br>
+                            and receive filing confirmation</p>
+                            <span class="digit">3</span>
+                    </article>
+                </div>
+
+                <a href="<?=$this->_conf['base_url']?>getstarted" class="button">
+                    <p><strong>GET STARTED NOW</strong></p>
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="why">
+            <h2>Why TheQuickDivorce.com?</h2>
+
+            <div class="porta__why">
+                <div class="porta__why--img1">
+                    <h3>AFFORDABLE<br>
+                        AND EFFICIENT</h3>
+                    <img src="<?php echo $_params['ruta_img']?>affordable.jpg" alt="affordable and efficcient">
+                </div>
+
+                <div class="porta__why--img2">
+                    <h3>EFFECTIVE<br>
+                        AND USER-FRIENDLY</h3>
+                    <img src="<?php echo $_params['ruta_img']?>effective.jpg" alt="Effective and user-friendly">
+                </div>
+
+                <div class="porta__why--img3">
+                    <h3>TRUSTED<br>
+                        AND QUICK!</h3>
+                    <img src="<?php echo $_params['ruta_img']?>trusted.jpg" alt="Trusted and Quick">
+                </div>
+            </div>
+    </section>
+
+    <!-- <section class="featured">
+        <div class="container">
+            <h3>WE HAVE BEEN FEATURED ON</h3>
+
+            <div class="featured__brands">
+                <img src="<?php echo $_params['ruta_img']?>featured-nyt.png" alt="the new york times">
+                <img src="<?php echo $_params['ruta_img']?>featured-dbr.png" alt="daiily business review">
+                <img src="<?php echo $_params['ruta_img']?>featured-nbc.png" alt="nbc news">
+                <img src="<?php echo $_params['ruta_img']?>featured-medium.png" alt="medium">
+            </div>
+
+            <a href="<?=$this->_conf['base_url']?>press" class="button"><p><strong>READ MORE</strong></p></a>
+
+        </div>
+    </section> -->
+
+    <section class="target">
+        <div class="border-line">
+            <div class="container">
+                <h3>OUR MISSION</h3>
+                <p>To provide the low-cost, do-it-yourself  separation<br>
+                and divorce solutions couples need.</p>
+
+                <h3>OUR VISION</h3>
+                <p>To serve as the go-to online platform enabling couples to minimize the costs<br>
+                    of separation and divorce and maximize their peace of mind.</p> 
+
+                    <a href="<?=$this->_conf['base_url']?>getstarted" class="button"><p><strong>GET STARTED NOW</strong></p></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="book">
+        <div class="book__col">
+            <img src="<?php echo $_params['ruta_img']?>book-white.jpg" alt="the positive divorce moment">
+            <h4>WHITE PAPER</h4>
+            <p>Aliette Carolan, a noted family
+                law attorney and author on
+                family friendly divorce, has
+                published a new whitepaper
+                with guidance on minimizing
+                the headaches and maximizing
+                the positive outcomes of
+                divorce. Submit your contact
+                details below to request a
+                complimentary copy of her
+                whitepaper.</p>
+
+                <a href="<?=$this->_conf['base_url']?>public/files/pdf/TQD_WhitePaper12.14.20.pdf" class="button" target="_blank">
+                    <p><strong>DOWNLOAD</strong></p>
+                </a>
+        </div>
+        <div class="book__col"></div>
+        <div class="book__col">
+            <img src="<?php echo $_params['ruta_img']?>book-book.png" alt="just in case">
+            <h4>BOOK</h4>
+            <p>Just in Case!! The Smart
+                Woman’s Guide to Marriage
+                and Self-Sufficiency by Aliette
+                Carolan. Establish your
+                personal independence and
+                financial solvency to be
+                self-sufficient no matter what
+                life throws at you. To learn
+                more life tips and tactics, use
+                the button below to purchase a
+                copy of this book.</p>
+
+                <a href="https://www.amazon.com/Just-Case-Lose-Your-Heart/dp/1899694730/ref=sr_1_1?dchild=1&keywords=aliette+carolan&qid=1602195470&s=books&sr=1-1" target="_blank" class="button">
+                    <p><strong>PURCHASE</strong></p>
+                </a>
+        </div>
+    </section>
+
+    <section class="read-blog">
+        <div class="container">
+
+            <h3>READ OUR BLOG</h3>
+
+            <div class="read-blog__row">
+
+            	<?php if($this->blogs):?>
+            	<?php foreach($this->blogs as $blogs):?>
+
+                <article class="card">
+                    <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__img">
+                    	<?php $_img = admin::traerImg($blogs['identificador'],'blog');?>
+                    	<?php if($_img):?>
+                        <img src="<?= $this->_conf['base_url'] . "public/img/subidas/blog/thumb/" . $_img->path?>" alt="">
+                        <?php endif?>
+                    </a>
+                    <div class="card__content">
+                        <h3 class="card__content--tit">
+                            <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>">
+                            	<?=$blogs['titulo']?>
+                            </a>
+                        </h3>
+                        <p class="card__content--date"><?=date('F d, Y', strtotime($blogs['fecha']))?></p>
+                        <p class="card__content--down">
+                            <?=strip_tags(home::limitarTitulo($blogs['texto'], 15))?>
+                        </p>
+                        <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__content--more">READ MORE <span>&gt;</span></a>
+                    </div>
+
+                </article>
+
+            	<?php endforeach?>
+            	<?php endif?>
+
+            </div>
+
+            <a href="<?=$this->_conf['base_url']?>blog" class="button"><p><strong>MORE ARTICLES</strong></p></a>
+
+        </div>
+    </section>
+</main>
+
+
+

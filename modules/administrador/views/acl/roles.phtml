@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-lg-6">
+    	<h2>Administraci&oacute;n de Roles</h2><br>
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<?php if(isset($this->roles) && count($this->roles)):?>
+   		<table class="table table-bordered table-condensed table-striped">
+      		<tr>
+    			<th>ID</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+            
+            <?php foreach($this->roles as $data):?>
+            <tr>
+                <td><?php echo $data->id_role?></td>
+                <td><?php echo $data->role?></td>
+                <td>
+                    <a href="<?php echo $this->_conf['base_url']?>administrador/acl/permisos_role/<?php echo $data->id_role?>">
+                        Permisos
+                    </a>
+                </td>
+            </tr>
+            <?php endforeach?>
+        </table>
+    <?php endif?>
+    </div>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+    	<a class="btn btn-primary" href="<?php echo $this->_conf['base_url']?>acl/nuevo_role">Agregar Role</a>
+    </div>
+</div>

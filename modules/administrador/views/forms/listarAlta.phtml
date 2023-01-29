@@ -1,0 +1,121 @@
+<!--<script>
+$(function(){
+	
+		var lista = $('#lista');
+		lista.sortable({
+			start: function (event, ui){
+				ui.item.toggleClass("destello", 250);
+			},
+			stop: function (event, ui){
+				ui.item.toggleClass("destello", 250);
+			},
+			update: function(event,ui){
+				var ordenPuntos = $(this).sortable('toArray').toString();
+				$.ajax({
+					type: 'POST',
+					url: _root_ + "administrador/blog/ordenarBlog",
+					data: "puntos="+ordenPuntos,
+					beforeSend: function(){
+						$('#cargadorBlog').modal('show');
+					},
+					success: function(data){
+						if(data==1){
+							$('#cargadorBlog').delay(2000).modal('hide');
+							window.location.href = _root_ + "administrador/blog";
+						}
+					}
+				});
+			}
+		});
+});
+</script>-->
+<div class="row">
+  	<div class="col-lg-12 contenido">
+        <div class="panel">
+          	<div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                    	<h3>Productos de Alta</h3>
+                       <!-- <small><em>(Arrastrar los items para ordenarlos)</em></small>-->
+                   	</div>
+                    <div class="col-lg-2">
+                    	<div class="btn-group"  style="margin-top:16px;">
+                        <!--<a class="btn btn-warning" href="javascript:void(0);" onclick="$().exportarPeluquerias();">
+                        	Exportar Datos
+                        </a>-->
+                        <a class="btn btn-warning" href="<?php echo $this->_conf['url_enlace']?>administrador/productos/cargar/">
+                        	Cargar
+                        </a>
+                        </div>
+                    </div>
+             	</div>
+          	</div>
+        </div>
+        
+       
+		<ul id="lista" class="list-group listar">
+        
+			<?php foreach($this->datos as $datos):?>
+            
+            <li class="list-group-item">
+                
+                <?php echo admin::convertirCaracteres($datos->titulo)?>
+                <span class="flotar_derecha" style="margin-right:15px">
+                    <a href="<?php echo $this->_conf['url_enlace']?>administrador/productos/editar/<?php echo $datos->id?>" class="btn btn-success btn-sm">
+                       editar
+                    </a>
+                   
+                  <!--  <a href="<?php echo $this->_conf['url_enlace']?>administrador/productos/borrar/<?php echo $datos->id?>" class="btn btn-danger btn-sm">-->
+                    <a class="btn btn-danger btn-sm _borrar_<?php echo $datos->id?> " data-toggle="tooltip" data-placement="top" title="Borrar">
+                       borrar
+                    </a>                    
+                     
+                </span>
+            </li>
+            
+            <script>
+				$(document).ready(function(){           
+					
+					
+					$('._borrar_<?php echo $datos->id?>').click(function(){
+						swal({
+							title: "¿Estas seguro de borrar este producto?",
+							text: "Los datos se perderán permanentemente!",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor: "#DD6B55",
+							confirmButtonText: "Aceptar",
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: true },
+						function (isConfirm){
+							if (isConfirm){
+		
+								var url= _root_ + "administrador/productos/borrar/<?php echo $datos->id?>";
+								$.ajax({
+										type: "POST",
+										url: url,
+										//data: $("#formulario").serialize(),
+										success: function(data){
+											swal("Borrado!", "El producto se borró con exito.", "success");
+											setTimeout(function() {
+												location.reload();
+											}, 400);
+										}
+								});
+							}else{
+								swal("Cancelado", "El producto esta guardado ", "error");
+							}
+						});
+					});
+				});
+			</script>
+            
+            <?php endforeach?>
+        </ul>
+        
+         <div id="exportar" style="display:none;"></div>        
+        
+    </div>
+</div>
+<?php //echo $this->paginacion?>

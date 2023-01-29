@@ -1,0 +1,193 @@
+<!-- Event snippet for Website traffic conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-11013596747/alsHCJrIzYAYEMvM2IMp'});
+</script>
+
+<main>
+    <section class="started">
+        <article class="started__step">
+            <div class="border-line">
+                <div class="container">
+				<h1 class="internal_page">Do you qualify for a Florida Online Divorce?</h1>
+                    <h4>LET’S GET STARTED!</h4>
+                    <p>Find out if you qualify<br>
+                        and purchase your package</p>
+                        <span class="digit">1</span>
+                </div>
+            </div>
+        </article>
+
+        <div class="container">           
+
+
+            <!-- <form action="" id="started__form"> -->
+            <form action="" name="questions" id="started__form" method="POST">
+                <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                <div class="started__form--line">
+                    <label for="resident">
+                        Are you a legal resident of Florida<br> for more than 6 months? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg1" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg1" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="partner">
+                        Can you locate your partner? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg2" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg2" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="married">
+                        Are you legally married? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg3" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg3" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="started__form--line">
+                    <label for="children">
+                        Do you have children together? <span>*</span>
+                    </label>
+                    <div class="options">
+                        <div>
+                            <input type="radio" name="preg4" value="yes"><p>Yes</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="preg4" value="no" checked><p>No</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="recaptcha">
+                    <div class="recaptcha__delim">
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            <p>No soy un robot</p>
+                        </label>
+                        <img src="./img/recaptcha-ejemplo.png" alt="">
+                    </div>
+
+                </div> -->
+
+                <button class="button" type="submit" id="enviar_data_questions"><p>Check Eligibility</p></button>
+                <div class="mensaje_questions"></div>
+                <p class="acepTerms">By clicking “Check Eligibility,” you agree to the <a href="<?=$this->_conf['base_url']?>termsandconditions">Terms & Conditions</a></p>
+            </form>           
+
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+<script>
+$(document).ready(function() {
+
+    
+
+    $("#started__form").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+
+        // console.log($("#form-questions input:radio:checked").length);
+
+
+        if($("#started__form input:radio:checked").length < 4){
+            $(".mensaje_questions").html("You must complete all questions");
+            $('#started__form input, #started__form select, #started__form textarea').removeAttr('style');
+            // $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;  
+        }
+                      
+        
+
+        
+        $('#enviar_data_questions').prop('disabled', true);
+        $(".mensaje_questions").html("");
+
+        // $('#form-questions input:text, #form-questions select, #form-questions textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/questions",
+            data: $("#started__form").serialize(),            
+            success: function(data){
+                $(".mensaje_questions").html("");
+                // data = $.trim(data);
+                
+                    // $('#form-questions input:text, #form-questions input:number, #form-questions textarea').val('');
+                    // $(".mensaje_questions").append('Envio exitoso!');
+                    $('#enviar_data_questions').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    /*setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_questions").html("");
+                    }, 4000);  */    
+
+
+                if(data=="msa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="ppa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="msappa"){
+
+                    window.location = _root_+'product/detail/'+data;
+
+                }else if(data=="no_califica"){
+
+                    window.location = _root_+'notqualified';
+
+                }else{
+                    $('#enviar_data_questions').prop('disabled', false);
+                    $(".mensaje_questions").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_questions").append(data);
+            }
+        });
+        return false;
+    });
+    
+    
+});
+
+
+</script> 
+
+
+
+
+

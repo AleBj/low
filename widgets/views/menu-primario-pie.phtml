@@ -1,0 +1,11 @@
+<div>
+
+<?php for($i=0;$i<count($menuPrimarioPie);$i++): ?>
+<?php $estilo = ($menuPrimarioPie[$i]['item'] == $menuPrimarioPie[$i]['id']) ? 'activo' : '';?>   
+<div class="itemMD"><a class="<?php echo $estilo?>" href="<?php echo $menuPrimarioPie[$i]['enlace']?>">
+	<?php echo $menuPrimarioPie[$i]['titulo']?>
+</a></div>
+	
+<?php endfor;?>
+
+</div>

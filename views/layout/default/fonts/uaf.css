@@ -1,0 +1,83 @@
+@font-face {
+	font-family: 'nexaregular';
+	src: url('./8761NexaRegular.otf') format('opentype'),
+		url('./8761NexaRegular.ttf') format('truetype'),
+		url('./8761NexaRegular.woff2') format('woff2'),
+		url('./8761NexaRegular.woff') format('woff');
+	font-display: auto;
+}
+
+.nexaregular{font-family: 'nexaregular' !important;}
+
+		@font-face {
+	font-family: 'nexabold';
+	src: url('./3323NexaBold.otf') format('opentype'),
+		url('./3323NexaBold.ttf') format('truetype'),
+		url('./3323NexaBold.woff2') format('woff2'),
+		url('./3323NexaBold.woff') format('woff');
+	font-display: auto;
+}
+
+.nexabold{font-family: 'nexabold' !important;}
+
+		@font-face {
+	font-family: 'nexabook';
+	src: url('./9560NexaBook.otf') format('opentype'),
+		url('./9560NexaBook.ttf') format('truetype'),
+		url('./9560NexaBook.woff2') format('woff2'),
+		url('./9560NexaBook.woff') format('woff');
+	font-display: auto;
+}
+
+.nexabook{font-family: 'nexabook' !important;}
+
+		@font-face {
+	font-family: 'myriadpro';
+	src: 
+		url('./3385MyriadPro.otf') format('opentype'),
+		url('./3385MyriadPro.ttf') format('truetype'),
+		url('./3385MyriadPro.woff2') format('woff2'),
+		url('./3385MyriadPro.woff') format('woff');
+	font-display: auto;
+}
+
+.myriadpro{font-family: 'myriadpro' !important;}
+
+		@font-face {
+	font-family: 'gothamlight';
+	src: 
+		url('./3232GothamLight.otf') format('opentype'),
+		url('./3232GothamLight.ttf') format('truetype'),
+		url('./3232GothamLight.woff2') format('woff2'),
+		url('./3232GothamLight.woff') format('woff');
+	font-display: auto;
+}
+
+.gothamlight{font-family: 'gothamlight' !important;}
+
+		@font-face {
+	font-family: 'gothamregular';
+	src: 
+		url('./5159GothamRegular.otf') format('opentype'),
+		url('./5159GothamRegular.ttf') format('truetype'),
+		url('./5159GothamRegular.woff2') format('woff2'),
+		url('./5159GothamRegular.woff') format('woff');
+	font-display: auto;
+}
+
+.gothamregular{font-family: 'gothamregular' !important;}
+
+		@font-face {
+	font-family: 'gothambold';
+	src: 
+		url('./1458GothamBold.otf') format('opentype'),
+		url('./1458GothamBold.ttf') format('truetype'),
+		url('./1458GothamBold.woff2') format('woff2'),
+		url('./1458GothamBold.woff') format('woff');
+	font-display: auto;
+}
+
+.gothambold{font-family: 'gothambold' !important;}
+
+						
+		

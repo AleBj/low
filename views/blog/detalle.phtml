@@ -1,0 +1,65 @@
+<main>
+    <section class="openBlog">
+        <div class="container">
+            <div class="openBlog__img">
+                <?php $_img = admin::traerImg($this->blog['identificador'],'blog');?>
+                <?php if($_img):?>
+                <img src="<?= $this->_conf['base_url'] . "public/img/subidas/blog/thumb/" . $_img->path?>" alt="">
+                <?php endif?>
+            </div>                
+
+            <div class="openBlog__text">
+                <h2 class="openBlog__text--tit"><?=$this->blog['titulo']?></h2>
+
+                <p class="openBlog__text--down">
+                    <span><?=date('F d, Y', strtotime($this->blog['fecha']))?></span>
+                </p>
+
+                <?=$this->blog['texto']?>
+                
+            </div>
+
+            <!-- <div class="openBlog__tag">
+                <p><strong>Tags: </strong><a href="">file for divorce</a>, <a href="">online divorce</a>, <a href="">prenuptial agreements</a></p>
+            </div>
+
+            <article class="share">
+                <p>Share this entry</p>
+                <ul class="share__icon">
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href=""><i class="fab fa-pinterest-p"></i></a></li>
+                    <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href=""><i class="fab fa-tumblr"></i></a></li>
+                    <li><a href=""><i class="fab fa-vk"></i></a></li>
+                    <li><a href=""><i class="fab fa-reddit-alien"></i></a></li>
+                    <li><a href=""><i class="fas fa-envelope"></i></a></li>
+                </ul>
+            </article>  -->               
+        </div>
+    </section>
+
+    <section class="also-like">
+        
+            <h4>You might also like</h4>
+                   
+        <div class="container">
+
+            <?php if($this->relacionadas):?>
+            <?php foreach($this->relacionadas as $blogs):?>
+
+            <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="also-like__note">
+                <?php $_img = admin::traerImg($blogs['identificador'],'blog');?>
+                <?php if($_img):?>
+                <img src="<?= $this->_conf['base_url'] . "public/img/subidas/blog/thumb/" . $_img->path?>" alt="">
+                <?php endif?>
+            </a>
+
+            <?php endforeach?>
+            <?php endif?>
+
+            
+        </div>
+    </section>
+</main>

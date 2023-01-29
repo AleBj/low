@@ -1,0 +1,18 @@
+<?php
+/*header("Content-type: application/vnd.ms-excel; name=\'excel\'");
+header("Content-Disposition: filename=bitacora.xlsx");
+header("Pragma: no-cache");
+header("Expires: 0");*/
+
+header("Pragma: public");
+header("Expires: 0");
+//$filename = "bitacora.xls";
+header("Content-type: application/x-msdownload");
+header("Content-Disposition: attachment; filename=".$this->filename);
+header("Pragma: no-cache");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+
+echo $this->html;
+
+
+?>

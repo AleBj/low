@@ -1,0 +1,1853 @@
+<main>
+    <nav class="nav-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="<?=$this->_conf['base_url']?>user/myaccount">My account</a></li>
+            <?php if($this->user['estado'] == 'customer'):?>
+            <li class="breadcrumb-item"><a href="<?=$this->_conf['base_url']?>user/myorders">My orders</a></li>
+            <?php endif?>
+            <li class="breadcrumb-item" ><a href="<?=$this->_conf['base_url']?>user/signout">Sign Out</a></li>
+        </ol>
+    </nav>
+
+    <section class="cart whity">
+        <h1>The Quick Divorce - PPA</h1>
+   <div class="containerForm">
+       <aside>             
+            <h2>MENU</h2>    
+            
+            <ul id="navform">
+                <li data-section="Divorce" class="active">Divorce</li>
+                <li data-section="Partner1">Partner1 </li>
+                <li data-section="Partner1-Financial">Partner1 Financial</li>
+                <li data-section="Partner2">Partner2</li>
+                <li data-section="Partner2-Financial">Partner2 Financial</li>
+                <li data-section="Children">Children</li>
+                <li data-section="Parenting-Plan">Parenting Plan</li>
+                <li data-section="Child-Support">Child Support</li>
+            </ul>
+
+       </aside>
+       <main>
+           <section id="Divorce" style="display: block;">
+               <div class="information contForm">
+                    <h2>Information</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">Is this a Same-Sex Relationship?</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="SameSex" value="No"> <label>No</label></td>
+                            <td width="20%"><input type="radio" name="SameSex" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                        <tr id="sexo">                            
+                            <td width="50%"></td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="SameSexS" value="MM"> <label>M/M</label></td>
+                            <td width="20%"><input type="radio" name="SameSexS" value="FF"> <label>F/F</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Person Filing the Seperation</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="FilingSeparation" value="Mother"> <label>Mother</label></td>
+                            <td width="20%"><input type="radio" name="FilingSeparation" value="Father"> <label>Father</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Filing County</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <select size="1" name="FilingCounty">    
+                                    <option>Select a County</option>
+                                    <option>MIAMI-DADE</option>
+                                    <option>ALACHUA</option>
+                                    <option>BAKER</option>
+                                    <option>BAY</option>
+                                    <option>BRADFORD</option>
+                                    <option>BREVARD</option>
+                                    <option>BROWARD</option>
+                                    <option>CALHOUN</option>
+                                    <option>CHARLOTTE</option>
+                                    <option>CITRUS</option>
+                                    <option>CLAY</option>
+                                    <option>COLLIER</option>
+                                    <option>COLUMBIA</option>
+                                    <option>DESOTO</option>
+                                    <option>DIXIE</option>
+                                    <option>DUVAL</option>
+                                    <option>ESCAMBIA</option>
+                                    <option>FLAGLER</option>
+                                    <option>FRANKLIN</option>
+                                    <option>GADSDEN</option>
+                                    <option>GILCHRIST</option>
+                                    <option>GLADES</option>
+                                    <option>GULF</option>
+                                    <option>HAMILTON</option>
+                                    <option>HARDEE</option>
+                                    <option>HENDRY</option>
+                                    <option>HERNANDO</option>
+                                    <option>HIGHLANDS</option>
+                                    <option>HILLSBOROUGH</option>
+                                    <option>HOLMES</option>
+                                    <option>INDIAN RIVER</option>
+                                    <option>JACKSON</option>
+                                    <option>JEFFERSON</option>
+                                    <option>LAFAYETTE</option>
+                                    <option>LAKE</option>
+                                    <option>LEE</option>
+                                    <option>LEON</option>
+                                    <option>LEVY</option>
+                                    <option>LIBERTY</option>
+                                    <option>MADISON</option>
+                                    <option>MANATEE</option>
+                                    <option>MARION</option>
+                                    <option>MARTIN</option>
+                                    <option>MIAMI-DADE</option>
+                                    <option>MONROE</option>
+                                    <option>NASSAU</option>
+                                    <option>OKALOOSA</option>
+                                    <option>OKEECHOBEE</option>
+                                    <option>ORANGE</option>
+                                    <option>OSCEOLA</option>
+                                    <option>PALM BEACH</option>
+                                    <option>PASCO</option>
+                                    <option>PINELLAS</option>
+                                    <option>POLK</option>
+                                    <option>PUTNAM</option>
+                                    <option>SANTA ROSA</option>
+                                    <option>SARASOTA</option>
+                                    <option>SEMINOLE</option>
+                                    <option>ST. JOHNS</option>
+                                    <option>ST. LUCIE</option>
+                                    <option>SUMTER</option>
+                                    <option>SUWANNEE</option>
+                                    <option>TAYLOR</option>
+                                    <option>UNION</option>
+                                    <option>VOLUSIA</option>
+                                    <option>WAKULLA</option>
+                                    <option>WALTON</option>
+                                    <option>WASHINGTON</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Date of Separation (MM/DD/YYYY)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <input type="date" name="dateSeparation">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Do you have any minor children from this marriage?</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="children" value="No"> <label>No</label></td>
+                            <td width="20%"><input type="radio" name="children" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                    </table>
+                   
+               </div>
+               <div class="residency contForm">
+                   <h2>Residency</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3"><strong>Domicile:</strong> <br> At least one of you must have lived in Florida for the past six months, and lived in the county where the divorce will be filed for the past 90 days.</td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="domicile" value="Partner 1"></td>
+                           <td width="5%"></td>
+                           <td><strong>Partner 1</strong> has lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="domicile" value="Partner 2"></td>
+                           <td width="5%"></td>
+                           <td><strong>Partner 2</strong> has lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="domicile" value="Both Partners"></td>
+                           <td width="5%"></td>
+                           <td><strong>Both partners</strong> have lived in Florida for the past six months and in the filing county for the past 90 days.</td>
+                       </tr>
+                       <tr><td colspan="3"><hr></td></tr>
+                       <tr>
+                           <td colspan="3"><strong>Military:</strong> <br> Is Partner 1 on active duty in the military?</td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="military-1" value="Yes"></td>
+                           <td width="5%"></td>
+                           <td><strong>Yes</strong></td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="military-1" value="No"></td>
+                           <td width="5%"></td>
+                           <td><strong>No</strong></td>
+                       </tr>
+                       <tr>
+                           <td colspan="3">Is the Partner 2 on active duty in the military?</td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="military-2" value="Yes"></td>
+                           <td width="5%"></td>
+                           <td><strong>Yes</strong></td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="military-2" value="No"></td>
+                           <td width="5%"></td>
+                           <td><strong>No</strong></td>
+                       </tr>
+                       <tr><td colspan="3"><hr></td></tr>
+                       <tr>
+                           <td colspan="3"><strong>Other Court Cases:</strong><br> Are there any other domestic/family law cases pending concerning the parties and/or their children in any court?      </td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="other-case" value="Yes"></td>
+                           <td width="5%"></td>
+                           <td><strong>Yes</strong></td>
+                       </tr>
+                       <tr>
+                           <td><input type="radio" name="other-case" value="No"></td>
+                           <td width="5%"></td>
+                           <td><strong>No</strong></td>
+                       </tr>
+                   </table>
+               </div>
+           </section>
+
+           <section id="Partner1" style="display: none;">
+               <div class="information contForm">
+                    <h2>Information</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">First Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-firstname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Middle Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-middlename" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Last Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-lastname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Birth Date (MM/DD/YYYY)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <input type="date" name="partner1-birth">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Is the Partner currently pregnant?</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="partner1-pregnant" value="No"> <label>No</label></td>
+                            <td width="20%"><input type="radio" name="partner1-pregnant" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Street Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-address" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">City and State</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="text" name="partner1-city" value="" placeholder="City"></td>
+                            <td width="20%" align="center">
+                                <select size="1" name="partner1State" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Zip Code</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner1-zipcode" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Phone</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner1-phone" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Fax Number (optional)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner1-fax" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">E-Mail Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="email" name="partner1-email" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">County</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-County" value=""></td>
+                        </tr>
+                    </table>                   
+               </div>
+               <div class="identification contForm">
+                   <h2>Identification</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">Birth State (or country if not USA)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-BirthState" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Driver's License Number</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-DriverLicenceNumber" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Driver's License State of Issuance</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <select size="1" name="partner1DriverLicenceState" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="employer contForm">
+                   <h2>Employer</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">Is the Partner currently employed?</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="partner1-employed" value="No"> <label>No</label></td>
+                            <td width="20%"><input type="radio" name="partner1-employed" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Occupation</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-OccupationEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employer</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-EmployerEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employment Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-EmployedAddress" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employment Address Line 2</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner1-EmployedAddress2" value=""></td>
+                        </tr><tr>
+                            <td width="50%">City and State</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="text" name="partner1-cityEmployed" value="" placeholder="City"></td>
+                            <td width="20%" align="center">
+                                <select size="1" name="partner1StateEmployed" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Zip Code</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner1-zipcodeEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Phone</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner1-phoneEmployed" value=""></td>
+                        </tr>
+                    </table>
+               </div>
+           </section>
+
+           <section id="Partner1-Financial" style="display: none;">
+               <div class="income contForm">
+                   <h2>Partner 1 Income</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3"><strong>Monthly Income</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Wages and Salaries</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-wageSalaries" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Interest and Dividend Income</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-InterestDividend" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Business Income (Self-Employment)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-BusinessIncome" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Alimony from Prior Marriage</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-AlmonyMarriage" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Disability Benefits/SSI</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-DisabilityBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Workers' Compensation</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-WorkersCompensation" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Unemployment Benefits</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-UnemployedBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Pension, Retirement, or Annuity payments</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-PensionRetirement" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Social Security Benefits</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-socialSecurityBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Other Income</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-Other" value=""></td>
+                       </tr>
+                       <tr>
+                           <td colspan="3"><strong>Monthly Deductions from Gross Income</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Income Taxes (Federal and State)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-IncomeTaxes" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">FICA (Soc.Sec.)/Self-Employment Taxes</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-FICA" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Medicare</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-Medicare" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Health Insurance (not including portion paid for children)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-HealthInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">State Industrial Insurance Deductions</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-StateIndustrialInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Mandatory Union Dues</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-MandatoryUnionDues" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Mandatory Pension Plan Payments</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-MandatoryPensionPlan" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Alimony Paid for Prior Marriage</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-AlimonyPaidPrior" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Normal Business Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner1Financial-NormalBusinessExpenses" value=""></td>
+                       </tr>
+                   </table>
+               </div>
+               <div class="childcare contForm">
+                   <h2>Partner 1 Child Care Expenses</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3"><strong>Monthly Child Care Expenses</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Child Health Insurance Premiums</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner1Financial-ChildHealthInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Extraordinary Child Health Care Costs</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner1Financial-InterestDividend" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Daycare Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner1Financial-Daycare" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Education Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner1Financial-Education" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Long Distance Transportation Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner1Financial-Transportation" value=""></td>
+                       </tr>
+                        <tr>
+                            <td width="60%">Does the Wife have any other special child care expenses?</td>
+                            <td width="10%"></td>
+                            <td width="15%"><input type="radio" name="partner1-specialchildcare" value="No"> <label>No</label></td>
+                            <td width="15%"><input type="radio" name="partner1-specialchildcare" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                   </table>
+               </div>
+               <div class="otherchild contForm">
+                   <h2>Partner 1 Other Child Support</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="60%">Does the Partner 1 currently pay child support for other children not from this marriage?</td>
+                            <td width="10%"></td>
+                            <td width="15%"><input type="radio" name="partner1-otherchildsupport" value="No"> <label>No</label></td>
+                            <td width="15%"><input type="radio" name="partner1-otherchildsupport" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                   </table>
+               </div>
+           </section>
+
+           <section id="Partner2" style="display: none;">
+               <div class="information contForm">
+                    <h2>Information</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">First Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-firstname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Middle Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-middlename" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Last Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-lastname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Birth Date (MM/DD/YYYY)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <input type="date" name="partner2-birth">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Street Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-address" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">City and State</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="text" name="partner2-city" value="" placeholder="City"></td>
+                            <td width="20%" align="center">
+                                <select size="1" name="partner2State" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Zip Code</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner2-zipcode" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Phone</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner2-phone" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Fax Number (optional)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner2-fax" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">E-Mail Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="email" name="partner2-email" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">County</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-County" value=""></td>
+                        </tr>
+                    </table>                   
+               </div>
+               <div class="identification contForm">
+                   <h2>Identification</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">Birth State (or country if not USA)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-BirthState" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Driver's License Number</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-DriverLicenceNumber" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Driver's License State of Issuance</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2">
+                                <select size="1" name="partner2DriverLicenceState" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="employer contForm">
+                   <h2>Employer</h2>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="50%">Is the Partner currently employed?</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="radio" name="partner2-employed" value="No"> <label>No</label></td>
+                            <td width="20%"><input type="radio" name="partner2-employed" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Occupation</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-OccupationEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employer</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-EmployerEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employment Address</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-EmployedAddress" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Employment Address Line 2</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="text" name="partner2-EmployedAddress2" value=""></td>
+                        </tr><tr>
+                            <td width="50%">City and State</td>
+                            <td width="10%"></td>
+                            <td width="20%"><input type="text" name="partner2-cityEmployed" value="" placeholder="City"></td>
+                            <td width="20%" align="center">
+                                <select size="1" name="partner2StateEmployed" class="formfont">
+                                  <option>State</option>
+                                  <option>FL</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AR</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                              </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Zip Code</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner2-zipcodeEmployed" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Phone</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="2"><input type="number" name="partner2-phoneEmployed" value=""></td>
+                        </tr>
+                    </table>
+               </div>
+           </section>
+
+           <section id="Partner2-Financial" style="display: none;">
+               <div class="income contForm">
+                   <h2>Partner 2 Income</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3"><strong>Monthly Income</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Wages and Salaries</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-wageSalaries" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Interest and Dividend Income</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-InterestDividend" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Business Income (Self-Employment)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-BusinessIncome" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Alimony from Prior Marriage</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-AlmonyMarriage" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Disability Benefits/SSI</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-DisabilityBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Workers' Compensation</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-WorkersCompensation" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Unemployment Benefits</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-UnemployedBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Pension, Retirement, or Annuity payments</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-PensionRetirement" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Social Security Benefits</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-socialSecurityBenefits" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Other Income</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-Other" value=""></td>
+                       </tr>
+                       <tr>
+                           <td colspan="3"><strong>Monthly Deductions from Gross Income</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Income Taxes (Federal and State)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-IncomeTaxes" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">FICA (Soc.Sec.)/Self-Employment Taxes</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-FICA" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Medicare</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-Medicare" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Health Insurance (not including portion paid for children)</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-HealthInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">State Industrial Insurance Deductions</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-StateIndustrialInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Mandatory Union Dues</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-MandatoryUnionDues" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Mandatory Pension Plan Payments</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-MandatoryPensionPlan" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Alimony Paid for Prior Marriage</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-AlimonyPaidPrior" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Normal Business Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%">$<input type="number" name="partner2Financial-NormalBusinessExpenses" value=""></td>
+                       </tr>
+                   </table>
+               </div>
+               <div class="childcare contForm">
+                   <h2>Partner 2 Child Care Expenses</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3"><strong>Monthly Child Care Expenses</strong></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Child Health Insurance Premiums</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner2Financial-ChildHealthInsurance" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Extraordinary Child Health Care Costs</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner2Financial-InterestDividend" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Daycare Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner2Financial-Daycare" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Education Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner2Financial-Education" value=""></td>
+                       </tr>
+                       <tr>
+                           <td width="60%">Long Distance Transportation Expenses</td>
+                           <td width="10%"></td>
+                           <td width="30%" colspan="2">$<input type="number" name="partner2Financial-Transportation" value=""></td>
+                       </tr>
+                        <tr>
+                            <td width="60%">Does the Husband have any other special child care expenses?</td>
+                            <td width="10%"></td>
+                            <td width="15%"><input type="radio" name="partner2-specialchildcare" value="No"> <label>No</label></td>
+                            <td width="15%"><input type="radio" name="partner2-specialchildcare" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                   </table>
+               </div>
+               <div class="otherchild contForm">
+                   <h2>Partner 2 Other Child Support</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="60%">Does the Husband currently pay child support for other children not from this marriage?</td>
+                            <td width="10%"></td>
+                            <td width="15%"><input type="radio" name="partner2-otherchildsupport" value="No"> <label>No</label></td>
+                            <td width="15%"><input type="radio" name="partner2-otherchildsupport" value="Yes"> <label>Yes</label></td>
+                        </tr>
+                   </table>
+               </div>
+           </section>
+
+           <section id="Children" style="display: none;">
+               <div class="frommarriage contForm">
+                   <h2>Children From Partnership</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3">List the minor children from this partnership</td>
+                       </tr>
+                   </table>
+
+                    <table cellpadding="0" cellspacing="0" width="100%" id="child">
+                        <tr>
+                            <td colspan="5"><strong class="title-child">Child:</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Child's First Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="3"><input type="text" name="child-firstname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Middle Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="3"><input type="text" name="child-middlename" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Last Name</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="3"><input type="text" name="child-lastname" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Birth Date (MM/DD/YYYY)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="3">
+                                <input type="date" name="child-birth">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Gender</td>
+                            <td width="10%"></td>
+                            <td width="15%"><input type="radio" name="child-gender" value="Male"> <label>Male</label></td>
+                            <td width="15%" colspan="2"><input type="radio" name="child-gender" value="Female"> <label>Female</label></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Birth Place (City and State)</td>
+                            <td width="10%"></td>
+                            <td width="40%" colspan="3"><input type="text" name="child-birthPlace" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">With Whom is Child Currently Living?</td>
+                            <td width="10%"></td>
+                            <td width="13%"><input type="radio" name="child-currentlyLiving" value="Mother"> <label>Mother</label></td>
+                            <td width="14%"><input type="radio" name="child-currentlyLiving" value="Father"> <label>Father</label></td>
+                            <td width="13%"><input type="radio" name="child-currentlyLiving" value="Other"> <label>Other</label></td>
+                        </tr>
+                    </table>
+                    <div id="duplicate-child"></div>
+                    <div class="buttons" style="padding-top: 20px;">
+                        <button id="btRemoveChild">Remove Last Child</button>
+                        <button id="btAddChild">Add Another Child</button>
+                    </div>
+               </div>
+           </section>
+
+           <section id="Parenting-Plan" style="display: none;">
+               <div class="custodyVisitors contForm">
+                   <h2>Custody & Visitation</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="4">In Florida, parents are often granted Shared Parental Responsibility and Decision Making with one parent's residence designating the school district for the children. Alternatively, one parent can be granted Sole Parental Responsibility; the children can still have significant parenting time scheduled with the non-residential parent.</td>
+                       </tr>
+                        <tr>
+                            <td colspan="4"><strong>Custody of the Children:</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-children" value="Shared Responsibility, Mother residence determines school district"></td>
+                            <td width="90%" colspan="3">Shared Responsibility, <strong>Mother's</strong> residence determines school district</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-children" value="Shared Responsibility, Father residence determines school district"></td>
+                            <td width="90%" colspan="3">Shared Responsibility,  <strong>Fathers's</strong> residence determines school district</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-children" value="Mothers has Sole Parental Responsibility"></td>
+                            <td width="90%" colspan="3"><strong>Mother's</strong> has Sole Parental Responsibility</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-children" value="Fathers has Sole Parental Responsibility"></td>
+                            <td width="90%" colspan="3"><strong>Fathers's</strong> has Sole Parental Responsibility</td>
+                        </tr>
+                        <tr><td colspan="4"><hr></td></tr>
+                        <tr>
+                            <td colspan="4"><strong>Weekend Parenting Time/Visitation</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4">The non-residential parent shall have possesion of the children:</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendTime" value="No Weekend Visits Scheduled"></td>
+                            <td width="90%" colspan="3">No Weekend Visits Scheduled</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendTime" value="The weekend of the first and third Friday of each month."></td>
+                            <td width="90%" colspan="3">The weekend of the first and third Friday of each month.</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendTime" value="The weekend of the first, third, and fifth Friday of each month."></td>
+                            <td width="90%" colspan="3">The weekend of the first, third, and fifth Friday of each month.</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendTime" value="The weekend of the second and fourth Friday of each month."></td>
+                            <td width="90%" colspan="3">The weekend of the second and fourth Friday of each month.</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendTime" value="The weekend of the second and fourth Friday of each month."></td>
+                            <td width="90%" colspan="3">Other: <input type="text" name="custody-WeekendTime-other" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="24%" colspan="2">Vistation begins:</td>
+                            <td width="20%"> <input type="text" name="custody-VistationBegins" value=""></td>
+                            <td width="56%"> (day and time) ex. "Friday 5 p.m."</td>
+                        </tr>
+                        <tr>
+                            <td width="24%" colspan="2">Visitation ends:</td>
+                            <td width="20%"> <input type="text" name="custody-VistationEnds" value=""></td>
+                            <td width="56%"> ex. "Sunday 5 p.m."</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><strong>Weekday Parenting Time</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4">The non-residential parent shall have possession of the children:</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendParentingTime" value="No Weekday Visits Scheduled"></td>
+                            <td width="90%" colspan="3">No Weekday Visits Scheduled</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendParentingTime" value="Every Wednesday Evening"></td>
+                            <td width="90%" colspan="3">Every Wednesday Evening</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendParentingTime" value="Every other Wednesday Evening"></td>
+                            <td width="90%" colspan="3">Every other Wednesday Evening</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WeekendParentingTime" value="Other"></td>
+                            <td width="90%" colspan="3">Other: <input type="text" name="custody-WeekendParentingTime-other" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="24%" colspan="2">Vistation begins:</td>
+                            <td width="20%"> <input type="text" name="custody-VistationParentingBegins" value=""></td>
+                            <td width="56%"> (time) ex. "3 p.m."</td>
+                        </tr>
+                        <tr>
+                            <td width="24%" colspan="2">Visitation ends:</td>
+                            <td width="20%"> <input type="text" name="custody-VistationParentingEnds" value=""></td>
+                            <td width="56%"> ex. "8 p.m."</td>
+                        </tr>
+                        <tr><td colspan="4"><hr></td></tr>
+                        <tr>
+                            <td colspan="4"><strong>Winter Break:</strong> from the last day of school in December until school resumes in January</td>
+                        </tr>
+                         <tr>
+                            <td colspan="4">The non-residential parent shall have possession of the children:</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WinterBreak" value="Same as Regular Weekend/Weekday Schedule"></td>
+                            <td width="90%" colspan="3">Same as Regular Weekend/Weekday Schedule</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WinterBreak" value="From / To"></td>
+                            <td width="90%" colspan="3">From <input type="text" name="custody-WinterBreak-from"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="90%" colspan="3">To <input type="text" name="custody-WinterBreak-To"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-WinterBreak" value="Other"></td>
+                            <td width="90%" colspan="3">Other: <input type="text" name="custody-WinterBreak-other" value=""></td>
+                        </tr>
+                        <tr><td colspan="4"><hr></td></tr>
+                        <tr>
+                            <td colspan="4"><strong>Spring Break:</strong> as scheduled by the school Calendar</td>
+                        </tr>
+                         <tr>
+                            <td colspan="4">The non-residential parent shall have possession of the children:</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SpringBreak" value="Same as Regular Weekend/Weekday Schedule"></td>
+                            <td width="90%" colspan="3">Same as Regular Weekend/Weekday Schedule</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SpringBreak" value="From / To"></td>
+                            <td width="90%" colspan="3">From <input type="text" name="custody-SpringBreak-from"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="90%" colspan="3">To <input type="text" name="custody-SpringBreak-To"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SpringBreak" value="Other"></td>
+                            <td width="90%" colspan="3">Other: <input type="text" name="custody-SpringBreak-other" value=""></td>
+                        </tr>
+                        <tr><td colspan="4"><hr></td></tr>
+                        <tr>
+                            <td colspan="4"><strong>Summer</strong></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4">The non-residential parent shall have possession of the children:</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SummerBreak" value="Same as Regular Weekend/Weekday Schedule"></td>
+                            <td width="90%" colspan="3">Same as Regular Weekend/Weekday Schedule</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SummerBreak" value="From / To"></td>
+                            <td width="90%" colspan="3">From <input type="text" name="custody-SummerBreak-from"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="90%" colspan="3">To <input type="text" name="custody-SummerBreak-To"> (day and time)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-SummerBreak" value="Other"></td>
+                            <td width="90%" colspan="3">Other: <input type="text" name="custody-SummerBreak-other" value=""></td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="Holidays contForm">
+                   <h2>Holidays</h2>
+
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td colspan="4"><strong>Custody of the Children:</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>New Years Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-NewYear" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-NewYear" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-NewYear-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-NewYear-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-NewYear-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Martin Luther King Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-MartinLutherKing" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-MartinLutherKing" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-MartinLutherKing-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-MartinLutherKing-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-MartinLutherKing-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Presidents' Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Presidents" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Presidents" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Presidents-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Presidents-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Presidents-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Memorial Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Memorial" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Memorial" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Memorial-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Memorial-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Memorial-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>July 4th</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-July4" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-July4" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-July4-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-July4-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-July4-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Labor Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-labor" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-labor" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-labor-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-labor-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-labor-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Veterans' Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Veterans" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Veterans" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Veterans-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Veterans-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Veterans-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Thanksgiving Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Thanksgiving" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Thanksgiving" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Thanksgiving-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Thanksgiving-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Thanksgiving-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Christmas Eve</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasEve" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasEve" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasEve-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasEve-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasEve-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Christmas Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasDay" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasDay" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasDay-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasDay-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-ChristmasDay-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Additional Holiday 1</strong></td>
+                            <td width="60%" colspan="3"><input type="text" name="custody-holidays-Additional1" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Parent</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional1-parent" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional1-parent" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional1-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional1-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional1-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Additional Holiday 2</strong></td>
+                            <td width="60%" colspan="3"><input type="text" name="custody-holidays-Additional2" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Parent</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional2-parent" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional2-parent" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional2-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional2-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-Additional2-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr><td colspan="4"><hr></td></tr>
+                        <tr>
+                            <td colspan="2" width="60%">All holidays listed will begin:</td>
+                            <td colspan="2" width="40%"><input type="text" name="custody-holidays-ListedBegin"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="60%">End:</td>
+                            <td colspan="2" width="40%"><input type="text" name="custody-holidays-end"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="60%">Holidays that fall on a Friday or Monday will include Saturday and Sunday:</td>
+                            <td width="20%"><input type="radio" name="custody-holidays-IncludeWeekEnd" value="Yes"> <label for="">Yes</label></td>
+                            <td width="20%"><input type="radio" name="custody-holidays-IncludeWeekEnd" value="No"> <label for="">No</label></td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="SpecialOccasions contForm">
+                   <h2>Special Occasions</h2>
+
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td colspan="4"><strong>Custody of the Children:</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Jack's Birthday</strong></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-JackBith" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-JackBith" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-JackBith-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-JackBith-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-JackBith-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Mother's Birthday</strong></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherBirth" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherBirth" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherBirth-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherBirth-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherBirth-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Father's Birthday</strong></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherBirth" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherBirth" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherBirth-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherBirth-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherBirth-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Mother's Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherDay" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherDay" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherDay-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherDay-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-MotherDay-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Father's Day</strong></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherDay" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherDay" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherDay-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherDay-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-FatherDay-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Other 1</strong></td>
+                            <td width="60%" colspan="3"><input type="text" name="custody-SpecialOccasions-Other1" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Parent</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other1-parent" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other1-parent" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other1-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other1-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other1-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Other 2</strong></td>
+                            <td width="60%" colspan="3"><input type="text" name="custody-SpecialOccasions-Other2" value=""></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Parent</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other2-parent" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other2-parent" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%">Year</td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other2-Year" value="Even"> <label for="">Even</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other2-Year" value="Odd"> <label for="">Odd</label></td>
+                            <td width="20%"><input type="radio" name="custody-SpecialOccasions-Other2-Year" value="Every"> <label for="">Every</label></td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="MajorDecisions contForm">
+                   <h2>Major Decisions</h2>
+
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td colspan="4">All major decisions regarding educational decisions, non-emergency health care, religious upbringing, and extracurricular activities will be made jointly by both parents. Should you be unable to reach consensus final decisions will be made as follows:</td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Education Decisions</strong></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-Education" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-Education" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Non-emergency health care</strong></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-HealthCare" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-HealthCare" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                        <tr>
+                            <td width="40%"><strong>Religious Upbringing</strong></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-Religius" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-Religius" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40%"><input type="text" name="custody-MajorDecisions-add1"></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-add1" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-add1" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40%"><input type="text" name="custody-MajorDecisions-add2"></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-add2" value="Mother"> <label for="">Mother</label></td>
+                            <td width="20%"><input type="radio" name="custody-MajorDecisions-add2" value="Father"> <label for="">Father</label></td>
+                            <td width="20%"></td>
+                        </tr>
+                    </table>
+               </div>
+               <div class="IncomeTaxes contForm">
+                   <h2>Income Tax Exemptions</h2>
+
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td colspan="3">Who will claim the child(ren) as exemptions on tax returns?</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-IncomeTaxes-who" value="Mother Every Year"></td>
+                            <td colspan="2">Mother Every Year</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-IncomeTaxes-who" value="Father Every Year"></td>
+                            <td>Father Every Year</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-IncomeTaxes-who" value="Alternating Years (Mother Even Years)"></td>
+                            <td colspan="2">Alternating Years (Mother Even Years)</td>
+                        </tr>
+                        <tr>
+                            <td width="5%"><input type="radio" name="custody-IncomeTaxes-who" value="Alternating Years (Father Even Years)"></td>
+                            <td colspan="2">Alternating Years (Father Even Years)</td>
+                        </tr>
+                        <tr><td colspan="3"><hr></td></tr>
+                        <tr>
+                            <td colspan="3">Based on your previous entries, estimate the percent of nights that the children will spend with each parent.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Percent of Nights children spend with Mother (0-100)</td>
+                            <td width="15%"><input type="number" name="custody-IncomeTaxes-percentMother" value="" style="max-width: 50px;" max="100"> %</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Percent of Nights children spend with Father (0-100)</td>
+                            <td width="15%"><input type="number" name="custody-IncomeTaxes-percentFather" value="" style="max-width: 50px;" max="100"> %</td>
+                        </tr>
+                    </table>
+               </div>
+           </section>
+
+           <section id="Child-Support" style="display: none;">
+               <div class="ChildSupport contForm">
+                   <h2>Child Support</h2>
+                   <table cellpadding="0" cellspacing="0" width="100%">
+                       <tr>
+                           <td colspan="3">Based upon the the number of children (1) and monthly income, the following monthly payments would be required of the spouse who is selected to pay child support. This calculation takes into account that the children spend at least 20% of the nights with each parent.</td>
+                       </tr>
+                        <tr>
+                            <td width="70%"></td>
+                            <td width="15%">Mother</td>
+                            <td width="15%">Father</td>
+                        </tr>
+                        <!-- ESTO ES LA FORMULA / CÁLCULO -->
+                        <tr>
+                            <td width="70%">Monthly Net Income</td>
+                            <td width="15%">$2,400.00</td>
+                            <td width="15%">-$1,400.00</td>
+                        </tr>
+                        <tr>
+                            <td width="70%">Monthly Child Support Obligation</td>
+                            <td width="15%">$400.00</td>
+                            <td width="15%">$140.00</td>
+                        </tr>
+                        <tr>
+                            <td width="70%">Monthly Child Support Credits</td>
+                            <td width="15%">$0.00</td>
+                            <td width="15%">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td width="70%"><strong>Monthly Payment (Standard Calculation)</strong></td>
+                            <td width="15%"><strong>$330.00</strong></td>
+                            <td width="15%"><strong>$0.00</strong></td>
+                        </tr>
+                        <!-- /ESTO ES LA FORMULA / CÁLCULO -->
+                        <tr>
+                            <td width="70%">Will you be using the above payment calculation?</td>
+                            <td width="15%"><input type="radio" name="ChildSupport-Using" value="Yes"> <label>Yes</label></td>
+                            <td width="15%"><input type="radio" name="ChildSupport-Using" value="No"> <label>No</label></td>
+                        </tr>
+                        <tr>
+                            <td width="70%">First Payment Date (MM/DD/YYYY)</td>
+                            <td width="30%" colspan="2">
+                                <input type="date" name="ChildSupport-FirstPayment" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="70%">Day of the month payment will be made</td>
+                            <td width="30%" colspan="2">
+                                <select size="1" name="ChildSupport-DayOfMonth">
+                                    <option selected>Select Day</option>
+                                    <option>1st</option>
+                                    <option>2nd</option>
+                                    <option>3rd</option>
+                                    <option>4th</option>
+                                    <option>5th</option>
+                                    <option>6th</option>
+                                    <option>7th</option>
+                                    <option>8th</option>
+                                    <option>9th</option>
+                                    <option>10th</option>
+                                    <option>11th</option>
+                                    <option>12th</option>
+                                    <option>13th</option>
+                                    <option>14th</option>
+                                    <option>15th</option>
+                                    <option>16th</option>
+                                    <option>17th</option>
+                                    <option>18th</option>
+                                    <option>19th</option>
+                                    <option>20th</option>
+                                    <option>21st</option>
+                                    <option>22nd</option>
+                                    <option>23rd</option>
+                                    <option>24th</option>
+                                    <option>25th</option>
+                                    <option>26th</option>
+                                    <option>27th</option>
+                                    <option>28th</option>
+                                    <option>29th</option>
+                                    <option>30th</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="70%">Will child support payments be made directly to the person or through the Florida county's Central Governmental Depository (service charge may apply)?</td>
+                            <td width="15%"><input type="radio" name="ChildSupport-DirectyCounty" value="Direct"> <label>Direct</label></td>
+                            <td width="15%"><input type="radio" name="ChildSupport-DirectyCounty" value="County"> <label>County</label></td>
+                        </tr>
+                        <tr>
+                            <td width="70%">Which parent will be paying for the Health Insurance of the children?</td>
+                            <td width="15%"><input type="radio" name="ChildSupport-PayHealth" value="Mother"> <label>Mother</label></td>
+                            <td width="15%"><input type="radio" name="ChildSupport-PayHealth" value="Father"> <label>Father</label></td>
+                        </tr>
+
+                    </table>
+               </div>
+           </section>
+       </main>
+   </div>
+   <div class="containerForm">
+       
+       <footer>
+           Please review each of the pages in the interview and provide any additional information needed for your Florida documents. Upon completing the online interview, you will be able to request your documents be shipped to you. Use the Navigation Pane on the left to jump to any section of the interview at any time.
+       </footer>
+   </div>
+    </section>
+</main>
+
+
+<script>
+    let i = 0
+    $('#btAddChild').on('click', function(){
+        i++
+        let clone = $('#child').clone()
+        $('#duplicate-child').prepend(clone.attr('id','child'+i))
+    })
+    $('#btRemoveChild').on('click', function(){
+        if(i > 0){
+            $('#child'+i).remove()
+            i--
+        }
+    })
+    $('#navform li').on('click', function(){
+        $('#navform li').removeClass('active')
+        let data = $(this).data('section');
+        $('.containerForm section').hide()
+        $('.containerForm section#'+data).show()
+
+        $(this).addClass('active')
+    })
+</script>
+
+
+

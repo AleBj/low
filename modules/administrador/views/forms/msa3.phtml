@@ -1,0 +1,26 @@
+<?php
+// ini_set('allow_url_include', false);
+require_once  RAIZ.'vendor/autoload.php';
+// use Spipu\Html2Pdf\Html2Pdf;
+// $html2pdf = new Html2Pdf();
+
+use Mpdf\Mpdf;
+
+$mpdf = new Mpdf([
+    'debug' => true,
+    'allow_output_buffering' => true
+]);
+
+
+ob_start();
+?>
+<h2>Hola mundo</h2>
+<?php
+$html = ob_get_contents();
+ob_end_clean();
+// $html2pdf->writeHTML($html);
+// $html2pdf->output();
+$mpdf->WriteHTML($html);
+$mpdf->Output();
+
+?>

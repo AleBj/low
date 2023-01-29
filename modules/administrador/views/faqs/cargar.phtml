@@ -1,0 +1,144 @@
+<script src="http://cdn.ckeditor.com/4.5.11/full-all/ckeditor.js"></script>
+<script>
+$(document).ready(function() {
+
+ 
+  
+    
+  $('#cargar_trabajo').submit(function(){
+    
+    
+      
+
+     /* $('input[type=checkbox]:checked').each(function() {
+          console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") Seleccionado");
+      });*/
+
+      /*var $fields = $(this).find('input[type=checkbox]:checked');
+      if (!$fields.length) {
+            alert('Debe seleccionar al menos una categoria');
+            return false; 
+        }*/
+
+            
+     /* if ($("#titulo").val() == "") {
+        alert("Debe completar el campo titulo");
+        $("#titulo").val('');
+        $('#titulo').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }*/
+
+     /* if ($("#video").val() == "") {
+        alert("Debe completar el campo video");
+        $('#video').focus();     
+        //$("#titulo").attr('placeholder', 'Titulo');
+        return false;        
+      }*/
+
+     
+
+      /*if($('._load_img_final_medidas').children().length == 0){
+        alert("Debe seleccionar una imagen");
+        return false; 
+      }*/
+      
+      
+      
+      return true;
+    
+  
+  });
+  
+  
+  
+});
+
+</script>
+
+
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>FAQs</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+ <div class="row wrapper wrapper-content">  
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Add</h5>
+                        </div>
+
+
+
+                        <form class="form-horizontal" id="cargar_trabajo" action="" method="POST" role="form" enctype="multipart/form-data">
+                        <input type="hidden" name="envio01" value="1" />        
+                        <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">                          
+                       
+                        
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label class="col-lg-2 control-label">Question</label>
+                              <div class="col-lg-9">
+                                <textarea class="form-control" id="pregunta" name="pregunta"><?php if(isset($this->data['pregunta'])) echo $this->data['pregunta']?></textarea>
+                                  <script>
+                                      CKEDITOR.replace('pregunta', {
+                                        language: 'en',
+                                          extraPlugins: 'colorbutton'
+                                      });
+                                  </script>                               
+                                 
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="ibox-content"> 
+                          <div class="form-group">
+                              <label class="col-lg-2 control-label">Answer</label>
+                              <div class="col-lg-9">
+                                <textarea class="form-control" id="respuesta" name="respuesta"><?php if(isset($this->data['respuesta'])) echo $this->data['respuesta']?></textarea>
+                                  <script>
+                                      CKEDITOR.replace('respuesta', {
+                                        language: 'en',
+                                          extraPlugins: 'colorbutton'
+                                      });
+                                  </script>                               
+                                 
+                              </div>
+                          </div>
+                        </div>
+
+
+
+                      
+                      
+
+                        <div class="ibox-content">
+                          <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                      <input type="submit" class="btn btn-success" id="validatex" name="cargar" value="Save" />                                      
+                                    </div>                                                                       
+                                </div>
+                                
+                              
+                            </div>                            
+                        </div>
+                       </form> 
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
+</div> 
+
+

@@ -1,0 +1,314 @@
+<main>
+    <section class="cart whity">
+        <div class="container">
+            <div class="cart__notification--full">
+                <p>“Combined Package” has been added to your cart.</p>
+            </div>
+            <!-- items table -->
+
+            <table class="items-table" id="items-table" cellspacing="0">
+                
+                    <thead>
+                        <th colspan="2"></th>
+                        <th>PRODUCT</th>
+                        <th>PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>SUBTOTAL</th>
+                    </thead>
+
+                <?php foreach($_SESSION['_carro'] as $id => $val):?>
+
+                <tr id="tr_<?=$id?>">
+                    <td><a onclick="$().eliminarProd('<?=$id?>');" href="javascript:void(0);"><i class="fas fa-times"></i></a></td>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=$val['item']?>"><img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase"></a></td>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=$val['item']?>"><?=home::convertirCaracteres(home::traerProductoPorItemStatic($val['item'])->titulo)?></a></td>
+                    <td>$<?=number_format($val['precio'], 2, '.', ',')?></td>
+                    <td><?=$val['cantidad']?></td>
+                    <td>$<?=number_format($val['cantidad']*$val['precio'], 2, '.', ',')?></td>
+                </tr>
+
+                <?php endforeach?>
+                
+
+
+            </table>
+
+            <div class="cart__total">
+                <h2>CART TOTALS</h2>
+                <table class="items-total" cellspacing="0">
+                    <tr>
+                        <td>SUBTOTAL</td>
+                        <td>$<?=number_format($this->_subtotal, 2, '.', ',')?></td>
+                    </tr>
+
+                    <tr>
+                        <td>TOTAL</td>
+                        <td>$<?=number_format($this->_total, 2, '.', ',')?></td>
+                    </tr>
+
+                </table>
+
+                <a href="<?=$this->_conf['base_url']?>cart/checkout" class="button long-btn">
+                    <p><strong>Proceed to checkout</strong></p></a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+
+
+
+
+<!-- 
+
+
+
+
+<section id="hero" class="interna">
+    
+</section>
+<i class="divisor"></i>
+
+
+<section id="checkout" class="centerSection">
+    
+    <h3 class="mrgTop">Tu pedido</h3>
+    <div class="wrapperSmall">
+        <div class="table">
+            <div class="row-table">
+                <div class="prod head">Producto</div>
+                <div class="sbt head">Precio</div>
+                <div class="sbt head"></div>
+            </div>
+
+            <?php foreach($_SESSION['_carro'] as $id => $val):?>
+            
+
+            <div id="tr_<?=$id?>" class="row-table _prods">
+                <div class="prod">
+                    <a href="<?=$this->_conf['base_url']?>product/detail/<?=$val['item']?>"><?=home::convertirCaracteres(home::traerProductoPorItemStatic($val['item'])->titulo)?></a>
+                </div>
+                <div class="sbt">
+                    <?=number_format($val['cantidad']*$val['precio'], 2, ',', '.')?>
+                </div>
+
+                <div class="sbt">
+                    <a onclick="$().eliminarProd('<?=$id?>');" href="javascript:void(0);">X</a>
+                </div>
+            </div>
+
+            <?php endforeach?>
+
+         
+            <div class="row-table subtotal">
+                <div class="head">Subtotal:</div>
+                <div class="sbt head">$<?=number_format($this->_subtotal, 2, ',', '.')?></div>
+            </div>
+
+            <div class="row-table total">
+                <div class="head">Total:</div>
+                <div class="sbt head">$<?=number_format($this->_total, 2, ',', '.')?></div>
+            </div>
+
+            <div class="buy">
+                <a href="<?=$this->_conf['base_url']?>cart/checkout" class="btn btn-verde">Proceed to checkout</a>
+            </div>
+
+        </div>
+    </div>
+
+    
+</section>
+
+ -->
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    
+  
+    $.fn.eliminarProd = function(_val){ 
+        //var url = window.location.href;
+        //var datastring = "data="+_data+"&posicion="+_pos+"&valor="+_val;
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/eliminarProd",
+            //data: datastring,
+            dataType: "json",           
+            data: {"id" : _val, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},   
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                $(data.item).remove();       
+                // $("._prods").remove(data.item);
+
+                
+                $('.subtotal .sbt').html(data.totalparcial);
+                // $('.resume ._shipping').html(data.shipping);
+                // $('.item ._shipping span').html(data.shipping);
+                $('.total .sbt').html(data.total);
+                
+
+                if(data.total == '$0.00'){
+                    $('.cart .content').html('<h3>No hay productos</h3>');
+                }
+            }
+        });
+
+    };
+
+
+
+    /*$('#forma-pago').on('submit', function() {
+        
+       
+        if($('#nombre_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un nombre").fadeIn('slow');
+          $("#nombre_reg").focus();
+          return false;
+        }
+
+        if($('#apellido_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un apellido").fadeIn('slow');
+          $("#apellido_reg").focus();
+          return false;
+        }
+
+        if($('#dni_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un DNI").fadeIn('slow');
+          $("#dni_reg").focus();
+          return false;
+        }
+
+       
+
+       if($('#email_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un email").fadeIn('slow');
+          $("#email_reg").focus();
+          return false;
+        }
+
+        if(!$("input[name='payment']:checked").val()){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar la forma de pago").fadeIn('slow');
+          // $("#nombre_reg").focus();
+          return false;
+        }
+        
+
+        //alert(url)
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/consolidarRegistro",
+            data: $('#forma-pago, #form-checkout').serialize(),
+            // datatype: 'json',
+            // contentType: "application/json",
+            // cache: false,
+            beforeSend: function(){
+                $('.error').html('').fadeOut('fast');
+                $('.success').html('Enviando...').fadeIn('slow');
+            },        
+            success: function(data){
+
+                data = JSON.parse(data);
+
+                // console.log(data.estado);
+
+                if(data.estado=='transfer'){
+
+                    console.log(data);
+
+                    $('.error').html('').fadeOut('fast');
+                    $('.success').html('Registro con exito').fadeIn('slow');
+                    setTimeout(function() {
+                          window.location.href = _root_+"cart/responsetransfer";
+                          // window.location.reload();
+                      }, 2000);
+                    
+
+                    
+                }else if(data.estado == 'mp'){
+
+                    // console.log(data);
+
+                    $('.error').html('').fadeOut('fast');
+                    $('.success').html('Cargando plataforma de pago...').fadeIn('slow');
+
+                    // Plataformas de pago MP
+                    $.getScript("https://sdk.mercadopago.com/js/v2", function(){ 
+                         console.log("script cargado"); 
+
+                         // Agrega credenciales de SDK                         
+                        // const mp = new MercadoPago('TEST-be7ffa02-12ea-4bb9-88c6-01b87e846682', {
+                        const mp = new MercadoPago('<?=$this->grupo['mp_public_key']?>', {
+                            locale: 'es-AR'
+                        });
+                        // Inicializa el checkout
+                        const checkout = mp.checkout({
+                          preference: {
+                              id: data.prefer_id
+                          },
+                          autoOpen: true, 
+                        });  
+
+                        $('.error').html('').fadeOut('slow');
+                        $('.success').html('').fadeOut('slow');                 
+                    });
+
+                    
+
+
+                }else if(data.estado == 'tp'){
+
+                    $('.error').html('').fadeOut('fast');
+                    $('.success').html('Cargando plataforma de pago...').fadeIn('slow');
+
+                    // Plataformas de pago TP
+                    if(data.error ==''){
+                        // $('.error').html('').fadeOut('fast');
+                        // $('.success').html('').fadeOut('fast');
+                        // setTimeout(function() {
+                          window.location.href = data.url;
+                        // }, 500);
+                    }else{
+                        $('.success').html('').fadeOut('fast');
+                        $('.error').html(data.error).fadeIn('slow');
+                    }
+
+                    
+                    
+                    $('.success').html('').fadeOut('fast');
+
+
+                }else{
+                    $('.success').html('').fadeOut('fast');
+                    $('.error').html(data.estado).fadeIn('slow');
+                }
+              
+            }
+        });
+
+        return false;    
+    });*/
+    
+ 
+
+
+
+  
+    
+    
+});
+</script>

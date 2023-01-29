@@ -1,0 +1,198 @@
+<script type="text/javascript">
+$.Fastselect.defaults = {
+
+    elementClass: 'fstElement',
+    singleModeClass: 'fstSingleMode',
+    noneSelectedClass: 'fstNoneSelected',
+    multipleModeClass: 'fstMultipleMode',
+    queryInputClass: 'fstQueryInput',
+    queryInputExpandedClass: 'fstQueryInputExpanded',
+    fakeInputClass: 'fstFakeInput',
+    controlsClass: 'fstControls',
+    toggleButtonClass: 'fstToggleBtn',
+    activeClass: 'fstActive',
+    itemSelectedClass: 'fstSelected',
+    choiceItemClass: 'fstChoiceItem',
+    choiceRemoveClass: 'fstChoiceRemove',
+    userOptionClass: 'fstUserOption',
+
+    resultsContClass: 'fstResults',
+    resultsOpenedClass: 'fstResultsOpened',
+    resultsFlippedClass: 'fstResultsFilpped',
+    groupClass: 'fstGroup',
+    itemClass: 'fstResultItem',
+    groupTitleClass: 'fstGroupTitle',
+    loadingClass: 'fstLoading',
+    noResultsClass: 'fstNoResults',
+    focusedItemClass: 'fstFocused',
+
+    matcher: null,
+
+    url: null,
+    loadOnce: false,
+    apiParam: 'query',
+    initialValue: null,
+    clearQueryOnSelect: true,
+    minQueryLength: 1,
+    focusFirstItem: false,
+    flipOnBottom: true,
+    typeTimeout: 150,
+    userOptionAllowed: false,
+    valueDelimiter: ',',
+    maxItems: null,
+
+    parseData: null,
+    onItemSelect: null,
+    onItemCreate: null,
+    onMaxItemsReached: null,
+
+    placeholder: 'Elegir una opción',
+    searchPlaceholder: 'Buscar una opción',
+    noResultsText: 'Nohay resultados',
+    userOptionPrefix: 'Agregar '
+
+};
+  
+$(document).ready(function(){
+
+  $('.multipleSelect').fastselect();
+
+  if($('#usuario_rol').val()==1){
+    $('#cont_gestion').slideUp('fast');
+  } else{
+    $('#cont_gestion').slideDown('fast');
+  } 
+
+  $("#usuario_rol").on('change', function() {
+    var _val = this.value;
+    if(_val == 1){
+      $('#cont_gestion').slideUp('fast');
+    } else{
+      $('#cont_gestion').slideDown('fast');
+    } 
+    
+  });
+
+});
+
+</script>
+
+<div id="head-bg-fix"></div>
+    <div class="wpContent">   
+      <div class="btn-group-usuario">
+          <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/listarUserHome'?>">
+            Administrar Usuario
+          </a>
+
+          <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/cargarUserHome'?>">
+            Cargar Usuario
+          </a>
+
+          <a href="#" class="active">
+            Editar Usuario
+          </a>
+      </div> 
+  <div class="wpFormNewUser">
+        
+        	<form class="form-horizontal" id="cargar_noticia" action="" method="POST" role="form">
+            <input type="hidden" name="envio01" value="1" />
+            
+    			<legend>Editar Usuario</legend>
+            	
+            <div class=" <?php if(isset($this->errorNombre)) echo $this->errorNombre?>">
+          			<label for="Categoria" class="labelInput">Nombre y Apellido</label>
+      				<div class="wpFormInput">
+                    	<input type="text" name="usuario_nombre" id="usuario_nombre" value="<?php echo $this->usuario->nombre?>">
+                   	</div>
+            	</div>
+                
+            <div class=" <?php if(isset($this->errorUsuario)) echo $this->errorUsuario?>">
+          			<label for="Categoria" class="labelInput">Usuario</label>
+      				<div class="wpFormInput">
+                    	<input type="text" name="usuario_usuario" id="usuario_usuario" value="<?php echo $this->usuario->usuario?>">
+                   	</div>
+            	</div>
+                
+            <div class=" <?php if(isset($this->errorEmail)) echo $this->errorEmail?>">
+          			<label for="Categoria" class="labelInput">Email</label>
+      				<div class="wpFormInput">
+                    	<input type="text" name="usuario_email" id="usuario_email" value="<?php echo $this->usuario->email?>">
+                   	</div>
+            	</div>
+                
+            <div class=" <?php if(isset($this->errorPass)) echo $this->errorPass?>">
+          			<label for="Categoria" class="labelInput">Password</label>
+      				<div class="wpFormInput">
+                    	<input type="password" name="usuario_pass" id="usuario_pass" placeholder="Si no coloca un nuevo Password, se conservara el actual.">
+                   	</div>
+            	</div>
+                
+            <div class=" <?php if(isset($this->errorPassRepetir)) echo $this->errorPassRepetir?>">
+          			<label for="Categoria" class="labelInput">Confirmar</label>
+      				<div class="wpFormInput">
+                    	<input type="password" name="usuario_repetir_pass" id="usuario_repetir_pass" value="" placeholder="Confirmar Password.">
+                   	</div>
+            	</div>
+               
+               
+              <div class="">
+            		<label for="Categoria" class="labelInput">Rol</label>
+        				<div class="wpFormInput select">
+                  	<select name="usuario_rol" id="usuario_rol">
+                      	<?php foreach($this->roles as $roles):?>
+                          <?php if($roles->id_role == $this->usuario->role):?>
+                          <option value="<?php echo $roles->id_role?>" selected><?php echo $roles->role?></option>
+                          <?php else:?>
+                          <option value="<?php echo $roles->id_role?>"><?php echo $roles->role?></option>
+                          <?php endif?>
+                        	
+                          <?php endforeach?>
+                      </select>
+                 	</div>
+          		</div>
+                
+            
+      <div id="cont_gestion">
+
+        <div class=" <?php if(isset($this->errorProv)) echo $this->errorProv?>">
+          <label for="prov_gestion" class="labelInput">Provincias a gestionar</label>
+
+          <div class="wpProvs">
+
+            <select class="provs multipleSelect" multiple name="prov_gestion[]">
+            <?php foreach($this->provincias as $prov):?>
+            <?php if(in_array($prov->id, $this->prov_select)):?>
+            <option value="<?=$prov->id?>" selected><?=$prov->nombre?></option> 
+            <?php else:?>
+            <option value="<?=$prov->id?>"><?=$prov->nombre?></option>
+            <?php endif?>
+            <?php endforeach?>                      
+            </select>
+
+           <!--  <?php foreach($this->provincias as $prov):?>
+            <div class="third">
+                <?php if(in_array($prov->id, $this->prov_select)):?>
+                <input type="checkbox" class="regular-checkbox" name="prov_gestion[]" value="<?=$prov->id?>" checked>  
+                <?php else:?>
+                <input type="checkbox" class="regular-checkbox" name="prov_gestion[]" value="<?=$prov->id?>"> 
+                <?php endif?>
+                <span><?=$prov->nombre?></span>
+            </div>
+            <?php endforeach?> -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="btnNewUser">
+
+        <input type="submit" class="btn" id="validatex" name="cargar" value="Cargar Usuario" />
+
+        <a class="btn btn-warning text-right btn-lg" style="margin-left: 20px;" href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/listarUserHome'?>">Cancelar</a>
+   
+      </div>
+
+    </form>
+  </div>  
+</div>

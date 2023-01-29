@@ -1,0 +1,132 @@
+<section id="hero" class="interna">
+    <div class="flexslider">
+        <ul class="slides">
+            <li>
+                <div class="wrapper">
+                    <div class="mid">
+                        <h2 class="anima hideme delay d02">Aprendé a manejar de verdad.</h2>
+                    </div>
+                </div>
+                <div class="circleSm anima hideme delay d06"></div>
+                <div class="circleMid anima hideme delay d04"></div>
+            </li>
+        </ul>   
+    </div>
+</section>
+
+<i class="divisor"></i>
+
+<section id="pedido" class="centerSection">
+    <h3>
+        <!-- <a href="commerce.html" class="inner-link">
+            <img src="<?php echo $_params['ruta_img']?>arrow-back.svg" alt="Driver's School">
+        </a>  -->
+        Pedido Recibido
+    </h3>
+    <div class="wrapperSmall">
+        <h4>¡Gracias! <br> Estamos procesando tu pedido. <br> A la brevedad nos contactaremos contigo.</h4>
+        
+        <ul class="detail">
+            <li><strong>- Número de pedido:</strong> <?=$this->_num_pedido?></li>
+            <li><strong>- Nombre:</strong> <?=home::convertirCaracteres3($this->user->nombre)?> <?=home::convertirCaracteres3($this->user->apellido)?></li>
+            <li><strong>- email:</strong> <?=$this->user->email?></li>
+            <li><strong>- Sucursal:</strong> <?=$this->sucursal['nombre']?></li>
+            <li><strong>- Fecha:</strong> <?=home::formatearFecha(date('Y-m-d'))?></li>
+            <li><strong>- Total:</strong> $<?=number_format($this->_total, 2, ',', '.')?></li>
+            <?php if($this->_compra['plataforma_pago'] == 'transfer'):?>
+            <li><strong>- Metodo de pago:</strong> Transferencia bancaria directa</li>
+            <?php endif?>
+            <?php if($this->_compra['plataforma_pago'] == 'mp'):?>
+
+            <?php if($_SESSION['_compra_response']['payment_type']=='credit_card'):?>
+            <li><strong>- Metodo de pago:</strong> Mercado Pago: Tarjeta de credito</li>
+            <?php elseif($_SESSION['_compra_response']['payment_type']=='debit_card'):?>
+            <li><strong>- Metodo de pago:</strong> Mercado Pago: Tarjeta de debito</li>
+            <?php else:?>
+            <li><strong>- Metodo de pago:</strong> Efectivo (pendiente de confirmación del pago)</li>
+            <?php endif?>
+
+            <!-- <li><strong>- Metodo de pago:</strong> Mercado Pago: <?=($_SESSION['_compra_response']['payment_type']=='credit_card') ? 'Tarjeta de credito' : 'Efectivo (pendiente de confirmación del pago)'?></li> -->
+
+            <?php endif?>
+            <?php if($this->_compra['plataforma_pago'] == 'tp'):?>
+            <li><strong>- Metodo de pago:</strong> Todo Pago</li>
+            <?php endif?>
+        </ul>
+
+        <?php if($this->_compra['plataforma_pago'] == 'transfer'):?>
+        <!-- SOLO PARA PAGO X TRANSFERENCIA -->
+        <p>
+            Transfiere o Deposita a la siguiente cuenta bancaria. <br>
+            Una vez realizada, <a href="mailto:<?=$this->grupo['email']?>"><strong>reporta tu pago aquí</strong></a>
+            <br><br>
+
+            <!-- <strong>BANCO GALICIA</strong> <br>
+            Titular: Instituto de seg y educación vial Drivers SRL <br>
+            CUIT: 30-70781674-7 <br>
+            CBU: 0070367120000000370255 <br> -->
+            <?=$this->grupo['transferencia']?>
+
+        </p>
+        <!-- SOLO PARA PAGO X TRANSFERENCIA -->
+        <?php endif?>
+
+        <h4>Detalle de compra</h4>
+ 
+        <div class="table">
+            <div class="row-table">
+                <div class="prod head">Producto</div>
+                <div class="sbt head">Subtotal</div>
+            </div>
+
+            <?php foreach($this->_compra['detalle_compra'] as $id => $val):?>
+            <?php     
+                $_id = $id;
+
+                $_subtotal = $val['cantidad']*$val['precio'];
+                $_total_parcial += $_subtotal; 
+                $_total += $_subtotal; 
+                
+            ?>
+
+            <!-- REPETEABLE -->
+            <div class="row-table">
+                <div class="prod">
+                    <?=home::convertirCaracteres(home::traerCursoPorId($val['id_curso'])->nombre)?>
+                </div>
+                <div class="sbt" style="text-align: center;">
+                    $<?=number_format($val['cantidad']*$val['precio'], 2, ',', '.')?>
+                </div>
+            </div>
+            <!-- REPETEABLE -->
+
+            <?php endforeach?>
+
+
+            <?php if(isset($this->_compra['descuento']) && $this->_compra['descuento']>0):?>
+            <div class="row-table total">
+                <div class="head">Descuento:</div>
+                <div class="sbt head">$<?=number_format($this->_descod, 2, ',', '.')?></div>
+            </div>            
+            <?php endif?>
+
+            <div class="row-table total">
+                <div class="head">Total:</div>
+                <div class="sbt head">$<?=number_format($this->_total, 2, ',', '.')?></div>
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $('#social a.cart').hide(); 
+    
+});
+</script>

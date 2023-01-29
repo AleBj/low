@@ -1,0 +1,44 @@
+<!-- <style type="text/css">
+    table.table td { vertical-align: middle; }
+    table.table td input, select { margin: 0; }
+</style>
+
+<h2>Permisos de Usuario</h2>
+
+<p>
+    <strong>Usuario:</strong> <?php echo $this->info['usuario']?> | <strong>Role:</strong> <?php echo $this->info['role']?>
+</p>
+
+<form name="form1" method="post" action="">
+    <input type="hidden" value="1" name="guardar">
+    
+    <?php if(isset($this->permisos) && count($this->permisos)):?>
+    	<table class="table table-bordered table-striped table-condensed" style="width: 500px;">   
+        
+        	<?php for($i=0;$i<count($this->permisos);$i++):?>
+            <?php 
+				if($this->role[$this->permisos[$i]]['valor'] == 1){
+					$v = 'habilitado';	
+				}else{
+					$v = 'denegado';	
+				}
+			 ?>
+             
+             <tr>
+                    <td><?php echo $this->usuario[$this->permisos[$i]]['permiso']?></td>
+
+                    <td>
+                        <select name="<?php echo 'perm_' . $this->usuario[$this->permisos[$i]]['id']?>">
+                            <option value="x" <?php if($this->usuario[$this->permisos[$i]]['heredado']):?> selected="selected"<?php endif?>>Heredado(<?php echo $v?>)</option>
+                            <option value="1" <?php if($this->usuario[$this->permisos[$i]]['valor'] == 1 && $this->usuario[$this->permisos[$i]]['heredado'] == ""):?> selected="selected" <?php endif?>>Habilitado</option>
+                            <option value="" <?php if($this->usuario[$this->permisos[$i]]['valor'] == "" && $this->usuario[$this->permisos[$i]]['heredado'] == ""):?> selected="selected" <?php endif?>>Denegado</option>
+                        </select>
+                    </td>
+                </tr>
+            
+            <?php endfor?>
+            </table>
+            
+        <p><button type="submit" value="guardar" class="btn btn-primary"><i class="icon-ok icon-white"> </i> Guardar</button></p>
+    <?php endif?>
+</form> -->

@@ -1,0 +1,616 @@
+<?php if(!$this->_sess->get('autenticado_front')):?>
+<main>
+    <section class="white">
+
+
+        <div class="container _login">
+            <h3 style="text-align:center; font-size: 25px;">Welcome!</h3>
+            <p class="white__intro" style="text-align:center;margin-top: 0; margin-bottom: 30px;">Login to an existing account or create a new account</p>
+
+            <!-- <form action="" id="whiteForm"> -->
+            <form action="" name="login" id="form-login" class="whiteForm" method="POST">
+                <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                
+
+                <div class="white__form--single">
+                    <label for="email">Email <span>*</span></label>
+                    <input type="email" name="email_login" id="email_login" >
+                </div>
+
+                <div class="white__form--single">
+                    <label for="subject">Password <span>*</span></label>
+                    <input type="password" name="password_login" id="password_login">
+                </div>
+
+                <button class="button" type="submit" id="enviar_data_login"><p>Send</p></button>
+                <div class="mensaje_login"></div>
+                <a class="btn_recuperar" href="javascript:void(0);">Recover  Password</a>
+                <br>
+                <a class="btn_register" href="javascript:void(0);">Register</a>
+            </form>
+        </div>
+
+
+        <div class="container _recuperar" style="display:none;">
+            <h3 style="text-align:center; font-size: 25px;margin-bottom: 30px;">Recover  Password</h3>
+
+            <!-- <form action="" id="whiteForm"> -->
+            <form action="" name="recover" id="form-recover" class="whiteForm" method="POST">
+                <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                
+                <div class="white__form--single">
+                    <label for="subject">Email <span>*</span></label>
+                    <input type="email" name="email_recover" id="email_recover" >
+                </div>
+
+                <button class="button" type="submit" id="enviar_data_recover"><p>Send</p></button>
+                <div class="mensaje_recover"></div>
+                <a class="btn_login" href="javascript:void(0);">Login</a>
+            </form>
+        </div>
+
+
+        <div class="container _reg" style="display:none;">
+            <h3 style="text-align:center; font-size: 25px;margin-bottom: 30px;">Create a new account</h3>
+
+            <!-- <form action="" id="whiteForm"> -->
+            <form action="" name="register" id="form-register" class="whiteForm" method="POST">
+                <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                
+                <div class="white__form--row">
+                    <div class="white__form--name">
+                        <label for="firstname">Name <span>*</span></label>
+                        <input type="text" name="nombre" id="nombre" >
+                        <span>First</span>
+                    </div>
+
+                    <div class="white__form--name">
+                        <label for=""></label>
+                        <input type="text" name="apellido" id="apellido">
+                        <span>Last</span>
+                    </div>
+                </div>
+
+                <div class="white__form--single">
+                    <label for="email">Email <span>*</span></label>
+                    <input type="email" name="email" id="email" >
+                </div>
+
+                <div class="white__form--single">
+                    <label for="subject">Password <span>*</span></label>
+                    <input type="password" name="password" id="password" >
+                </div>
+
+                <div class="white__form--single">
+                    <label for="subject">Repeat Password <span>*</span></label>
+                    <input type="password" name="repeat_password" id="repeat_password">
+                </div>
+
+                <button class="button" type="submit" id="enviar_data"><p>Send</p></button>
+                <div class="mensaje"></div>
+                <a class="btn_login" href="javascript:void(0);">Login</a>
+            </form>
+        </div>
+
+
+
+
+    </section>
+</main>
+
+<script>
+$(document).ready(function() {
+
+    $('.btn_login').on('click', function(){
+        $('._recuperar').fadeOut('fast');
+        $('._reg').fadeOut('fast', function(){
+            $('._login').fadeIn(400);
+        });
+    });
+
+    $('.btn_register').on('click', function(){
+        // $('._recuperar').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._reg').fadeIn(400);
+        });
+    });
+
+    $('.btn_recuperar').on('click', function(){
+        // $('._reg').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._recuperar').fadeIn(400);
+        });
+    });
+
+
+    $("#form-login").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_login").val() == "") {
+            $(".mensaje_login").html("You must complete the email field");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_login").val().indexOf('@', 0) == -1 || $("#email_login").val().indexOf('.', 0) == -1) {
+            $(".mensaje_login").html("You must enter a valid email");
+            $$('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password_login").val() == "") {
+            $(".mensaje_login").html("You must complete the password field");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#password_login').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+       
+        
+        
+        
+        $('#enviar_data_login').prop('disabled', true);
+        $(".mensaje_login").html("");
+
+        $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "user/login",
+            data: $("#form-login").serialize(),            
+            success: function(data){
+                $(".mensaje_login").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-login input, #form-login textarea').val('');
+                    $(".mensaje_login").append('Successful delivery!');
+                    $('#enviar_data_login').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_login").html("");
+                        window.location.reload();
+                    }, 1000);                    
+
+                }else{
+                    $('#enviar_data_login').prop('disabled', false);
+                    $(".mensaje_login").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_login").append(data);
+            }
+        });
+        return false;
+    });
+    
+    $("#form-recover").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_recover").val() == "") {
+            $(".mensaje_recover").html("You must complete the email field");
+            $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_recover").val().indexOf('@', 0) == -1 || $("#email_recover").val().indexOf('.', 0) == -1) {
+            $(".mensaje_recover").html("You must enter a valid email");
+            $$('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+   
+        
+        
+        
+        $('#enviar_data_recover').prop('disabled', true);
+        $(".mensaje_recover").html("");
+
+        $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "user/recoverPass",
+            data: $("#form-recover").serialize(),            
+            success: function(data){
+                $(".mensaje_recover").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-recover input, #form-recover textarea').val('');
+                    $(".mensaje_recover").append('The new password was sent to your email');
+                    $('#enviar_data_recover').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_recover").html("");
+                    }, 1000);                    
+
+                }else{
+                    $('#enviar_data_recover').prop('disabled', false);
+                    $(".mensaje_recover").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_recover").append(data);
+            }
+        });
+        return false;
+    });
+  
+    $("#form-register").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+        
+        if ($("#nombre").val() == "") {
+            $(".mensaje").html("You must complete the first name field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#nombre').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#apellido").val() == "") {
+            $(".mensaje").html("You must complete the last name field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#apellido').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        }            
+        
+
+        if ($("#email").val() == "") {
+            $(".mensaje").html("You must complete the email field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1) {
+            $(".mensaje").html("You must enter a valid email");
+            $$('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password").val() == "") {
+            $(".mensaje").html("You must complete the password field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#repeat_password").val() == "") {
+            $(".mensaje").html("You must complete the repeat password field");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#repeat_password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+        
+        
+        
+        $('#enviar_data').prop('disabled', true);
+        $(".mensaje").html("");
+
+        $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "user/register",
+            data: $("#form-register").serialize(),
+            beforeSend: function() {
+                $(".mensaje").html('Waiting...');
+            },            
+            success: function(data){
+                $(".mensaje").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-register input, #form-register textarea').val('');
+                    $(".mensaje").html('Check your email account to activate your account');
+                    $('#enviar_data').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje").html("");
+                    }, 5000);                    
+
+                }else{
+                    $('#enviar_data').prop('disabled', false);
+                    $(".mensaje").html(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje").html(data);
+            }
+        });
+        return false;
+    });
+
+
+    
+    
+});
+</script> 
+
+<?php else:?>
+
+<main>
+
+    <nav class="nav-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">My account</li>
+            <?php if($this->user['estado'] == 'customer'):?>
+            <li class="breadcrumb-item "><a href="<?=$this->_conf['base_url']?>user/myorders">My orders</a></li>
+            <?php endif?>
+            <li class="breadcrumb-item" ><a href="<?=$this->_conf['base_url']?>user/signout">Sign Out</a></li>
+        </ol>
+    </nav>
+
+
+    <section class="checkout whity">
+        <div class="container cont__bill">
+            
+                <!-- <form action="" id="checkpay"> -->
+                <form name="checkoutForm" id="checkoutForm">
+                    
+
+                    <div class="check__col">
+                        <h2 class="checkout__tit">Billing details</h2>
+
+                        <div class="check__row">
+                            <div>
+                                <label for="first-name">First name <span>*</span></label>
+                                <!-- <input type="text" name="first-name" id=""> -->
+                                <input type="text" id="nombre_reg" name="nombre" value="<?=(isset($this->user['nombre'])) ? $this->user['nombre'] : ''?>" />
+                            </div>
+
+                            <div>
+                                <label for="first-name">Last name <span>*</span></label>
+                                <!-- <input type="text" name="last-name" id=""> -->
+                                <input type="text" id="apellido_reg" name="apellido" value="<?=(isset($this->user['apellido'])) ? $this->user['apellido'] : ''?>" />
+                            </div>
+                        </div>
+
+                        <!-- <div class="check__row">
+                            <label for="company-name">Company name <span>(optional)</span></label>
+                                <input type="text" name="company_name_reg" id="company_name" value="<?=(isset($this->user['company_name'])) ? $this->user['company_name']: ''?>">
+                        </div> -->
+
+                        <div class="check__row">
+                            <label for="phone">Phone <span>*</span></label>
+                                <!-- <input type="tel" name="phone" id=""> -->
+                                <input type="text" id="telefono_reg" name="telefono" value="<?=(isset($this->user['telefono'])) ? $this->user['telefono'] : ''?>" />
+                        </div>
+
+                        <div class="check__row">
+                            <label for="email">Email address <span>*</span></label>
+                                <!-- <input type="email" name="email" id=""> -->
+                                <input type="email" id="email_reg" name="email" value="<?=(isset($this->user['email'])) ? $this->user['email'] : ''?>" />
+                        </div>
+
+                      
+                        <div class="check__row">
+                            <label for="countrey">Country / Region <span>*</span></label>
+                            <select id="pais_reg" name="pais">
+                                <option value="United State (US)" selected>United State (US)</option>
+                                <!-- <option value=">fghanistan">Afghanistan</option>
+                                <option value=">rgentina">Argentina</option>
+                                <option value="United Kingdom">United Kingdom (UK)</option>                               
+                               <option value="United State (US) Minor Outlyin Islands">United State (US) Minor Outlyin Islands</option> -->
+                            </select>
+                        </div>
+
+                        <div class="check__row">
+                            <label for="countrey">State <span>*</span></label>
+                            <select id="estado_reg" name="estado">
+                                <option value="Florida" selected>Florida</option>
+                                <!-- <option value="Alabama">Alabama</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>                                
+                                <option value="Hawaii">Hawaii</option> -->
+                            </select>
+                        </div>
+
+                        <div class="check__row">
+                            <label for="town">Town / City <span>*</span></label>
+                                <!-- <input type="text" name="town" id="" required> -->
+                                <input type="text" id="ciudad_reg" name="ciudad" value="<?=(isset($this->user['ciudad'])) ? $this->user['ciudad'] : ''?>" />
+                        </div>
+
+                        <div class="check__row">
+                            <label for="adress">Street Address <span>*</span></label>
+                                <!-- <input type="text" name="adress" id="" placeholder="House number and street name" required> -->
+                                <input type="text" id="direccion_reg" name="direccion"  placeholder="House number and street name" value="<?=(isset($this->user['direccion'])) ? $this->user['direccion'] : ''?>" />
+
+                                <!-- <input type="text" name="adress" id="" placeholder="Apartment, suit, unit, etc. (optional)"> -->
+                        </div>                        
+
+                        <div class="check__row">
+                            <label for="zip-code">Zip Code <span>*</span></label>
+                                <!-- <input type="text" name="zip-code" id=""> -->
+                                <input type="text" id="cod_postal_reg" name="cod_postal" value="<?=(isset($this->user['cod_postal'])) ? $this->user['cod_postal'] : ''?>" />
+                        </div>
+
+                        <div class="check__row">
+                            <label for="town">Modify Password</label>
+                                <input type="password" name="password" id="password">
+                        </div>
+
+                        <div class="check__row">
+                            <label for="town">Repeat Modify Password</label>
+                                <input type="password" name="repeat_password" id="repeat_password">
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="check__col">
+                        <h3 class="checkout__tit">Additional information</h3>
+
+                        <div class="check__row">
+                            <label for="">Order notes <span>(optional)</span></label>
+                            <textarea name="order_notes" id="order_notes" placeholder="Notes about your order, e. g. special notes for delivery."><?=(isset($this->user['order_notes'])) ? $this->user['order_notes'] : ''?></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+                    <input type="hidden" name="_id" value="<?=$this->user['id']?>">
+                    <button type="button" id="procesarPayment" class="button btn_order Btedit"><p>Edit</p></button>
+
+
+                    
+
+                </form>
+
+                <div class="success" style="padding-top:20px"></div>
+                <div class="error" style="padding-top:20px"></div>
+        </div>
+
+        
+    </section>
+
+</main>
+
+<script>
+$( document ).ready(function() {
+
+   
+    $(".Btedit").click(function(){    
+       
+       /* if($('#nombre_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un nombre").fadeIn('slow');
+          $("#nombre_reg").focus();
+          return false;
+        }
+
+        if($('#apellido_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un apellido").fadeIn('slow');
+          $("#apellido_reg").focus();
+          return false;
+        }
+
+        
+        if($('#telefono_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un telefono").fadeIn('slow');
+          $("#telefono_reg").focus();
+          return false;
+        }
+
+       if($('#email_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un email").fadeIn('slow');
+          $("#email_reg").focus();
+          return false;
+        }
+
+
+        if($('#pais_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un Pais").fadeIn('slow');
+          $("#pais_reg").focus();
+          return false;
+        }
+
+
+        if($('#estado_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un Estado").fadeIn('slow');
+          $("#estado_reg").focus();
+          return false;
+        }
+
+        if($('#ciudad_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un ciudad").fadeIn('slow');
+          $("#ciudad_reg").focus();
+          return false;
+        }
+
+        if($('#direccion_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un direccion").fadeIn('slow');
+          $("#direccion_reg").focus();
+          return false;
+        }
+
+        if($('#cod_postal_reg').val()==''){
+          // alert("Debe ingresar un email");
+          $('.error').html("Debe completar un codigo postal").fadeIn('slow');
+          $("#cod_postal_reg").focus();
+          return false;
+        }*/     
+
+
+        
+
+        //alert(url)
+        $.ajax({
+            type: 'POST',
+            url: _root_+"user/editarDatos",
+            data: $('#checkoutForm').serialize(),
+            beforeSend: function(){
+                
+            },        
+            success: function(data){
+                if(data == 'ok'){
+                    $('.error').html('').fadeOut('fast');
+                    $('.success').html('Successful edition').fadeIn('slow');
+                    /*setTimeout(function() {
+                          window.location.href = _root_+"cart/payment";
+                          // window.location.reload();
+                      }, 2000);*/
+                
+                }else{
+                    $('.error').html(data).fadeIn('slow');
+                }
+              
+            }
+        });
+
+        return false;    
+    });
+    
+
+   
+
+
+});    
+</script>
+
+
+<?php endif?>
+
+
+
+
+
+
+
+
+

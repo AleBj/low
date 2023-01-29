@@ -1,0 +1,269 @@
+
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Usuarios Administrador</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content">  
+    <div class="ibox-title">  
+       
+        <a class="btn btn-w-m btn-success"  href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/cargar'?>">
+          Cargar Usuario
+        </a>
+
+
+    </div>
+     <div class="ibox-content ">
+        <div class="row">
+            
+                <!-- <form role="form" method="post" action="">
+                    <input type="hidden" id="estado" name="estado" value="alta" />
+                    <div class="btn-group">
+                        <div class="input-group m-b">
+                          <input class="form-control m-b" id="buscador" name="buscador" placeholder="Buscar por Nro cliente o razon social" type="text" />
+                            <span class="input-group-btn">
+                                <button id="btBuscador" type="button" class="btn btn-primary">
+                                     <i class="fa fa-search"></i>
+                                </button> 
+                            </span> 
+                            
+                        </div>
+                    </div>
+                </form> -->
+
+                <form role="form" action="" method="post" name="filtrar_usuarios">
+                 
+                   <div class="col-lg-4">
+                    <select class="form-control" name="_roles">
+                      <?php foreach($this->roles as $roles):?>
+                      <option value="<?php echo $roles->id_role?>"> <?php echo $roles->role?> </option>
+                      <?php endforeach?>
+                      <option value=""> Sin Filtro </option>
+                    </select>
+                 </div>
+                 <div class="col-lg-2">
+	                  <input class="btn btn-danger" type="submit" value="Filtrar"/>
+	                   <input type="hidden" name="_filtrar" value="1" />
+	              </div>
+                  
+                </form>
+         
+      </div> 
+    </div>
+
+
+    <div id="contenedor" class="ibox-content forum-container">
+    
+        <?php if($this->usuarios):?>
+        <?php foreach($this->usuarios as $datos):?>
+
+        <div class="forum-item">
+            <div class="row">
+                <div class="col-md-10">                    
+                                                  
+                   <a href="" class="forum-item-title"><?php echo $datos->nombre?></a> 
+                   <small>Rol: <?=usuarios::combertirRole($datos->role)->role?></small>
+                </div>
+
+                <div class="col-md-2 forum-info">
+                    <div class="tooltip-demo pull-right">                    
+
+                        <a class="btn btn-warning btn-round" href="<?php echo $this->_conf['url_enlace']?>administrador/usuarios/editar/<?php echo $datos->id?>">
+                           Editar
+                        </a>&nbsp;&nbsp;
+
+                       <a href="javascript:void(0);" class="btn btn-danger btn-round _borrar_<?php echo $datos->id?>" title="Borrar">
+                            Eliminar
+                        </a>&nbsp;&nbsp;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       <script>
+            $(document).ready(function () {
+                  $('._borrar_<?php echo $datos->id?>').click(function () {
+                      swal({
+                          title: "Estas seguro de borrar este usuario?",
+                          text: "Los datos se perderán permanentemente!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Si, que se borre!",
+                          cancelButtonText: "No, mejor no!",
+                          closeOnConfirm: false,
+                          closeOnCancel: false },
+                      function (isConfirm) {
+                          if (isConfirm) {
+                              var url= _root_ + "administrador/usuarios/borrar";
+                              var dataString = '_id=<?=$datos->id?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                              $.ajax({
+                                      type: "POST",
+                                      url: url,
+                                      data: dataString,
+                                      success: function(data){
+                                        if(data=='ok'){
+                                          swal("Borrado!", "El usuario se borró con exito.", "success");
+                                          setTimeout(function() {
+                                              location.reload();
+                                          }, 200);
+                                        }else{
+                                          swal("Cancelado", "No se puede borrar", "error");
+                                        }
+                                          
+                                          
+                                      }
+                              });
+                          } else {
+                              swal("Cancelado", "El usuario esta guardado", "error");
+                          }
+                      });
+                  });
+              });
+           </script>
+
+        <?php endforeach?> 
+
+        <?php else:?>
+        <p>No hay datos cargados!</p>
+        <?php endif?>
+    </div>
+    <div class="loader"></div> 
+   <?php echo (isset($this->paginacion)) ? $this->paginacion : ''?>
+</div>
+
+
+
+
+<!-- 
+
+<div id="head-bg-fix"></div>
+<div class="wpContent">        
+   		   <div class="btn-group-usuario">
+              <a href="#" class="active">
+                Administrar Usuario
+              </a>
+      	
+              <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/cargar'?>">
+                Cargar Usuario
+              </a>
+        	</div>
+          <div class="contFiltroUsuario">
+            	
+            <form role="form" action="" method="post" name="filtrar_usuarios">
+              <input type="hidden" name="_filtrar" value="1" />
+              <div style="min-width: 300px">
+                <select class="form-control" name="_roles">
+                  <?php foreach($this->roles as $roles):?>
+                  <option value="<?php echo $roles->id_role?>"> <?php echo $roles->role?> </option>
+                  <?php endforeach?>
+                  <option value=""> Sin Filtro </option>
+                </select>
+              </div>
+
+              <input class="btn btn-danger" type="submit" value="Filtrar"/>
+              
+            </form>
+
+        </div>
+        
+		  <ul class="list-group listar">
+        
+      <?php foreach($this->usuarios as $usuarios):?>
+
+          <li class="list-group-item">
+              <p>
+                <strong><?php echo $usuarios->nombre?></strong>
+                <small>Rol: <?=usuarios::combertirRole($usuarios->role)->role?></small>
+              </p> 
+              
+              <span>
+                                                    
+                  <a href="<?php echo $this->_conf['base_url'] . 'administrador/usuarios/editar/' . $usuarios->id?>">
+                    <img src="<?=$this->_conf['base_url']?>public/img/ico-pencil.png" alt="editar" style="width: 27px"/>
+                  </a>
+                 
+                  
+
+                  <a href="javascript:void(0);" class="_borrar_<?php echo $usuarios->id?>" title="Borrar">
+                      <img src="<?=$this->_conf['base_url']?>public/img/ico-cruz.png" alt="eliminar"/>
+                  </a>                    
+                   
+              </span>
+          </li>
+            
+          <script>
+            $(document).ready(function () {
+                  $('._borrar_<?php echo $usuarios->id?>').click(function () {
+                      swal({
+                          title: "Estas seguro de borrar este usuario?",
+                          text: "Los datos se perderán permanentemente!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Si, que se borre!",
+                          cancelButtonText: "No, mejor no!",
+                          closeOnConfirm: false,
+                          closeOnCancel: false },
+                      function (isConfirm) {
+                          if (isConfirm) {
+                              var url= _root_ + "administrador/usuarios/borrar";
+                              var dataString = '_id=<?=$usuarios->id?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                              $.ajax({
+                                      type: "POST",
+                                      url: url,
+                                      data: dataString,
+                                      success: function(data){
+                                        if(data=='ok'){
+                                          swal("Borrado!", "El usuario se borró con exito.", "success");
+                                          setTimeout(function() {
+                                              location.reload();
+                                          }, 200);
+                                        }else{
+                                          swal("Cancelado", "No se puede borrar porque el usuario esta en uso", "error");
+                                        }
+                                          
+                                          
+                                      }
+                              });
+                          } else {
+                              swal("Cancelado", "El usuario esta guardado", "error");
+                          }
+                      });
+                  });
+              });
+           </script>
+         
+        
+        
+        
+        
+        
+        <?php endforeach?>
+        </ul>
+        
+    
+</div>
+<?php //echo $this->paginacion?>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

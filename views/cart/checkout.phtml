@@ -1,0 +1,493 @@
+<style type="text/css">
+
+.field{
+    height: 40px;
+    background: #ffffff;
+    border: none;
+    padding: 10px 12px;
+    color: #919191;
+    font-size: 13px;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 100;
+    margin-right: 10px;
+}
+.tarjeta{
+    margin-right: 15%;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 70% 15% 15%;
+    column-gap: 0;
+} 
+@media (max-width: 800px){
+    .tarjeta{display: flex;flex-wrap: wrap;justify-content: space-between;}
+    .field{width: calc(50% - 3px);margin:6px 0;}
+    .field#card-number-element{width: 100%;}
+}
+
+</style>
+<main>
+    <section class="checkout whity">
+
+        <div class="container cont__bill">
+            <h2 style="text-align:center; margin-bottom: 30px;">COMPLETE YOUR PURCHASE</h2>
+        </div>
+
+        <div class="container cont__bill">
+            
+                <!-- <form action="" id="checkpay"> -->
+                <form name="checkoutForm" id="checkoutForm">
+                    <input type="hidden" name="token" /> 
+
+                    <div class="check__col">
+                        <h2 class="checkout__tit">Billing details</h2>
+
+                        <div class="check__row">
+                            <div>
+                                <label for="first-name">First name <span>*</span></label>
+                                <!-- <input type="text" name="first-name" id=""> -->
+                                <input type="text" id="nombre_reg" name="nombre" value="<?=(isset($this->user->nombre)) ? $this->user->nombre : ''?>" />
+                            </div>
+
+                            <div>
+                                <label for="first-name">Last name <span>*</span></label>
+                                <!-- <input type="text" name="last-name" id=""> -->
+                                <input type="text" id="apellido_reg" name="apellido" value="<?=(isset($this->user->apellido)) ? $this->user->apellido : ''?>" />
+                            </div>
+                        </div>
+
+                       <!--  <div class="check__row">
+                            <label for="company-name">Company name <span>(optional)</span></label>
+                                <input type="text" name="company_name_reg" id="company_name" value="<?=(isset($this->user->company_name)) ? $this->user->company_name : ''?>">
+                        </div> -->
+
+                        <div class="check__row">
+                            <label for="phone">Phone <span>*</span></label>
+                                <!-- <input type="tel" name="phone" id=""> -->
+                                <input type="text" id="telefono_reg" name="telefono" value="<?=(isset($this->user->telefono)) ? $this->user->telefono : ''?>" />
+                        </div>
+
+                        <div class="check__row">
+                            <label for="email">Email address <span>*</span></label>
+                                <!-- <input type="email" name="email" id=""> -->
+                                <input type="email" id="email_reg" name="email" value="<?=(isset($this->user->email)) ? $this->user->email : ''?>" />
+                        </div>
+
+                      
+                        <div class="check__row">
+                            <label for="countrey">Country / Region <span>*</span></label>
+                            <select id="pais_reg" name="pais">
+                                <option value="United State (US)" selected>United State (US)</option>
+                                <!-- <option value=">fghanistan">Afghanistan</option>
+                                <option value=">rgentina">Argentina</option>
+                                <option value="United Kingdom">United Kingdom (UK)</option>                               
+                               <option value="United State (US) Minor Outlyin Islands">United State (US) Minor Outlyin Islands</option> -->
+                            </select>
+                        </div>
+
+                        <div class="check__row">
+                            <label for="countrey">State <span>*</span></label>
+                            <select id="estado_reg" name="estado">
+                                <option value="Florida" selected>Florida</option>
+                                <!-- <option value="Alabama">Alabama</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>                                
+                                <option value="Hawaii">Hawaii</option> -->
+                            </select>
+                        </div>
+
+                        <div class="check__row">
+                            <label for="town">Town / City <span>*</span></label>
+                                <!-- <input type="text" name="town" id="" required> -->
+                                <input type="text" id="ciudad_reg" name="ciudad" value="<?=(isset($this->user->ciudad)) ? $this->user->ciudad : ''?>" />
+                        </div>
+
+                        <div class="check__row">
+                            <label for="adress">Street Address <span>*</span></label>
+                                <!-- <input type="text" name="adress" id="" placeholder="House number and street name" required> -->
+                                <input type="text" id="direccion_reg" name="direccion"  placeholder="House number and street name" value="<?=(isset($this->user->direccion)) ? $this->user->direccion : ''?>" />
+
+                                <!-- <input type="text" name="adress" id="" placeholder="Apartment, suit, unit, etc. (optional)"> -->
+                        </div>                        
+
+                        <div class="check__row">
+                            <label for="zip-code">Zip Code <span>*</span></label>
+                                <!-- <input type="text" name="zip-code" id=""> -->
+                                <input type="text" id="cod_postal_reg" name="cod_postal" value="<?=(isset($this->user->cod_postal)) ? $this->user->cod_postal : ''?>" />
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="check__col">
+                        <h3 class="checkout__tit">Additional information</h3>
+
+                        <div class="check__row">
+                            <label for="">Order notes <span>(optional)</span></label>
+                            <textarea name="order_notes" id="order_notes" placeholder="Notes about your order, e. g. special notes for delivery."><?=(isset($this->user->order_notes)) ? $this->user->order_notes : ''?></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="success"></div>
+                    <div class="error"></div>
+
+                <!-- </form> -->
+        </div>
+
+        <!-- check order -->
+        <div class="container">
+            <h3 class="checkout__tit">Your order</h3>
+
+            <table class="order-table" id="check-order" cellspacing="0">
+                <thead>
+                    <th>PRODUCT</th>
+                    <th>TOTAL</th>
+                </thead>
+
+                <?php foreach($_SESSION['_carro'] as $id => $val):?>
+                
+                <tr>
+                    <td><?=home::convertirCaracteres(home::traerProductoPorItemStatic($val['item'])->titulo)?> <strong>x <?=$val['cantidad']?></strong></td>
+                    <td>$<?=number_format($val['cantidad']*$val['precio'], 2, '.', ',')?></td>
+                </tr>
+
+               <?php endforeach?>
+
+                <tr class="bold">
+                    <td>SUBTOTAL</td>
+                    <td>$<?=number_format($this->_subtotal, 2, '.', ',')?></td>
+                </tr>
+
+                <tr class="bold">
+                    <td>TOTAL</td>
+                    <td>$<?=number_format($this->_total, 2, '.', ',')?></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <!---->
+        <div class="container cont-card">
+
+            <div class="order-card__header">
+                <h4>Credit Cards</h4>
+                <div class="order-card__img">
+                    <img src="<?php echo $_params['ruta_img']?>amex.svg" alt="amex">
+                    <img src="<?php echo $_params['ruta_img']?>discover.svg" alt="discover">
+                    <img src="<?php echo $_params['ruta_img']?>visa.svg" alt="visa">
+                    <img src="<?php echo $_params['ruta_img']?>mastercard.svg" alt="master">
+                </div>
+            </div>
+
+            <!-- <form action="" id="order-card" class="order-card"> -->
+                <div class="tarjeta">
+                    <!-- <input type="number" placeholder="Numero de tarjeta">
+                    <input type="number" placeholder="MM/AA">
+                    <input type="number" placeholder="CVC">-->
+                    <div class="field" id="card-number-element" class="field"></div>        
+                    <div class="field" id="card-expiry-element" class="field"></div>                
+                    <div class="field" id="card-cvc-element" class="field"></div>
+                </div> 
+                <!-- <div class="">
+                    <input type="checkbox" name="save-card" id="">
+                    <label for="save-card">Save Card</label>
+                </div> -->
+            
+
+            <p>
+                Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#" >privacy policy.</a>
+            </p>
+
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+            
+            <!-- <a href="" class="button btn_order"><p>Place order</p></a> -->
+            <button type="submit" id="procesarPayment" class="button btn_order"><p>Place Order</p></button>
+
+            <div id="error"></div>
+            <div id="success"></div>
+
+        </form>
+        </div>
+    </section>
+
+
+</main>
+
+
+
+
+
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+
+    /*$("#procesarPayment").click(function(){
+        setTimeout(function(){ 
+            $("#procesarPayment").prop("disabled",true);
+        }, 3000);
+    });*/
+
+    var stripe = Stripe('<?=$this->_conf['stripe']['public_key']?>');
+    var elements = stripe.elements();
+
+    var style = {
+      base: {
+        iconColor: '#666EE8',
+        color: '#919191',
+        // lineHeight: '40px',
+        // fontWeight: 300,
+        // fontFamily: '"Montserrat", sans-serif',
+        // fontSize: '15px',
+        fontStyle: 'italic',
+
+        '::placeholder': {
+          color: '#cfcfcf',
+        },
+      },
+    };
+
+    var cardNumberElement = elements.create('cardNumber', {
+      style: style,
+      // id:'cardNumber',
+      placeholder: 'Card Number',
+    });
+    cardNumberElement.mount('#card-number-element');
+
+    var cardExpiryElement = elements.create('cardExpiry', {
+      style: style,
+      placeholder: 'MM/AA',
+    });
+    cardExpiryElement.mount('#card-expiry-element');
+
+    var cardCvcElement = elements.create('cardCvc', {
+      style: style,
+      placeholder: 'CVC',
+    });
+    cardCvcElement.mount('#card-cvc-element');
+
+
+    function setOutcome(result) {
+        var successElement = document.getElementById('success');
+        var errorElement = document.getElementById('error');
+        successElement.classList.remove('visible');
+        errorElement.classList.remove('visible');
+
+        if (result.token) {
+            // In this example, we're simply displaying the token
+            // successElement.querySelector('.token').textContent = result.token.id;
+            // successElement.classList.add('visible');
+
+            successElement.textContent = 'Waiting...'; 
+            successElement.classList.add('visible');
+
+            // In a real integration, you'd submit the form with the token to your backend server
+            var form = document.getElementById('checkoutForm');
+            form.querySelector('input[name="token"]').setAttribute('value', result.token.id);
+            // form.submit();        
+
+            fetch(_root_+"cart/procesarPayment", {
+              method: "POST",
+              /*headers: {
+                "Content-Type": "application/json"
+              },*/
+              body: new FormData(form)
+            })
+                .then(function(response) {
+                 // var data = response.json();
+                // successElement.textContent = data.outcome[0];
+                // successElement.classList.add('visible');
+                // console.log('response: '+ response);
+
+                
+
+                if (response.ok) {
+                    // response.text() devuelve otra promesa con el contenido
+                    // devuelto por el servidor en formato texto            
+                    return response.text();
+                } else {
+                    // el servidor ha respondido la petición, pero se ha producido algún 
+                    // problema y no ha podido enviar el recurso solicitado;
+                    // como por ejemplo que el archivo no existe
+                    return Promise.reject(response.statusText);
+                }
+
+                // console.log('response: '+ response);
+             })
+                .then(function(responseText) {
+                // si la promesa con el texto del script se ha resuelto
+                // correctamente entrará aquí  
+
+                // successElement.textContent = responseText;         
+                
+                if(responseText == 'ok'){
+                    setTimeout(function(){  
+                        window.location.href = _root_+"cart/success";
+                    }, 1000);
+                }else{
+                    successElement.textContent = responseText;
+                    $("#procesarPayment").prop("disabled",false);
+                    console.log(responseText);
+                }
+                successElement.classList.add('visible');
+            })
+                .catch(function(error) {
+                // ha habido algún error al resolver alguna de las promesas
+                errorElement.textContent = error.message;
+                errorElement.classList.add('visible');
+                console.log("Error making the request: " + error.message);    
+            });
+            
+
+        } else if (result.error) {
+            errorElement.textContent = result.error.message;
+            errorElement.classList.add('visible');
+            successElement.classList.remove('visible');
+            $("#procesarPayment").prop("disabled",false);
+            // console.log(result.error);
+        }
+    }
+
+    cardNumberElement.on('change', function(event) {
+      setOutcome(event);
+    });
+
+    document.getElementById("checkoutForm").addEventListener('submit', function(e) {
+      e.preventDefault();
+      $("#procesarPayment").prop("disabled",true);
+      var successElement = document.getElementById('success');
+      var errorElement = document.getElementById('error');
+      successElement.classList.remove('visible');
+      errorElement.classList.remove('visible');
+      successElement.textContent = '';
+      errorElement.textContent = '';
+      
+      var name = document.getElementById('nombre_reg').value;
+      if (!name) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a name.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var lastname = document.getElementById('apellido_reg').value;
+      if (!lastname) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a lastname.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var email = document.getElementById('email_reg').value;
+      if (!email) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a email.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var phone = document.getElementById('telefono_reg').value;
+      if (!phone) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a phone.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var country = document.getElementById('pais_reg').value;
+      if (!country) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a country.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var state = document.getElementById('estado_reg').value;
+      if (!state) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a state.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var city = document.getElementById('ciudad_reg').value;
+      if (!city) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a city.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var address = document.getElementById('direccion_reg').value;
+      if (!address) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a street address.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var zip_cod = document.getElementById('cod_postal_reg').value;
+      if (!zip_cod) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a zip code.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+
+      var cardNumber = elements.getElement('cardNumber');
+      // console.log(cardNumber);
+      if (!cardNumber) {               
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a card Number.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled", false); 
+        
+
+        return ;
+      }
+      var cardExpiry = elements.getElement('cardExpiry');
+      if (!cardExpiry) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a Expiration Date.";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+      var cardCvc = elements.getElement('cardCvc');
+      if (!cardCvc) {
+        var errorElement = document.getElementById('error');
+        errorElement.textContent = "You must provide a CVC";
+        errorElement.classList.add('visible');
+        $("#procesarPayment").prop("disabled",false);
+
+        return;
+      }
+
+
+      var options = {
+        // address_zip: document.getElementById('postal-code').value,
+        name: document.getElementById('nombre_reg').value,
+        lastname: document.getElementById('apellido_reg').value,
+        email: document.getElementById('email_reg').value,
+        phone: document.getElementById('telefono_reg').value,
+        country: document.getElementById('pais_reg').value,
+        state: document.getElementById('estado_reg').value,
+        city: document.getElementById('ciudad_reg').value,
+        address: document.getElementById('direccion_reg').value,
+        zip_cod: document.getElementById('cod_postal_reg').value,
+      };
+      stripe.createToken(cardNumberElement, options).then(setOutcome);
+    });
+</script>

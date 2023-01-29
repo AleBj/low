@@ -1,0 +1,141 @@
+<main>
+    <?php if(!$this->empty_cart):?>
+
+    <section class="cart whity">
+        <div class="container" style="display: flex;flex-wrap: wrap;">
+            <?php if(isset($this->_new_product)):?>
+            <div class="cart__notification--full">
+                <p>“<?=$this->_new_product?>” has been added to your cart.</p>
+            </div>
+            <?php endif?>
+            <!-- items table -->
+
+            <table class="items-table" id="items-table" cellspacing="0" width="100%">
+                
+                    <thead>
+                        <th colspan="2"></th>
+                        <th>PRODUCT</th>
+                        <th>PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>SUBTOTAL</th>
+                    </thead>
+
+                <?php foreach($_SESSION['_carro'] as $id => $val):?>
+
+                <tr id="tr_<?=$id?>">
+                    <td><a onclick="$().eliminarProd('<?=$id?>');" href="javascript:void(0);"><i class="fas fa-times"></i></a></td>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=$val['item']?>"><img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase"></a></td>
+                    <td><a href="<?=$this->_conf['base_url']?>product/detail/<?=$val['item']?>"><?=home::convertirCaracteres(home::traerProductoPorItemStatic($val['item'])->titulo)?></a></td>
+                    <td>$<?=number_format($val['precio'], 2, '.', ',')?></td>
+                    <td><?=$val['cantidad']?></td>
+                    <td>$<?=number_format($val['cantidad']*$val['precio'], 2, '.', ',')?></td>
+                </tr>
+
+                <?php endforeach?>
+                
+
+
+            </table>
+
+            <div class="cart__total">
+                <h2>CART TOTALS</h2>
+                <table class="items-total" cellspacing="0">
+                    <tr>
+                        <td>SUBTOTAL</td>
+                        <td class="subtotal">$<?=number_format($this->_subtotal, 2, '.', ',')?></td>
+                    </tr>
+
+                    <tr>
+                        <td>TOTAL</td>
+                        <td class="total">$<?=number_format($this->_total, 2, '.', ',')?></td>
+                    </tr>
+
+                </table>
+
+                <a href="<?=$this->_conf['base_url']?>cart/checkout" class="button long-btn">
+                    <p><strong>Proceed to checkout</strong></p></a>
+            </div>
+
+            <div class="cart__total" style="font-size: 20px;line-height: 1.4;padding: 40px;">
+                <p>Do you need to speak to a staff member about your case? <strong><a href="https://thequickdivorce.com/product" style="color:#000;text-decoration: underline;">Click here</a></strong> to add more services.</p>
+            </div>
+
+
+        </div>
+    </section>
+
+    <?php endif?>
+
+
+    <section class="cart empty" <?=(!$this->empty_cart) ? 'style="display:none;"' : ''?>>
+        <div class="container">
+            <div class="cart__notification">
+                <p>Your cart is currently empty.</p>
+            </div>
+
+            <a href="<?=$this->_conf['base_url']?>getstarted" class="button">
+                <p><strong>Get Started</strong></p>
+            </a>
+        </div>
+    </section>
+
+    
+</main>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    
+  
+    $.fn.eliminarProd = function(_val){ 
+        //var url = window.location.href;
+        //var datastring = "data="+_data+"&posicion="+_pos+"&valor="+_val;
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/eliminarProd",
+            //data: datastring,
+            dataType: "json",           
+            data: {"id" : _val, "_csrf" : "<?=$this->_sess->get('_csrf')?>"},   
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+
+                if(data.total == '$0.00'){
+                    $('.whity').hide();
+                    $('.empty').show();
+
+                }else{
+
+                    $(data.item).remove();       
+                    // $("._prods").remove(data.item);                    
+                    $('.subtotal').html(data.totalparcial);
+                    // $('.resume ._shipping').html(data.shipping);
+                    // $('.item ._shipping span').html(data.shipping);
+                    $('.total').html(data.total);
+                }
+
+
+                
+            }
+        });
+
+    };
+
+
+
+  
+    
+    
+});
+</script>

@@ -1,0 +1,84 @@
+<section id="logIn">
+    <!-- <h2><img src="<?= $this->_conf['base_url']?>public/img/logo-cencosud.png" alt="Cencosud" style="width: 174px"></h2> -->
+    <div>        	
+        <form role="form" name="form1" method="post">
+            <input type="hidden" value="1" name="enviar">
+            <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>">
+            <input type="text" autocomplete="off" name="usuario" value="<?php if(isset($this->datos['usuario'])) echo $this->datos['usuario']?>" placeholder="User">                
+            <input type="password" name="pass" class="pass" placeholder="Password">
+            <input id="btEntrar" type="submit" value="Login">
+        </form>
+    </div>
+    <?php if(isset($this->_error)):?>
+    <div class="error"><?=$this->_error?></div>
+    <?php endif?>
+</section>
+
+<style type="text/css">
+    #nosotros, #contacto, header{
+        display: none;
+    }
+
+    section#logIn{
+        text-align: center;
+        padding: 80px 0
+    }
+    section#logIn h1 img{
+        max-width: 300px;
+    }
+    section#logIn h2{
+        margin: 40px 0;
+        font-size: 2rem;
+        font-weight: 100;
+        color:#e3e3e3;
+    }
+    section#logIn input{
+        display: block;
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        outline: none;
+        width: 300px;
+        height: 50px;
+        margin:auto;
+        margin-bottom: 20px;
+        border: none;
+        padding: 0 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        text-transform: uppercase;
+        font-family: 'Heebo', sans-serif;font-weight: 400;
+        border-radius: 8px;
+        color: #3e3e3e;
+    }
+    section#logIn input:not(#btEntrar){
+        padding-left: 60px;
+        background-image: url(<?= $this->_conf['base_url']?>public/img/ico-user.png);
+        background-size: 50px 50px;
+        background-position: left center;
+        background-repeat: no-repeat;        
+    }
+    section#logIn input.pass{
+        background-image: url(<?= $this->_conf['base_url']?>public/img/ico-pass.png);        
+    }
+    section#logIn #btEntrar{
+        background: rgb(10,104,173); /* Old browsers */
+        background: -moz-linear-gradient(left, rgba(10,104,173,1) 0%, rgba(143,219,225,1) 100%);
+        background: -webkit-linear-gradient(left, rgba(10,104,173,1) 0%,rgba(143,219,225,1) 100%);
+        background: linear-gradient(to right, rgba(10,104,173,1) 0%,rgba(143,219,225,1) 100%);
+        cursor: pointer;
+        font-family: 'Heebo', sans-serif;font-weight: 400;
+        font-size: 1rem;
+        color:#fff;
+        transition:all ease-out 0.3s;
+        border: none;
+        border-radius: 14px;
+        margin-top: 50px
+    }
+    section#logIn #btEntrar:hover{
+        background: rgb(10,104,173);
+    }
+	input:-webkit-autofill {
+        -webkit-appearance:none;
+        background-color: transparent;
+    }
+    .error{color: #f00;}
+</style>

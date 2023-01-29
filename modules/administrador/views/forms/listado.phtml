@@ -1,0 +1,378 @@
+<script language="javascript">
+
+function limpiarBusqueda(){
+    window.location.href=_root_+'administrador/forms';
+}
+
+function generarDocs(_id, _id_compra){
+
+    $('#actions'+_id+' ._docs').hide();
+    $('#actions'+_id+' ._download').hide();
+    $('#actions'+_id+' ._docusign').hide();
+    $('#actions'+_id+' ._loading').show();
+
+    var dataString = '_id='+_id+'&_id_compra='+_id_compra+'&_csrf=<?=$this->_sess->get('_csrf')?>';
+    $.ajax({
+        type: "POST",
+        url: _root_ + "administrador/forms/generateDocs",
+        data: dataString,
+        success: function(data){
+            console.log(data);
+          if(data=='ok'){
+            $('#status ._status_text').html('Documents generation was successful');
+            $('#status').modal('show'); 
+            $('#actions'+_id+' ._loading').hide();
+            $('#actions'+_id+' ._docs').show();
+            $('#actions'+_id+' ._download').show();
+            $('#actions'+_id+' ._docusign').show();
+            // $('#status').modal('hide');
+            setTimeout(function() {
+                $('#status').modal('hide'); 
+            }, 3000);
+          }else{
+            // console.log('error');
+            $('#status ._status_text').html('There was an error in the documents generation process');
+            $('#status').modal('show'); 
+            $('#actions'+_id+' ._download').hide();
+            $('#actions'+_id+' ._docusign').hide();
+            $('#actions'+_id+' ._loading').hide();
+            setTimeout(function() {
+                $('#status').modal('hide'); 
+            }, 3000);
+          }            
+            
+        }
+    });
+
+}
+
+
+$(document).ready(function() {
+
+  $("#formBuscador").submit(function(){  
+  
+  
+    if ($("#buscador").val() == "") {
+      return false;        
+    } 
+    
+    var valor = $("#buscador").val();
+    
+    // var dataString = 'valor='+valor+'&_csrf=<?=$this->_sess->get('_csrf')?>';
+    $.ajax({            
+            type: 'POST',
+            url: _root_+"administrador/forms/buscador", 
+            data: $('#formBuscador').serialize(),
+            beforeSend: function(){
+              //$('.pagination').hide();
+              $('#contenedor').fadeOut('fast', function(){
+                $('.loader').fadeIn('fast');        
+              });
+            },
+            success: function(data){
+              $('#contenedor').html(data);
+              $('.pagination').hide();
+              $('.loader').fadeOut('fast', function(){
+                $('#contenedor').fadeIn('fast');  
+                $('.loader').fadeOut('fast');     
+              });
+        
+            },
+            error: function(){
+                 alert('error!!');
+            }
+        });
+    
+    return false; 
+  })
+
+  $('#busqueda_estado').on('change', function() {
+
+        if(this.value == ''){
+            return false;   
+        }      
+
+
+        var valor = $("#busqueda_estado").val();
+    
+        $.ajax({            
+            type: 'POST',
+            url: _root_+"administrador/forms/buscadorEstado", 
+            data: $('#formBuscadorEstado').serialize(),
+            beforeSend: function(){
+              //$('.pagination').hide();
+              $('#contenedor').fadeOut('fast', function(){
+                $('.loader').fadeIn('fast');        
+              });
+            },
+            success: function(data){
+              $('#contenedor').html(data);
+              $('.pagination').hide();
+              $('.loader').fadeOut('fast', function(){
+                $('#contenedor').fadeIn('fast');  
+                $('.loader').fadeOut('fast');     
+              });
+        
+            },
+            error: function(){
+                 alert('error!!');
+            }
+        });  
+          
+
+    });
+  
+  // $(".botonExcel").click(function(event) {
+  //     $("#datos_a_enviar").val( $("<div>").append( $("#Exportar_a_Excel").eq(0).clone()).html());
+  //     $("#FormularioExportacion").submit();
+  // });
+
+  /*$("#_exportar").click(function(){
+       
+           
+      //var _data_ = $("#Exportar_a_Excel").eq(0).clone()).html();
+      //$('input[name="_fondos"]').val(_data_);
+     
+      var url = _root_ + "administrador/users/exportaDatos";     
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: "exportar=si",
+        success: function(data){
+
+          window.open(data,'_self' );
+           
+        }
+      });
+      return false;
+  });*/
+   
+
+});
+</script>
+<div class="row wrapper">
+    <div class="col-lg-10">
+        <h2>Forms</h2>        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content">  
+    
+    <div class="ibox-title">
+        <div class="row">
+            <div class="col-lg-3">
+                <form id="formBuscador" role="form" method="post" action="">
+                    <input type="hidden" name="estado" value="aprobado" />
+                    <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>" />
+                    <div class="btn-group">
+                        <div class="input-group m-b">
+                          <input class="form-control m-b" id="buscador" name="buscador" placeholder="Search for Nº order" type="text" />
+                            <span class="input-group-btn">
+                                <button id="btBuscador" type="submit" class="btn btn-primary">
+                                     <i class="fa fa-search"></i>
+                                </button> 
+                            </span> 
+                            
+                        </div>
+                    </div>
+                </form>
+          </div>
+
+          <div class="col-lg-2">
+                <form id="formBuscadorEstado" role="form" method="post" action="">
+                    <input type="hidden" name="_csrf" value="<?=$this->_sess->get('_csrf')?>" />
+                    <select name="status" id="busqueda_estado" class="form-control">
+                        <option value="">choose a status</option>
+                        <option value="complete">Complete</option>
+                        <option value="incomplete">Incomplete</option>
+                        <option value="not started">Not started</option>
+                        <option value="close">Expired</option>
+                    </select>
+                </form>
+          </div>
+
+          <div class="col-lg-2">
+            <button type="button" class="btn btn-white btn-sm" onclick="limpiarBusqueda()">
+                <i class="fa fa-eraser"></i>&nbsp;&nbsp;Limpiar
+            </button>
+        </div>
+
+          <!-- <div class="col-lg-2">
+              <a class="btn btn-success " href="<?php echo $this->_conf['url_enlace']?>administrador/compras/exportar/aprobado">
+                 Export orders
+              </a>&nbsp;&nbsp;
+          </div> -->
+
+      </div> 
+    </div>
+
+
+    <div id="contenedor" class="ibox-content forum-container">
+    
+        <?php if($this->datos):?>
+        <?php foreach($this->datos as $datos):?>
+
+        <?php $_docu = admin::traerDocuSignPorId($datos['id']);?>
+
+        <div class="forum-item">
+            <div class="row">
+                <div class="col-md-7">
+                    
+                   <a href="" class="forum-item-title">
+                        
+                        <!-- <small><?=date ("Y-m-d", strtotime($datos['fecha']));?></small>
+                        <br /> -->
+                        N&deg order: <strong><?=$datos['id_compra']?></strong>
+                        <br>
+                        <small>Client: <strong><?=admin::convertirCaracteres($datos['nombre'])?> <?=admin::convertirCaracteres($datos['apellido'])?></strong></small>
+                        <br>
+                        <small>Product: <strong><?=admin::convertirCaracteres($datos['titulo'])?></strong></small>
+                        <!-- <br>
+                        <small>Status: <strong><?=$datos['estado']?></strong></small> -->
+                    </a>  
+
+                    
+
+                </div>
+
+                <div class="col-md-5 forum-info">
+                    <div id="actions<?=$datos['id']?>" class="tooltip-demo pull-right">
+
+
+                        <?php if($datos['estado'] == 'complete'):?>
+                        <a class="btn btn-info btn-sm" href="javascript:void(0);" style="cursor:default">
+                        <?php elseif($datos['estado'] == 'incomplete'):?>
+                        <a class="btn btn-warning btn-sm" href="javascript:void(0);" style="cursor:default">
+                        <?php elseif($datos['estado'] == 'close'):?>
+                        <a class="btn btn-default btn-sm" href="javascript:void(0);" style="cursor:default">
+                        <?php else:?>
+                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" style="cursor:default">
+                        <?php endif?>
+                           Status: <strong><?=($datos['estado']=='close') ? 'Expired' : ucfirst($datos['estado'])?></strong>
+                        </a>
+                    
+                        <?php if($datos['estado'] == 'complete'):?>
+
+                        <a class="btn btn-warning" href="<?php echo $this->_conf['url_enlace']?>administrador/forms/verform/<?=$datos['id']?>/<?=$datos['id_compra']?>" target="_blank" alt="Download PDF" title="Download PDF">
+                           <i class="fa fa-download"></i>
+                        </a>
+                        
+                       <a class="btn btn-primary _docs" onclick="generarDocs(<?=$datos['id']?>, <?=$datos['id_compra']?>);" href="javascript:void(0);" alt="Generate documents" title="Generate documents">
+                           <i class="fa fa-file-text"></i>
+                        </a>
+
+                        <?php if(file_exists($this->_conf['ruta_archivos_descargas'].'forms/'.$datos['item'].'/'.$datos['id'].'/'.$datos['item'].'-'.$datos['id_compra'].'.zip')):?>
+                        <a class="btn btn-success _download" href="<?=$this->_conf['url_enlace']?>public/descargas/forms/<?=$datos['item']?>/<?=$datos['id']?>/<?=$datos['item']?>-<?=$datos['id_compra']?>.zip" alt="Download Documents" title="Download Documents">
+                           <i class="fa fa-download"></i>
+                        </a>
+                        <?php else:?>
+                        <a class="btn btn-success _download" href="<?=$this->_conf['url_enlace']?>public/descargas/forms/<?=$datos['item']?>/<?=$datos['id']?>/<?=$datos['item']?>-<?=$datos['id_compra']?>.zip" alt="Download Documents" title="Download Documents" style="display:none;">
+                           <i class="fa fa-download"></i>
+                        </a>
+                        <?php endif?>      
+
+                        <?php if(isset($_docu['docusign']) && $_docu['docusign'] == 'si'):?>
+                        <a class="btn btn-info btn-sm _docusign" href="javascript:void(0);" style="cursor:default;">
+                            Sent to <strong>DocuSign</strong>
+                        </a>
+                        <?php else:?>
+                        <a class="btn btn-info btn-sm _docusign" href="javascript:void(0);" style="display:none;cursor:default;">
+                            Sent to <strong>DocuSign</strong>
+                        </a>
+                        <?php endif?>                   
+
+                        <a class="btn btn-white _loading" style="display:none;">
+                            <i class="fa fa-cog fa-spin fa-lg"></i>
+                        </a>
+                        
+                        <?php endif?>                        
+
+                        <!-- <a href="javascript:void(0);" class="btn btn-danger _borrar_<?php echo $datos['id']?>" title="Borrar">
+                            Eliminar
+                        </a>&nbsp;&nbsp; -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <?php endforeach?> 
+
+        <?php else:?>
+        <p>No data loaded!</p>
+        <?php endif?>
+    </div>
+    <div class="loader"></div>
+   <?php echo (isset($this->paginacion)) ? $this->paginacion : ''?>
+</div>
+
+
+<div id="status" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header" style="min-height: 45px;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="margin-bottom: 10px;">
+            <h4 class="_status_text" style="text-align:center;"></h4>           
+        </div>
+        <div class="modal-footer" style="background-color: #fff;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<!-- 
+<script>
+  $(document).ready(function () {
+        $('._borrar_<?php echo $datos['id']?>').click(function () {
+            swal({
+                title: "Estas seguro de borrar este contenido?",
+                text: "Los datos se perderán permanentemente!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Si, que se borre!",
+                cancelButtonText: "No, mejor no!",
+                closeOnConfirm: false,
+                closeOnCancel: false },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var url= _root_ + "administrador/compras/borrar";
+                    var dataString = '_id=<?=$datos['id']?>&_csrf=<?=$this->_sess->get('_csrf')?>';
+                    $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: dataString,
+                            success: function(data){
+                              if(data=='ok'){
+                                swal("Borrado!", "El contenido se borró con exito.", "success");
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 200);
+                              }else{
+                                swal("Cancelado", "No se puede borrar porque el contenido esta en uso", "error");
+                              }
+                                
+                                
+                            }
+                    });
+                } else {
+                    swal("Cancelado", "El contenido esta guardado", "error");
+                }
+            });
+        });
+    });
+</script>
+ -->
+
+
+

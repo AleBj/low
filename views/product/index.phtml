@@ -1,0 +1,342 @@
+<main>
+    <div class="main-blog__header">
+        <h3>OUR SERVICES</h3>
+    </div>
+    <section class="main-blog">   
+        <!-- cards ↓ -->         
+        <div class="container">
+
+            <!-- <?php if($this->productos):?>
+            <?php foreach($this->productos as $productos):?>
+            
+            <article class="card">
+                <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__img">
+                    <img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase">
+                </a>
+                <div class="card__content">
+                    <h3 class="card__content--tit">
+                        <a href="<?=$this->_conf['base_url']?>product/detail/<?=$productos['item']?>"><?=$productos['titulo']?></a>
+                    </h3>
+                    <p class="card__content--date">$<?=number_format($productos['precio'], 2, ',', '.')?></p>
+                    <a href="javascript:void(0);" onclick="$().agregarCarro(<?=$productos['id']?>, 1, '<?=$productos['precio']?>', '<?=$productos['item']?>');" class="button long-btn">
+                        <p><strong>Add to cart</strong></p>
+                    </a>
+                </div>
+
+            </article>
+
+            <?php endforeach?>
+            <?php endif?> -->
+
+            <?php if($this->productos_variables):?>
+            <?php foreach($this->productos_variables as $productos):?>
+            
+            <article class="card">
+                <a href="<?=$this->_conf['base_url']?>product/detail/<?=$productos['item']?>" class="card__img">
+                    <img src="<?php echo $_params['ruta_img']?>Icons-01.png" alt="suitcase">
+                </a>
+                <div class="card__content">
+                    <h3 class="card__content--tit">
+                        <a href="<?=$this->_conf['base_url']?>product/detail/<?=$productos['item']?>"><?=$productos['titulo']?></a>
+                    </h3>
+                    <p class="card__content--date">$<?=number_format($productos['precio'], 2, ',', '.')?></p>
+                    <!-- <a href="<?=$this->_conf['base_url']?>blog/detail/<?=$blogs['item']?>" class="card__content--more">READ MORE <span>&gt;</span></a> -->
+                    <a href="javascript:void(0);" onclick="$().agregarCarro(<?=$productos['id']?>, 1, '<?=$productos['precio']?>', '<?=$productos['item']?>');" class="button long-btn">
+                        <p><strong>Add to cart</strong></p>
+                    </a>
+                </div>
+
+            </article>
+
+            <?php endforeach?>
+            <?php endif?>
+
+        </div>
+    </section>
+</main>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+    $('.btn_login').on('click', function(){
+        $('._recuperar').fadeOut('fast');
+        $('._reg').fadeOut('fast', function(){
+            $('._login').fadeIn(400);
+        });
+    });
+
+    $('.btn_register').on('click', function(){
+        // $('._recuperar').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._reg').fadeIn(400);
+        });
+    });
+
+    $('.btn_recuperar').on('click', function(){
+        // $('._reg').fadeOut('fast');
+        $('._login').fadeOut('fast', function(){
+            $('._recuperar').fadeIn(400);
+        });
+    });
+
+
+    $("#form-login").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_login").val() == "") {
+            $(".mensaje_login").html("Debe completar el campo email");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_login").val().indexOf('@', 0) == -1 || $("#email_login").val().indexOf('.', 0) == -1) {
+            $(".mensaje_login").html("Debe ingresar un email valido");
+            $$('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#email_login').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password_login").val() == "") {
+            $(".mensaje_login").html("Debe completar el campo password");
+            $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+            $('#password_login').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+       
+        
+        
+        
+        $('#enviar_data_login').prop('disabled', true);
+        $(".mensaje_login").html("");
+
+        $('#form-login input, #form-login select, #form-login textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/login",
+            data: $("#form-login").serialize(),            
+            success: function(data){
+                $(".mensaje_login").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-login input, #form-login textarea').val('');
+                    $(".mensaje_login").append('Envio exitoso!');
+                    $('#enviar_data_login').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_login").html("");
+                        window.location.reload();
+                    }, 2000);                    
+
+                }else{
+                    $('#enviar_data_login').prop('disabled', false);
+                    $(".mensaje_login").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_login").append(data);
+            }
+        });
+        return false;
+    });
+    
+    $("#form-recover").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+                      
+        
+
+        if ($("#email_recover").val() == "") {
+            $(".mensaje_recover").html("Debe completar el campo email");
+            $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email_recover").val().indexOf('@', 0) == -1 || $("#email_recover").val().indexOf('.', 0) == -1) {
+            $(".mensaje_recover").html("Debe ingresar un email valido");
+            $$('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+            $('#email_recover').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+   
+        
+        
+        
+        $('#enviar_data_recover').prop('disabled', true);
+        $(".mensaje_recover").html("");
+
+        $('#form-recover input, #form-recover select, #form-recover textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/recoverPass",
+            data: $("#form-recover").serialize(),            
+            success: function(data){
+                $(".mensaje_recover").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-recover input, #form-recover textarea').val('');
+                    $(".mensaje_recover").append('Se envio la nueva contraseña a tu email');
+                    $('#enviar_data_recover').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje_recover").html("");
+                    }, 2000);                    
+
+                }else{
+                    $('#enviar_data_recover').prop('disabled', false);
+                    $(".mensaje_recover").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje_recover").append(data);
+            }
+        });
+        return false;
+    });
+  
+    $("#form-register").submit(function(e){
+
+        e.preventDefault();
+        e.returnValue = false;
+        
+        if ($("#nombre").val() == "") {
+            $(".mensaje").html("Debe completar el campo nombre");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#nombre').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#apellido").val() == "") {
+            $(".mensaje").html("Debe completar el campo apellido");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#apellido').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        }            
+        
+
+        if ($("#email").val() == "") {
+            $(".mensaje").html("Debe completar el campo email");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');           
+            return false;        
+        }
+
+        if($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1) {
+            $(".mensaje").html("Debe ingresar un email valido");
+            $$('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#email').val('').focus().css('border','1px solid #ed5565');
+            return false;
+        }   
+       
+
+       if ($("#password").val() == "") {
+            $(".mensaje").html("Debe completar el campo password");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+
+        if ($("#repeat_password").val() == "") {
+            $(".mensaje").html("Debe completar el campo repeat password");
+            $('#form-register input, #form-register select, #form-register textarea').removeAttr('style');
+            $('#repeat_password').val('').focus().css('border','1px solid #ed5565');         
+            return false;        
+        } 
+        
+        
+        
+        $('#enviar_data').prop('disabled', true);
+        $(".mensaje").html("");
+
+        $('#form-register input:text, #form-register select, #form-register textarea').removeAttr('style');
+           
+        $.ajax({
+            type: "POST",
+            url: _root_ + "getstarted/register",
+            data: $("#form-register").serialize(),            
+            success: function(data){
+                $(".mensaje").html("");
+                // data = $.trim(data);
+                if(data=="ok"){
+                    $('#form-register input:text, #form-register input:number, #form-register textarea').val('');
+                    $(".mensaje").append('Verifique su cuenta de email para activar su cuenta');
+                    $('#enviar_data').prop('disabled', false);
+                    // $('#enviar_data').attr('value', 'Enviado!');
+                    //window.location = _root_+'contenidos/contacto/respuesta';
+
+                    setTimeout(function() {
+                        // $('#popUps, #popUps form').fadeOut(400);
+                        $(".mensaje").html("");
+                    }, 2000);                    
+
+                }else{
+                    $('#enviar_data').prop('disabled', false);
+                    $(".mensaje").append(data);
+                }
+            },
+            error: function (err){
+                console.log("Error");
+                $(".mensaje").append(data);
+            }
+        });
+        return false;
+    });
+
+
+  
+    $.fn.agregarCarro = function(_id, _cant, _precio, _item){  
+        
+        $.ajax({
+            type: 'POST',
+            url: _root_+"cart/llenarCarro",
+            dataType: "json",
+            cache: false,
+            data: {"_id" : _id, "_cantidad" : _cant, "_precio" : _precio, "_item" : _item, "_csrf" : "<?=$this->_sess->get('_csrf')?>"}, 
+            beforeSend: function(){
+                //$('.formPostulante').animate({'opacity': '0'}, 300);
+            },
+            success: function(data){
+                // console.log(data);
+
+                if(data.cart=='ok'){
+                    // window.location = _root_+'cart';
+                    setTimeout(function(){ 
+                        window.location = _root_+'cart';
+                    }, 1000);
+                }
+
+
+            }
+        });        
+
+    };
+    
+    
+    
+});
+
+
+
+</script>
