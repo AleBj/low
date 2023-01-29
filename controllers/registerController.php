@@ -175,7 +175,6 @@ class registerController extends Controller
 			            $this->envioMail->Subject = 'Nuevo Registro';               
 			            $this->envioMail->Body = $_body;
 			            $this->envioMail->AddAddress($this->_view->datos['email']);            
-			            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 			            $this->envioMail->IsHTML(true); 
 			            
 			            $exito = $this->envioMail->Send();
@@ -641,8 +640,7 @@ class registerController extends Controller
 		            $this->envioMail->FromName ='The Quick Divorce';
 		            $this->envioMail->Subject = 'Active su cuenta';               
 		            $this->envioMail->Body = $_body;
-		            // $this->envioMail->AddAddress($this->_view->datos['email']);            
-		            $this->envioMail->AddAddress('lucianodirisio@gmail.com');
+		            $this->envioMail->AddAddress($this->_view->datos['email']);            
 		            $this->envioMail->IsHTML(true); 
 		            
 		            $exito = $this->envioMail->Send();
@@ -767,8 +765,7 @@ class registerController extends Controller
 			            $this->envioMail->FromName ='The Quick Divorce';
 			            $this->envioMail->Subject = 'Recuperar '.utf8_decode('contraseña');               
 			            $this->envioMail->Body = $_body;
-			            // $this->envioMail->AddAddress($this->_view->datos['email']);            
-			            $this->envioMail->AddAddress('lucianodirisio@gmail.com');
+			            $this->envioMail->AddAddress($this->_view->datos['email']);            
 			            $this->envioMail->IsHTML(true); 
 			            
 			            $exito = $this->envioMail->Send();
@@ -880,7 +877,6 @@ class registerController extends Controller
 				            $this->envioMail->Subject = 'Recuperar '.utf8_decode('contraseña');               
 				            $this->envioMail->Body = $_body;
 				            $this->envioMail->AddAddress($this->_view->datos['email']);            
-				            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 				            $this->envioMail->IsHTML(true); 
 				            
 				            $exito = $this->envioMail->Send();

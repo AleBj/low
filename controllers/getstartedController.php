@@ -234,7 +234,6 @@ class getstartedController extends Controller
 		            $this->envioMail->Subject = 'Activate your account';               
 		            $this->envioMail->Body = $_body;
 		            $this->envioMail->AddAddress($this->_view->datos['email']);            
-		            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 		            $this->envioMail->IsHTML(true); 
 		            
 		            $exito = $this->envioMail->Send();
@@ -272,13 +271,7 @@ class getstartedController extends Controller
 					        'Email' => $this->_view->datos['email'],
 					        'Name' => home::convertirCaracteres(validador::getTexto('nombre')).' '.home::convertirCaracteres(validador::getTexto('apellido'))
 					      ]
-					    ],							    
-			            'Bcc' => [
-			                [
-			                    'Email' => "lucianodirisio@gmail.com",
-			                    'Name' => "Luciano"
-			                ]
-			            ],
+					    ],	
 					    'Subject' => 'Activate your account',
 					    'HTMLPart' => $_body,
 					  ]
@@ -550,7 +543,6 @@ class getstartedController extends Controller
 			            $this->envioMail->Subject = 'Recover Password';               
 			            $this->envioMail->Body = $_body;
 			            $this->envioMail->AddAddress($this->_view->datos['email_recover']);            
-			            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 			            $this->envioMail->IsHTML(true); 
 			            
 			            $exito = $this->envioMail->Send();

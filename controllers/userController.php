@@ -749,8 +749,6 @@ class userController extends Controller
 		            $this->envioMail->AddAddress('info@thequickdivorce.com');
 		            // $this->envioMail->AddAddress('notifications@thequickdivorce.com');
 		            $this->envioMail->addCC('aliette@carolanfamilylaw.com');
-		            $this->envioMail->addBCC('lucianodirisio@gmail.com');
-		            $this->envioMail->addBCC('alejandromarsico@gmail.com'); 
 		            $this->envioMail->IsHTML(true); 
 		            
 		            $exito = $this->envioMail->Send();
@@ -790,14 +788,7 @@ class userController extends Controller
 			                ]
 			            ],
 			            'Bcc' => [
-			                [
-			                    'Email' => "lucianodirisio@gmail.com",
-			                    'Name' => "Luciano"
-			                ],
-			                [
-			                    'Email' => "alejandromarsico@gmail.com",
-			                    'Name' => "Ale"
-			                ],
+			                
 			                [
 			                    'Email' => "thequickdivorce@gmail.com",
 			                    'Name' => "The Quick Divorce Gmail"
@@ -1279,8 +1270,6 @@ class userController extends Controller
 		            $this->envioMail->AddAddress('info@thequickdivorce.com');
 		            // $this->envioMail->AddAddress('notifications@thequickdivorce.com');
 		            $this->envioMail->addCC('aliette@carolanfamilylaw.com');
-		            $this->envioMail->addBCC('lucianodirisio@gmail.com');
-		            $this->envioMail->addBCC('alejandromarsico@gmail.com'); 
 		            $this->envioMail->IsHTML(true); 
 		            
 		            $exito = $this->envioMail->Send();
@@ -1323,14 +1312,7 @@ class userController extends Controller
 			                ]
 			            ],
 			            'Bcc' => [
-			                [
-			                    'Email' => "lucianodirisio@gmail.com",
-			                    'Name' => "Luciano"
-			                ],
-			                [
-			                    'Email' => "alejandromarsico@gmail.com",
-			                    'Name' => "Ale"
-			                ],
+			                
 			                [
 			                    'Email' => "thequickdivorce@gmail.com",
 			                    'Name' => "The Quick Divorce Gmail"
@@ -2447,7 +2429,6 @@ class userController extends Controller
 		            $this->envioMail->Subject = 'Activate your account';               
 		            $this->envioMail->Body = $_body;
 		            $this->envioMail->AddAddress($this->_view->datos['email']);            
-		            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 		            $this->envioMail->IsHTML(true); 
 		            
 		            $exito = $this->envioMail->Send();
@@ -2743,7 +2724,6 @@ class userController extends Controller
 			            $this->envioMail->Subject = 'Recover Password';               
 			            $this->envioMail->Body = $_body;
 			            $this->envioMail->AddAddress($this->_view->datos['email_recover']);            
-			            // $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 			            $this->envioMail->IsHTML(true); 
 			            
 			            $exito = $this->envioMail->Send();
@@ -2955,7 +2935,6 @@ class userController extends Controller
 				            $this->envioMail->Subject = 'Recover Password';               
 				            $this->envioMail->Body = $_body;
 				            // $this->envioMail->AddAddress($this->_view->datos['email']);            
-				            $this->envioMail->AddAddress('lucianodirisio@gmail.com');
 				            $this->envioMail->IsHTML(true); 
 				            
 				            $exito = $this->envioMail->Send();
