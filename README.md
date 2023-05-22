@@ -4,15 +4,25 @@ Site thequickdivorce.com
 Estructura directorios
 
 1 - configuracion
+
 2 - controllers
+
 3 - cron
+
 4 - libs
+
 5 - modelos
+
 6 - modules
+
 7 - nucleo
+
 8 - public
+
 9 - tmp
+
 10 - views
+
 11 - widgets
 
 
